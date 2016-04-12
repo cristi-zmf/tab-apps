@@ -1,4 +1,4 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['firebase'])
 
 .controller('DashCtrl', function ($scope) {})
 
@@ -21,19 +21,24 @@ angular.module('starter.controllers', [])
     $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('WallController', function ($scope) {
+.controller('WallController', function ($scope, $firebaseArray) {
+    var postsDatabaseRef = new Firebase("https://vivid-fire-1290.firebaseio.com/").child('posts');
+    var postsData = $firebaseArray(postsDatabaseRef);
+    
     $scope.post = {
         message: ''
     };
 
-    $scope.posts = [];
+    $scope.posts = postsData;
 
     $scope.addPost = function () {
-        $scope.posts.unshift($scope.post);
+        $scope.posts.$add($scope.post);
         $scope.post = {
             message: ''
         };
     };
+
+
 })
 
 .controller('AccountCtrl', function ($scope) {
