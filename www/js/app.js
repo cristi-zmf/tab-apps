@@ -34,7 +34,8 @@ angular.module('starter', ['ionic', 'firebase', 'starter.controllers', 'starter.
   // login page
   .state('login', {
       url: '/login',
-      templateUrl: 'templates/login.html'
+      templateUrl: 'templates/login.html',
+      controller: 'LoginController'
   })
   
   // setup an abstract state for the tabs directive

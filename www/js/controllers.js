@@ -44,5 +44,11 @@ angular.module('starter.controllers', ['firebase'])
 .controller('AccountCtrl', function ($scope) {
     $scope.settings = {
         enableFriends: true
-    };
+    }
+})
+    
+.controller('LoginController', function($scope, $location) {
+    $scope.login = function() {
+        $location.path('/tab/dash');
+    }       
 });
