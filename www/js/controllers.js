@@ -21,7 +21,7 @@ angular.module('starter.controllers', ['firebase'])
     $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('WallController', function ($scope, $firebaseArray) {
+.controller('materiiController', function ($scope, $firebaseArray, $location, $state) {
     var postsDatabaseRef = new Firebase("https://vivid-fire-1290.firebaseio.com/").child('posts');
     var postsData = $firebaseArray(postsDatabaseRef);
     
@@ -37,7 +37,9 @@ angular.module('starter.controllers', ['firebase'])
             message: ''
         };
     };
-
+    $scope.goToMaterie = function () {
+        $state.transitionTo('materie');
+    }
 
 })
 

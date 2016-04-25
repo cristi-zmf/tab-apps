@@ -34,7 +34,7 @@ angular.module('starter', ['ionic', 'firebase', 'starter.controllers', 'starter.
   // login page
   .state('login', {
       url: '/login',
-      templateUrl: 'templates/login.html',
+      templateUrl: 'main/login.html',
       controller: 'LoginController'
   })
   
@@ -42,16 +42,27 @@ angular.module('starter', ['ionic', 'firebase', 'starter.controllers', 'starter.
     .state('tab', {
     url: '/tab',
     abstract: true,
-    templateUrl: 'templates/tabs.html'
+    templateUrl: 'elev/tabs.html'
   })
 
   // Each tab has its own nav history stack:
-  .state('tab.wall', {
-      url: '/wall',
+  .state('tab.materii', {
+      url: '/materii',
       views: {
-          'tab-wall': {
-              templateUrl: 'templates/tab-wall.html',
-              controller: 'WallController'
+          'tab-materii': {
+              templateUrl: 'elev/tab-materii.html',
+              controller: 'materiiController'
+          }
+      }
+      
+  })
+  
+  .state('materie', {
+      url: '/materie',
+      views: {
+          'test': {
+              templateUrl: 'elev/test.html',
+              controller: 'materiiController'
           }
       }
       
@@ -61,7 +72,7 @@ angular.module('starter', ['ionic', 'firebase', 'starter.controllers', 'starter.
     url: '/dash',
     views: {
       'tab-dash': {
-        templateUrl: 'templates/tab-dash.html',
+        templateUrl: 'elev/tab-dash.html',
         controller: 'DashCtrl'
       }
     }
@@ -71,7 +82,7 @@ angular.module('starter', ['ionic', 'firebase', 'starter.controllers', 'starter.
       url: '/chats',
       views: {
         'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
+          templateUrl: 'elev/tab-chats.html',
           controller: 'ChatsCtrl'
         }
       }
@@ -80,7 +91,7 @@ angular.module('starter', ['ionic', 'firebase', 'starter.controllers', 'starter.
       url: '/chats/:chatId',
       views: {
         'tab-chats': {
-          templateUrl: 'templates/chat-detail.html',
+          templateUrl: 'elev/chat-detail.html',
           controller: 'ChatDetailCtrl'
         }
       }
@@ -90,7 +101,7 @@ angular.module('starter', ['ionic', 'firebase', 'starter.controllers', 'starter.
     url: '/account',
     views: {
       'tab-account': {
-        templateUrl: 'templates/tab-account.html',
+        templateUrl: 'elev/tab-account.html',
         controller: 'AccountCtrl'
       }
     }
