@@ -28,7 +28,7 @@ angular.module('starter.controllers', ['firebase'])
     $scope.post = {
         message: ''
     };
-
+    
     $scope.posts = postsData;
 
     $scope.addPost = function () {
@@ -37,8 +37,13 @@ angular.module('starter.controllers', ['firebase'])
             message: ''
         };
     };
+    
+    $scope.materii = {
+        materie: ''
+    };
+    
     $scope.goToMaterie = function () {
-        $state.transitionTo('materie');
+        $state.go('tab.materie');
     }
 
 })

@@ -57,10 +57,10 @@ angular.module('starter', ['ionic', 'firebase', 'starter.controllers', 'starter.
       
   })
   
-  .state('materie', {
-      url: '/materie',
+  .state('tab.materie', {
+      url: 'materie',
       views: {
-          'test': {
+          'tab-materii': {
               templateUrl: 'elev/test.html',
               controller: 'materiiController'
           }
