@@ -1,10 +1,10 @@
-angular.module('starter.services', [])
+angular.module('gradeBook.services', [])
 
 .factory('Chats', function() {
   // Might use a resource here that returns a JSON array
 
   // Some fake testing data
-  var chats = [{
+var chats = [{
     id: 0,
     name: 'Ben Sparrow',
     lastText: 'You on your way?',

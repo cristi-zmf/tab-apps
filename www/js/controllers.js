@@ -1,4 +1,4 @@
-angular.module('starter.controllers', ['firebase'])
+angular.module('gradeBook.controllers', ['firebase'])
 
 .controller('DashCtrl', function ($scope) {})
 
@@ -26,7 +26,7 @@ angular.module('starter.controllers', ['firebase'])
     var postsData = $firebaseArray(postsDatabaseRef);
     
     $scope.post = {
-        message: ''
+        message: 'ada'
     };
     
     $scope.posts = postsData;
