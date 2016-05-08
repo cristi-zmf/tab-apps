@@ -21,32 +21,7 @@ angular.module('gradeBook.controllers', ['firebase'])
     $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('materiiController', function ($scope, $firebaseArray, $location, $state) {
-    var postsDatabaseRef = new Firebase("https://vivid-fire-1290.firebaseio.com/").child('posts');
-    var postsData = $firebaseArray(postsDatabaseRef);
-    
-    $scope.post = {
-        message: 'ada'
-    };
-    
-    $scope.posts = postsData;
 
-    $scope.addPost = function () {
-        $scope.posts.$add($scope.post);
-        $scope.post = {
-            message: ''
-        };
-    };
-    
-    $scope.materii = {
-        materie: ''
-    };
-    
-    $scope.goToMaterie = function () {
-        $state.go('tab.materie');
-    }
-
-})
 
 .controller('AccountCtrl', function ($scope) {
     $scope.settings = {

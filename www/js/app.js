@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'gradeBook.services' is found in services.js
 // 'gradeBook.controllers' is found in controllers.js
-angular.module('gradeBook', ['ionic', 'firebase', 'gradeBook.controllers', 'gradeBook.services'])
+angular.module('gradeBook', ['ionic', 'firebase', 'gradeBook.controllers', 'gradeBook.elevControllers', 'gradeBook.services', 'gradeBook.elevServices'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -61,7 +61,7 @@ angular.module('gradeBook', ['ionic', 'firebase', 'gradeBook.controllers', 'grad
       url: 'materie',
       views: {
           'tab-materii': {
-              templateUrl: 'elev/test.html',
+              templateUrl: 'elev/detalii-materie.html',
               controller: 'materiiController'
           }
       }
