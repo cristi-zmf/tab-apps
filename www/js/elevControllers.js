@@ -9,4 +9,9 @@ angular.module('gradeBook.elevControllers', ['firebase'])
         $state.go('tab.materie');
     }
 
+})
+
+.controller('materieController', function($scope, $state, Materii) {
+    
+    
 });

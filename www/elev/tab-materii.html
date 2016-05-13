@@ -4,14 +4,10 @@
         <div class="list">
             <div class="item item-divider">
                 <ion-list>
-                    <a nav-transition="ios">
-                    <ion-item class="button icon icon-right ion-chevron-right" ng-click="goToMaterie()">
-                        Matematica
+                    <ion-item class="button icon icon-right ion-chevron-right" ng-repeat="materie in materii" href="#/tab/materii/{{materie.id}}" type="item-text-wrap">
+                      <p>{{materie.nume}}</p>
                     </ion-item>
-                        </a>
-                    <ion-item>
-                        Romana
-                    </ion-item>
+                       
                 </ion-list>
             </div>
         </div>

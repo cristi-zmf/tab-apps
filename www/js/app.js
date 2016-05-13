@@ -58,7 +58,7 @@ angular.module('gradeBook', ['ionic', 'firebase', 'gradeBook.controllers', 'grad
   })
   
   .state('tab.materie', {
-      url: 'materie',
+      url: '/materii/:materieId',
       views: {
           'tab-materii': {
               templateUrl: 'elev/detalii-materie.html',
