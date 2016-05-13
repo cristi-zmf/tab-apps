@@ -11,7 +11,7 @@ angular.module('gradeBook.elevControllers', ['firebase'])
 
 })
 
-.controller('materieController', function($scope, $state, Materii) {
-    
-    
+.controller('materieController', function($scope, $state, $stateParams, Materii) {
+    $scope.materii = Materii.all();
+    $scope.materie = Materii.get($stateParams.materieId);
 });

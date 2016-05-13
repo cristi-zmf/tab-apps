@@ -62,7 +62,7 @@ angular.module('gradeBook', ['ionic', 'firebase', 'gradeBook.controllers', 'grad
       views: {
           'tab-materii': {
               templateUrl: 'elev/detalii-materie.html',
-              controller: 'materiiController'
+              controller: 'materieController'
           }
       }
       
