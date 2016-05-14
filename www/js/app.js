@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'gradeBook.services' is found in services.js
 // 'gradeBook.controllers' is found in controllers.js
-angular.module('gradeBook', ['ionic', 'firebase', 'gradeBook.controllers', 'gradeBook.elevControllers', 'gradeBook.services', 'gradeBook.elevServices'])
+angular.module('gradeBook', ['ionic', 'firebase', 'gradeBook.controllers', 'gradeBook.elevControllers', 'gradeBook.services', 'gradeBook.elevServices', 'chart.js'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -30,14 +30,14 @@ angular.module('gradeBook', ['ionic', 'firebase', 'gradeBook.controllers', 'grad
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
-  
+
   // login page
   .state('login', {
       url: '/login',
       templateUrl: 'main/login.html',
       controller: 'LoginController'
   })
-  
+
   // setup an abstract state for the tabs directive
     .state('tab', {
     url: '/tab',
@@ -54,9 +54,9 @@ angular.module('gradeBook', ['ionic', 'firebase', 'gradeBook.controllers', 'grad
               controller: 'materiiController'
           }
       }
-      
+
   })
-  
+
   .state('tab.materie', {
       url: '/materii/:materieId',
       views: {
@@ -65,9 +65,9 @@ angular.module('gradeBook', ['ionic', 'firebase', 'gradeBook.controllers', 'grad
               controller: 'materieController'
           }
       }
-      
+
   })
-  
+
   .state('tab.dash', {
     url: '/dash',
     views: {
@@ -106,8 +106,8 @@ angular.module('gradeBook', ['ionic', 'firebase', 'gradeBook.controllers', 'grad
       }
     }
   });
-  
-  
+
+
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');

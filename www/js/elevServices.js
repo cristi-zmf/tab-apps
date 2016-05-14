@@ -13,7 +13,7 @@ angular.module('gradeBook.elevServices', [])
          }, {
         id: 2,
         nume: 'Romana',
-        note: [4, 6, 9],
+        note: [4, 6, 9, 9, 9],
         absente: ['22/04/2016']
          }];
 
@@ -27,6 +27,28 @@ angular.module('gradeBook.elevServices', [])
                 if (materii[i].id === parseInt(materieId))
                     return materii[i];
             }
+        },
+
+        countOccurence: function (materie) {
+            var vector = materie.note;
+            var note = [],
+                occurs = [],
+                prev;
+
+            note.sort();
+            for (var i = 0; i < vector.length; i++) {
+                if (vector[i] !== prev) {
+                    note.push(vector[i].toString());
+                    occurs.push(1);
+                } else {
+                    occurs[occurs.length - 1]++;
+                }
+                prev = vector[i];
+            }
+            return {
+                note: note,
+                aparitii: occurs
+            };
         }
     };
 
