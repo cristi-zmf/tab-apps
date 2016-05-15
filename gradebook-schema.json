@@ -1,0 +1,45 @@
+{
+	"elevi" : {
+		"username_cu_prefixul_E" : {
+			"parola" : "valoare criptata RSA",
+			"nume" : "valoare",
+			"prenume" : "valoare",
+			"cnp" : "valoare"
+		} 
+		
+	},
+
+	"semestrul 1" : {
+		"username_cu_prefixul_E": {
+			"nume_materie" : {
+				"note" : ["note"],
+				"are_teza" : "true/false"
+			}
+		}
+	},
+	"semestrul 2" : {
+		"username_cu_prefixul_E": {
+			"nume_materie" : {
+				"note" : ["note"],
+				"are_teza" : "true/false",
+				"absente" : ["dd/mm"]
+			}
+		}
+	},
+
+	"profesori" : {
+		"username_cu_prefixul_P" : {
+			"parola" : "valoare criptata RSA",
+			"nume" : "valoare",
+			"prenume" : "valoare",
+			"cnp" : "valoare",
+			"clase" : [{"id_clasa":"nume_materie"}]
+		}
+	},
+
+	"clase" : {
+		"id_clasa" : ["username_cu_prefixul_E"]
+	}
+
+}
+
