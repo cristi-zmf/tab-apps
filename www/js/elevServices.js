@@ -8,6 +8,7 @@ angular.module('gradeBook.elevServices', [])
     var materii = [{
         id: 1,
         nume: 'Matematica',
+        are_teza: true,
         note: [[10, {
                 "Provenienta": "Lucrare",
                 "Observatii": "Nu e bine!",
@@ -34,6 +35,7 @@ angular.module('gradeBook.elevServices', [])
          }, {
         id: 2,
         nume: 'Romana',
+        are_teza: false,
         note: [[10, {
             "Provenienta": "Lucrare",
             "Observatii": "Nu e bine!",
@@ -54,6 +56,7 @@ angular.module('gradeBook.elevServices', [])
         absente: ['22/04/2016']
          }];
 
+    //Se returneaza notele din vectorul de note si observatii
      materii.getGrades = function (note) {
         var grades = [];
         var gradePos = 0;

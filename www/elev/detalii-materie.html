@@ -1,12 +1,26 @@
 <ion-view view-title="{{materie.nume}}">
   <ion-content class="padding">
     <ion-list>
+
       <ion-item class="item-icon-left" ng-repeat="nota in note track by $index" type="item-text-wrap">
-        <i class="icon ion-ribbon-b"></i>
-  <h5><p>{{nota}}</p></h5>
-        </ion-item>
-      </ion-list>
-   <canvas id="pie" class="chart chart-pie"
-           chart-data="data" chart-labels="labels" chart-legend="true"></canvas>
+        <div ng-if="nota === 10">
+          <i class="icon ion-trophy royal"></i>
+          <h5><p>{{nota}}</p></h5>
+        </div>
+        <div ng-if="nota >= 7 && nota < 10">
+          <i class="icon ion-ribbon-b balanced"></i>
+          <h5><p>{{nota}}</p></h5>
+        </div>
+        <div ng-if="nota < 7 && nota >= 5">
+          <i class="icon ion-alert-circled energized"></i>
+          <h5><p>{{nota}}</p></h5>
+        </div>
+        <div ng-if="nota < 5">
+          <i class="icon ion-sad assertive"></i>
+          <h5><p>{{nota}}</p></h5>
+        </div>
+      </ion-item>
+    </ion-list>
+    <canvas id="pie" class="chart chart-pie" chart-data="data" chart-labels="labels" chart-legend="true"></canvas>
   </ion-content>
 </ion-view>
