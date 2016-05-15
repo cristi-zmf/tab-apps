@@ -1,0 +1,18 @@
+<!--Fereastra de tipul pop-up/modal pentru 
+afisarea detaliilor despre nota curenta-->
+<ion-modal-view>
+    <ion-header-bar>
+        <h1 class="title">Detalii nota {{nota[GRADE_POSITION]}}</h1>
+        <button class="button icon ion-close-circled button-assertive" ng-click="closeModal()">Exit</button>
+    </ion-header-bar>
+    <ion-content class="has-subheader">
+        <div class="list">
+                <div class="item item-divider">
+                    {{PROVENIENTA}}:
+                </div>
+                <p>{{nota[DETAILS_POSITION].Provenienta}}</p>
+        </div>
+    </ion-content>
+</ion-modal-view>
+
+<!--ng-if="!nota[DETAILS_POSITION].Provenienta"-->

@@ -12,7 +12,7 @@ angular.module('gradeBook.elevServices', [])
         note: [[10, {
                 "Provenienta": "Lucrare",
                 "Observatii": "Nu e bine!",
-                "Recomandari": ""
+                "Recomandari": "SUPER, NIMIC DE ZIS!"
         }], [5, {
                 "Provenienta": "Lucrare",
                 "Observatii": "Nu e bine!",
@@ -57,7 +57,7 @@ angular.module('gradeBook.elevServices', [])
          }];
 
     //Se returneaza notele din vectorul de note si observatii
-     materii.getGrades = function (note) {
+    materii.getGrades = function (note) {
         var grades = [];
         var gradePos = 0;
 
@@ -79,6 +79,11 @@ angular.module('gradeBook.elevServices', [])
                     return materii[i];
             }
         },
+        /*Functie care numara de cate ori apare o nota
+            @in:materie = materia la care vrem sa numaram notele
+            @out: note = vector cu notele
+            @out: occurs = vector cu nr de aparitii al fiecarui vector
+            indexul din note corespunde cu indexul din occurs*/
 
         countOccurence: function (materie) {
             var vector = materii.getGrades(materie.note);
