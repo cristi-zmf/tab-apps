@@ -20,7 +20,8 @@
 	"semestrul 2" : {
 		"username_cu_prefixul_E": {
 			"nume_materie" : {
-				"note" : ["note"],
+				"note" : [["nota", {"Provenienta":"Lucrare/Ascultare", "Observatii": "Observatie", 
+					"Recomandari":"Recomandare", "Data":"data_notei"}]],
 				"are_teza" : "true/false",
 				"absente" : ["dd/mm"]
 			}

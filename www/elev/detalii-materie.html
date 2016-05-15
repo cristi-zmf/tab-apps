@@ -1,6 +1,11 @@
 <ion-view view-title="{{materie.nume}}">
   <ion-content class="padding">
-  <h5><p>{{note}}</p></h5>
+    <ion-list>
+      <ion-item class="item-icon-left" ng-repeat="nota in note track by $index" type="item-text-wrap">
+        <i class="icon ion-ribbon-b"></i>
+  <h5><p>{{nota}}</p></h5>
+        </ion-item>
+      </ion-list>
    <canvas id="pie" class="chart chart-pie"
            chart-data="data" chart-labels="labels" chart-legend="true"></canvas>
   </ion-content>

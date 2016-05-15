@@ -2,7 +2,8 @@
     <ion-content>
         <div class="item item-divider">Semestrul 1</div>
         <ion-list>
-            <ion-item class="item-icon-right" ng-repeat="materie in materii" href="#/tab/materii/{{materie.id}}" type="item-text-wrap">
+            <ion-item class="item-icon-left item-icon-right" ng-repeat="materie in materii" href="#/tab/materii/{{materie.id}}" type="item-text-wrap">
+                <i class="icon ion-ios-book"></i>
                 <p>{{materie.nume}}</p>
                 <i class="icon ion-chevron-right icon-accessory"></i>
             </ion-item>
