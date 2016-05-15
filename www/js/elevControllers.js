@@ -44,6 +44,7 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
     $scope.pieData = Materii.countOccurence($scope.materie);
     $scope.labels = $scope.pieData.note;
     $scope.data = $scope.pieData.aparitii;
+    $scope.note = $scope.materii.getGrades($scope.materie.note);
     if ($scope.data.length == 0) {
         $scope.data.push(100);
         $scope.labels.push("Fara note");

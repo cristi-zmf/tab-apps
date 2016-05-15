@@ -8,14 +8,62 @@ angular.module('gradeBook.elevServices', [])
     var materii = [{
         id: 1,
         nume: 'Matematica',
-        note: [10, 9, 7, 5],
+        note: [[10, {
+                "Provenienta": "Lucrare",
+                "Observatii": "Nu e bine!",
+                "Recomandari": ""
+        }], [5, {
+                "Provenienta": "Lucrare",
+                "Observatii": "Nu e bine!",
+                "Recomandari": ""
+        }], [3, {
+                "Provenienta": "Lucrare",
+                "Observatii": "Nu e bine!",
+                "Recomandari": ""
+        }], [8, {
+                "Provenienta": "Lucrare",
+                "Observatii": "Nu e bine!",
+                "Recomandari": ""
+        }],
+            [8, {
+                "Provenienta": "Lucrare",
+                "Observatii": "Nu e bine!",
+                "Recomandari": ""
+        }]],
         absente: ['22/03/2016']
          }, {
         id: 2,
         nume: 'Romana',
-        note: [4, 6, 9, 9, 9],
+        note: [[10, {
+            "Provenienta": "Lucrare",
+            "Observatii": "Nu e bine!",
+            "Recomandari": ""
+        }], [9, {
+            "Provenienta": "Lucrare",
+            "Observatii": "Nu e bine!",
+            "Recomandari": ""
+        }], [8, {
+            "Provenienta": "Lucrare",
+            "Observatii": "Nu e bine!",
+            "Recomandari": ""
+        }], [5, {
+            "Provenienta": "Lucrare",
+            "Observatii": "Nu e bine!",
+            "Recomandari": ""
+        }]],
         absente: ['22/04/2016']
          }];
+
+     materii.getGrades = function (note) {
+        var grades = [];
+        var gradePos = 0;
+
+        for (var i = 0; i < note.length; i++) {
+            var nota = note[i];
+            grades.push(nota[gradePos]);
+        }
+        return grades;
+    };
 
     return {
         all: function () {
@@ -30,7 +78,7 @@ angular.module('gradeBook.elevServices', [])
         },
 
         countOccurence: function (materie) {
-            var vector = materie.note;
+            var vector = materii.getGrades(materie.note);
             var note = [],
                 occurs = [],
                 prev;
