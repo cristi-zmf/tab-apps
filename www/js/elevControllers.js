@@ -17,7 +17,7 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
     $scope.materie = Materii.get($stateParams.materieId);
     /*Constante pentru fereastra modal*/
     $scope.PROVENIENTA = "Provenienta";
-    $scope.OBSSERVATII = "Observatii";
+    $scope.OBSERVATII = "Observatii";
     $scope.RECOMANDARI = "Recomandari"
 
     /*Constante pentru a obtine nota, si detaliile acesteia*/

@@ -1,16 +1,30 @@
 <!--Fereastra de tipul pop-up/modal pentru 
 afisarea detaliilor despre nota curenta-->
 <ion-modal-view>
-    <ion-header-bar>
+    <ion-header-bar class="bar-balanced">
         <h1 class="title">Detalii nota {{nota[GRADE_POSITION]}}</h1>
         <button class="button icon ion-close-circled button-assertive" ng-click="closeModal()">Exit</button>
     </ion-header-bar>
-    <ion-content class="has-subheader">
+    <ion-content class="padding">
         <div class="list">
-                <div class="item item-divider">
-                    {{PROVENIENTA}}:
-                </div>
-                <p>{{nota[DETAILS_POSITION].Provenienta}}</p>
+            <div class="item item-divider balanced" style="background:purple">
+                {{PROVENIENTA}}:
+            </div>
+            <div style="background:green" class="positive">
+                <h4><p>{{nota[DETAILS_POSITION].Provenienta}}</p></h4>
+            </div>
+            <div class="item item-divider balanced" style="background:purple">
+                {{OBSERVATII}}:
+            </div>
+            <div style="background:green" class="positive">
+                <h4><p>{{nota[DETAILS_POSITION].Observatii}}</p></h4>
+            </div>
+            <div class="item item-divider balanced" style="background:purple">
+                {{RECOMANDARI}}:
+            </div>
+            <div style="background:green" class="positive">
+                <h4><p>{{nota[DETAILS_POSITION].Recomandari}}</p></h4>
+            </div>
         </div>
     </ion-content>
 </ion-modal-view>
