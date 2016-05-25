@@ -12,19 +12,24 @@
 	"semestrul 1" : {
 		"username_cu_prefixul_E": {
 			"nume_materie" : {
-				"note" : ["note"],
-				"are_teza" : "true/false"
+				"note" : [{"nota":10, "provenienta":"Lucrare/Ascultare", "observatii": "Observatie", 
+					"recomandari":"Recomandare", "data":"23/04/2016"}],
+				"are_teza" : "true/false",
+				"nota_teza": {"nota":10, "provenienta":"Lucrare/Ascultare", "observatii": "Observatie", 
+					"recomandari":"Recomandare", "data":"23/04/2016"},
+				"absente" : [{"data":"22/04/2016", "motivata":0, "este_nemotivabila":0}]
 			}
 		}
 	},
 	"semestrul 2" : {
 		"username_cu_prefixul_E": {
 			"nume_materie" : {
-				"note" : [["nota", {"Provenienta":"Lucrare/Ascultare", "Observatii": "Observatie", 
-					"Recomandari":"Recomandare", "Data":"data_notei"}]],
+				"note" : [{"nota":10, "provenienta":"Lucrare/Ascultare", "observatii": "Observatie", 
+					"recomandari":"Recomandare", "data":"23/04/2016"}],
 				"are_teza" : "true/false",
-				"nota_teza": "nota",
-				"absente" : ["dd/mm"]
+				"nota_teza": {"nota":10, "provenienta":"Lucrare/Ascultare", "observatii": "Observatie", 
+					"recomandari":"Recomandare", "data":"23/04/2016"},
+				"absente" : [{"data":"22/04/2016", "motivata":0, "este_nemotivabila":0}]
 			}
 		}
 	},
@@ -41,6 +46,15 @@
 
 	"clase" : {
 		"id_clasa" : ["username_cu_prefixul_E"]
+	},
+
+	"parinti" : {
+		"username_cu_prefixul_F" : {
+			"elevi" : [{"username_cu_prefixul_E":true}],
+			"nume" : "nume_parinte",
+			"parola" : "parola_parinte",
+			"prenume" : "prenume_parinte"
+		}
 	}
 
 }
