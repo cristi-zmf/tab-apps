@@ -2,12 +2,12 @@
   <ion-content class="padding">
       <div class="list list-inset">
           <label class="item item-input">
-              <input type="text" placeholder="Username" ng-model="data.username">
+              <input type="text" placeholder="Maill address" ng-model="mail">
           </label>
           <label class="item item-input">
-              <input type="password" placeholder="Password" ng-model="data.password">
+              <input type="password" placeholder="Password" ng-model="password">
           </label>
       </div>
-      <button class="button button-block button-royal" ng-click="login()">Login</button>
+      <button class="button button-block button-royal" ng-click="signIn(mail, password)">Login</button>
   </ion-content>
 </ion-view>

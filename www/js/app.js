@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'gradeBook.services' is found in services.js
 // 'gradeBook.controllers' is found in controllers.js
-angular.module('gradeBook', ['ionic', 'firebase', 'gradeBook.controllers', 'gradeBook.elevControllers', 'gradeBook.services', 'gradeBook.elevServices', 'chart.js'])
+angular.module('gradeBook', ['ionic', 'firebase', 'gradeBook.controllers', 'gradeBook.elevControllers','gradeBook.loginController', 'gradeBook.services', 'gradeBook.elevServices', 'chart.js'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -35,7 +35,7 @@ angular.module('gradeBook', ['ionic', 'firebase', 'gradeBook.controllers', 'grad
   .state('login', {
       url: '/login',
       templateUrl: 'main/login.html',
-      controller: 'LoginController'
+      controller: 'loginController'
   })
 
   // setup an abstract state for the tabs directive

@@ -27,10 +27,5 @@ angular.module('gradeBook.controllers', ['firebase'])
     $scope.settings = {
         enableFriends: true
     }
-})
-    
-.controller('LoginController', function($scope, $location) {
-    $scope.login = function() {
-        $location.path('/tab/dash');
-    }       
 });
+    

@@ -4,7 +4,8 @@
 			"parola" : "valoare criptata RSA",
 			"nume" : "valoare",
 			"prenume" : "valoare",
-			"cnp" : "valoare"
+			"cnp" : "valoare",
+			"mail" : "valoare"
 		} 
 		
 	},
@@ -40,7 +41,8 @@
 			"nume" : "valoare",
 			"prenume" : "valoare",
 			"cnp" : "valoare",
-			"clase" : [{"id_clasa":"nume_materie"}]
+			"clase" : [{"id_clasa":"nume_materie"}],
+			"mail" : "valoare"
 		}
 	},
 
@@ -53,7 +55,8 @@
 			"elevi" : [{"username_cu_prefixul_E":true}],
 			"nume" : "nume_parinte",
 			"parola" : "parola_parinte",
-			"prenume" : "prenume_parinte"
+			"prenume" : "prenume_parinte",
+			"mail" : "valoare"
 		}
 	}
 
