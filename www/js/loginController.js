@@ -19,20 +19,48 @@ angular.module('gradeBook.loginController', ['firebase', 'chart.js'])
 
     $scope.signIn = function (mail, password) {
         console.log("Intram aici");
-        $scope.authObj.$authWithPassword({
-                email: mail,
-                password: password
-            }).then(function (authData) {
+        /*$scope.authWithPassword({
+                email : mail,
+                password : password
+            }, function(error, authData) {
+                    if (error) {
+                        console.log("Login failed!", error);
+                    } else {
+                        console.log("Login succes", authdata);
+                    }});*/
+            
+           /* .then(function (authData) {
             console.log("Loggin succes: ", authData);
         }).catch(function (error) {
            console.error("Auth failed: ", error); 
-        });
-            
+        });*/
+        var errorObj;    
         
-        /*firebase.auth().signInWithEmailAndPassword(mail, password).catch(function(error) {
+        firebase.auth().signInWithEmailAndPassword(mail, password).then(function (authData) {
+            $location.path('/tab/dash');
+            $scope.$apply();
+            console.log("auth succesful", authData);
+            
+        }).catch(function(error) {
             var errorCode = error.code;
             var errorMessage = error.message;
-            console.log("am loggat");
-        });*/
+            errorObj = error;
+            console.log("Login failed: ", error);
+        });
+        
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+            console.log("userul este ", user.mail);
+            $location.path('/tab/dash');
+            }
+        }, null, '  ');
+        /*if () {
+            console.log("bad user", errorObj);
+        }
+        
+        else {
+            console.log("succesful login", errorObj);
+            $location.path('/tab/dash');
+        }*/
     };
 });
