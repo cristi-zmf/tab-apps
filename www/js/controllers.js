@@ -1,6 +1,11 @@
 angular.module('gradeBook.controllers', ['firebase'])
 
-.controller('DashCtrl', function ($scope) {})
+.controller('DashCtrl', function ($scope, CurrentUser) {
+    
+    
+    $scope.currentUser = CurrentUser.getLoggedUser();
+    
+})
 
 .controller('ChatsCtrl', function ($scope, Chats) {
     // With the new view caching in Ionic, Controllers are only called

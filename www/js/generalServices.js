@@ -1,11 +1,14 @@
 /*Modul cu variabile globale constante*/
 angular.module('gradeBook.generalServices', [])
 
-.factory('generalServices', function() {
-   var loggedUser = '';
+.factory('CurrentUser', function() {
+   var loggedUser = {};
     return {
         getLoggedUser : function () {
-            return loggedUser();
+            return loggedUser;
+        },
+        setLoggedUser : function (user) {
+            loggedUser = user;
         }
     };
 });

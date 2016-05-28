@@ -36,7 +36,10 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
         $scope.data.push(100);
         $scope.labels.push("Fara note");
     }
-
+    
+    
+    /*Firebase logic*/
+    
     /*Modal logic*/
     $ionicModal.fromTemplateUrl('elev/nota-modal.html', {
         scope: $scope,
