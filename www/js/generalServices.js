@@ -15,9 +15,10 @@ angular.module('gradeBook.generalServices', [])
     /*Constante pentru numele intrarilor generale din baza
     de date*/
 }).factory('DatabaseTables', function () {
-    var elevi = "elevi";
+    var elevi = "elevi/";
     var profesori = "profesori";
     var semestrul1 = "";
+    var database = "https://gradebook-a87b2.firebaseio.com/";
 
     return {
         getEleviTableName: function () {
@@ -25,6 +26,10 @@ angular.module('gradeBook.generalServices', [])
         },
         getProfesoriTableName: function () {
             return profesori;
+        },
+
+        getDatabaseName: function () {
+            return database;
         }
     };
 });

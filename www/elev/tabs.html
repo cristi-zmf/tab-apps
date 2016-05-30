@@ -4,7 +4,11 @@ Each tab's child <ion-nav-view> directive will have its own
 navigation history that also transitions its views in and out.
 -->
 <ion-tabs class="tabs-icon-top tabs-color-active-positive">
-
+<ion-nav-buttons side="left">
+  <button class="button" ng-click="doSomething()">
+    MI
+  </button>
+</ion-nav-buttons>
     <!-- materii Tab -->
     <ion-tab title="Materii" icon-off="ion-ios-bookmarks-outline" icon-on="ion-ios-bookmarks" href="#/tab/materii">
         <ion-nav-view name="tab-materii"></ion-nav-view>

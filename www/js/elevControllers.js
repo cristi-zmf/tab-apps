@@ -1,9 +1,10 @@
 /*Modul care ofera functionalitatea pentru taburile din elev*/
 angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
 
-.controller('materiiController', function ($scope, $firebaseArray, $location, $state, Materii) {
-    var postsDatabaseRef = new Firebase("https://vivid-fire-1290.firebaseio.com/").child('posts');
-    var postsData = $firebaseArray(postsDatabaseRef);
+.controller('materiiController', function ($scope, $firebaseArray, $location, $state, Materii, DatabaseTables) {
+    /*Luam materiile */
+    var ref = new Firebase(DatabaseTables.getDatabaseName() + DatabaseTables.getEleviTableName());
+
     $scope.materii = Materii.all();
 
     $scope.goToMaterie = function () {
@@ -36,10 +37,10 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
         $scope.data.push(100);
         $scope.labels.push("Fara note");
     }
-    
-    
+
+
     /*Firebase logic*/
-    
+
     /*Modal logic*/
     $ionicModal.fromTemplateUrl('elev/nota-modal.html', {
         scope: $scope,
@@ -54,6 +55,6 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
     $scope.closeModal = function () {
         $scope.modal.hide();
     };
-   
+
 
 });

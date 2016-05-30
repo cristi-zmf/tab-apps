@@ -1,1 +1,11 @@
 /* Empty. Add your own CSS if you like */
+.popup-buttons .button {
+     border-color: transparent;
+    background-color: #886aea;
+    color: #fff;
+}
+
+.popup-buttons .button.activated
+{
+  background-color: #6b46e5;
+}
