@@ -1,64 +1,99 @@
 {
-	"elevi" : {
-		"username_cu_prefixul_E" : {
-			"parola" : "valoare criptata RSA",
-			"nume" : "valoare",
-			"prenume" : "valoare",
-			"cnp" : "valoare",
-			"mail" : "valoare"
-		} 
-		
-	},
-
-	"semestrul 1" : {
-		"username_cu_prefixul_E": {
-			"nume_materie" : {
-				"note" : [{"nota":10, "provenienta":"Lucrare/Ascultare", "observatii": "Observatie", 
-					"recomandari":"Recomandare", "data":"23/04/2016"}],
-				"are_teza" : "true/false",
-				"nota_teza": {"nota":10, "provenienta":"Lucrare/Ascultare", "observatii": "Observatie", 
-					"recomandari":"Recomandare", "data":"23/04/2016"},
-				"absente" : [{"data":"22/04/2016", "motivata":0, "este_nemotivabila":0}]
-			}
-		}
-	},
-	"semestrul 2" : {
-		"username_cu_prefixul_E": {
-			"nume_materie" : {
-				"note" : [{"nota":10, "provenienta":"Lucrare/Ascultare", "observatii": "Observatie", 
-					"recomandari":"Recomandare", "data":"23/04/2016"}],
-				"are_teza" : "true/false",
-				"nota_teza": {"nota":10, "provenienta":"Lucrare/Ascultare", "observatii": "Observatie", 
-					"recomandari":"Recomandare", "data":"23/04/2016"},
-				"absente" : [{"data":"22/04/2016", "motivata":0, "este_nemotivabila":0}]
-			}
-		}
-	},
-
-	"profesori" : {
-		"username_cu_prefixul_P" : {
-			"parola" : "valoare criptata RSA",
-			"nume" : "valoare",
-			"prenume" : "valoare",
-			"cnp" : "valoare",
-			"clase" : [{"id_clasa":"nume_materie"}],
-			"mail" : "valoare"
-		}
-	},
-
-	"clase" : {
-		"id_clasa" : ["username_cu_prefixul_E"]
-	},
-
-	"parinti" : {
-		"username_cu_prefixul_F" : {
-			"elevi" : [{"username_cu_prefixul_E":true}],
-			"nume" : "nume_parinte",
-			"parola" : "parola_parinte",
-			"prenume" : "prenume_parinte",
-			"mail" : "valoare"
-		}
-	}
-
+  "elevi": {
+    "uid_elev": {     
+      "nume": "valoare",
+      "prenume": "valoare",
+      "cnp": "valoare",
+      "parinti" : [{"uid_parinte": true}]
+    }
+  },
+  "semestrul 1": {
+    "uid_elev": [{
+      "nume_materie": {
+        "note": [
+          {
+            "nota": 10,
+            "provenienta": "Lucrare/Ascultare",
+            "observatii": "Observatie",
+            "recomandari": "Recomandare",
+            "data": "23/04/2016"
+          }
+        ],
+        "are_teza": "true/false",
+        "nota_teza": {
+          "nota": 10,
+          "provenienta": "Lucrare/Ascultare",
+          "observatii": "Observatie",
+          "recomandari": "Recomandare",
+          "data": "23/04/2016"
+        },
+        "absente": [
+          {
+            "data": "22/04/2016",
+            "motivata": 0,
+            "este_nemotivabila": 0
+          }
+        ]
+      }
+    }]
+  },
+  
+  "semestrul 2": {
+    "uid_elev": [{
+      "nume_materie": {
+        "note": [
+          {
+            "nota": 10,
+            "provenienta": "Lucrare/Ascultare",
+            "observatii": "Observatie",
+            "recomandari": "Recomandare",
+            "data": "23/04/2016"
+          }
+        ],
+        "are_teza": "true/false",
+        "nota_teza": {
+          "nota": 10,
+          "provenienta": "Lucrare/Ascultare",
+          "observatii": "Observatie",
+          "recomandari": "Recomandare",
+          "data": "23/04/2016"
+        },
+        "absente": [
+          {
+            "data": "22/04/2016",
+            "motivata": 0,
+            "este_nemotivabila": 0
+          }
+        ]
+      }
+    }]
+  },
+  "profesori": {
+    "uid_profesor": {
+      "nume": "valoare",
+      "prenume": "valoare",
+      "cnp": "valoare",
+      "clase": [
+        {
+          "id_clasa": "nume_materie"
+        }
+      ]
+    }
+  },
+  "clase": {
+    "id_clasa": [
+      "uid_elev"
+    ]
+  },
+  "parinti": {
+    "uid_parinte": {
+      "elevi": [
+        {
+          "uid_elev": true
+        }
+      ],
+      "nume": "nume_parinte",
+      "prenume": "prenume_parinte"
+    }
+  }
 }
-

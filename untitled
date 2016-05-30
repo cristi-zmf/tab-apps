@@ -1,0 +1,7 @@
+{
+     
+      "nume": "Zamfir",
+      "prenume": "Cristian",
+      "cnp": "1234567891234",
+      "parinti" : [{"parinte@parinte.com": true}]
+    }

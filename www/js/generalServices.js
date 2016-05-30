@@ -1,14 +1,30 @@
 /*Modul cu variabile globale constante*/
 angular.module('gradeBook.generalServices', [])
 
-.factory('CurrentUser', function() {
-   var loggedUser = {};
+.factory('CurrentUser', function () {
+    var loggedUser = {};
     return {
-        getLoggedUser : function () {
+        getLoggedUser: function () {
             return loggedUser;
         },
-        setLoggedUser : function (user) {
+        setLoggedUser: function (user) {
             loggedUser = user;
+        }
+    };
+
+    /*Constante pentru numele intrarilor generale din baza
+    de date*/
+}).factory('DatabaseTables', function () {
+    var elevi = "elevi";
+    var profesori = "profesori";
+    var semestrul1 = "";
+
+    return {
+        getEleviTableName: function () {
+            return elevi;
+        },
+        getProfesoriTableName: function () {
+            return profesori;
         }
     };
 });
