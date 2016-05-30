@@ -1,11 +1,10 @@
 /*Modul care ofera functionalitatea pentru taburile din elev*/
 angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
 
-.controller('materiiController', function ($scope, $firebaseArray, $location, $state, Materii, DatabaseTables) {
+.controller('materiiController', function ($scope, $firebaseArray, $firebaseObject, $location, $state, Materii, DatabaseTables, CurrentUser) {
     /*Luam materiile */
-    var ref = new Firebase(DatabaseTables.getDatabaseName() + DatabaseTables.getEleviTableName());
-
-    $scope.materii = Materii.all();
+    var ref = new Firebase(DatabaseTables.getDatabaseName() + DatabaseTables.getSemestrul1() + CurrentUser.getLoggedUser());
+    $scope.materii = Materii.getMateriiElev();
 
     $scope.goToMaterie = function () {
         $state.go('tab.materie');
@@ -14,8 +13,11 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
 })
 
 .controller('materieController', function ($scope, $state, $stateParams, $ionicModal, Materii) {
-    $scope.materii = Materii.all();
-    $scope.materie = Materii.get($stateParams.materieId);
+    $scope.materii = Materii.getMateriiElev();
+
+    console.log("pe asta o selectam: ", $stateParams.materieNume);
+    $scope.materie = Materii.getSelectedMaterie($stateParams.materieNume, $scope.materii);
+
     /*Constante pentru fereastra modal*/
     $scope.PROVENIENTA = "Provenienta";
     $scope.OBSERVATII = "Observatii";
@@ -32,7 +34,7 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
     $scope.labels = $scope.pieData.note;
     $scope.data = $scope.pieData.aparitii;
     $scope.note = $scope.materie.note;
-    $scope.note.justGrades = $scope.materii.getGrades($scope.materie.note);
+    $scope.note.justGrades = Materii.getGrades($scope.materie.note);
     if ($scope.data.length == 0) {
         $scope.data.push(100);
         $scope.labels.push("Fara note");

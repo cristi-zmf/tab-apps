@@ -1,6 +1,6 @@
 angular.module('gradeBook.elevServices', [])
 
-.factory('Materii', function () {
+.factory('Materii', function ($firebaseArray, CurrentUser, DatabaseTables) {
 
     var elev = '';
     elev = 'Luca';
@@ -56,8 +56,12 @@ angular.module('gradeBook.elevServices', [])
         absente: ['22/04/2016']
          }];
 
+    /*Firebase logic*/
+    var ref = new Firebase(DatabaseTables.getDatabaseName() + DatabaseTables.getSemestrul1() + CurrentUser.getLoggedUser());
+    var materii2 = $firebaseArray(ref);
+
     //Se returneaza notele din vectorul de note si observatii
-    materii.getGrades = function (note) {
+  /*  materii.getGrades = function (note) {
         var grades = [];
         var gradePos = 0;
 
@@ -66,11 +70,17 @@ angular.module('gradeBook.elevServices', [])
             grades.push(nota[gradePos]);
         }
         return grades;
-    };
+    };*/
 
     return {
         all: function () {
             return materii;
+        },
+
+        getMateriiElev: function () {
+            /*var ref = new Firebase(DatabaseTables.getDatabaseName() + DatabaseTables.getSemestrul1() + CurrentUser.getLoggedUser());
+            var materii2 = $firebaseArray(ref);*/
+            return materii2;
         },
 
         get: function (materieId) {
@@ -79,6 +89,27 @@ angular.module('gradeBook.elevServices', [])
                     return materii[i];
             }
         },
+
+        getSelectedMaterie: function (materieNume, materiiArray) {
+            for (var i = 0; i < materiiArray.length; i++) {
+                console.log("Suntem la materia: ", materiiArray[i].numeMaterie);
+                if (materiiArray[i].numeMaterie === materieNume) {
+                    console.log("am gasit materia: ", materiiArray[i].nume);
+                    return materiiArray[i];
+                }
+            }
+        },
+
+        getGrades: function (note) {
+            var grades = [];
+            /*var gradePos = 0;*/
+
+            for (var i = 0; i < note.length; i++) {
+                var nota = note[i].nota;
+                grades.push(nota);
+            }
+            return grades;
+        },
         /*Functie care numara de cate ori apare o nota
             @in:materie = materia la care vrem sa numaram notele
             @out: note = vector cu notele
@@ -86,7 +117,7 @@ angular.module('gradeBook.elevServices', [])
             indexul din note corespunde cu indexul din occurs*/
 
         countOccurence: function (materie) {
-            var vector = materii.getGrades(materie.note);
+            var vector = this.getGrades(materie.note);
             var note = [],
                 occurs = [],
                 prev;

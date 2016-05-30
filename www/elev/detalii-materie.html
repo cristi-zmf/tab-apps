@@ -1,23 +1,23 @@
-<ion-view view-title="{{materie.nume}}">
+<ion-view view-title="{{materie.numeMaterie}}">
   <ion-content class="padding">
     <ion-list>
 
       <ion-item class="item-icon-left" ng-repeat="nota in note track by $index" type="item-text-wrap" ng-click="openModal(nota)">
-        <div ng-if="nota[GRADE_POSITION] === 10">
+        <div ng-if="nota.nota === 10">
           <i class="icon ion-trophy royal"></i>
-          <h5><p>{{nota[GRADE_POSITION]}}</p></h5>
+          <h5><p>{{nota.nota}}</p></h5>
         </div>
-        <div ng-if="nota[GRADE_POSITION] >= 7 && nota[GRADE_POSITION] < 10">
+        <div ng-if="nota.nota >= 7 && nota.nota < 10">
           <i class="icon ion-ribbon-b balanced"></i>
-          <h5><p>{{nota[GRADE_POSITION]}}</p></h5>
+          <h5><p>{{nota.nota}}</p></h5>
         </div>
-        <div ng-if="nota[GRADE_POSITION] < 7 && nota[GRADE_POSITION] >= 5">
+        <div ng-if="nota.nota < 7 && nota.nota >= 5">
           <i class="icon ion-alert-circled energized"></i>
-          <h5><p>{{nota[GRADE_POSITION]}}</p></h5>
+          <h5><p>{{nota.nota}}</p></h5>
         </div>
-        <div ng-if="nota[GRADE_POSITION] < 5">
+        <div ng-if="nota.nota < 5">
           <i class="icon ion-sad assertive"></i>
-          <h5><p>{{nota[GRADE_POSITION]}}</p></h5>
+          <h5><p>{{nota.nota}}</p></h5>
         </div>
       </ion-item>
     </ion-list>

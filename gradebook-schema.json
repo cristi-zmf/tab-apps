@@ -9,7 +9,7 @@
   },
   "semestrul 1": {
     "uid_elev": [{
-      "nume_materie": {
+      "numeMaterie": "valoare",
         "note": [
           {
             "nota": 10,
@@ -19,8 +19,8 @@
             "data": "23/04/2016"
           }
         ],
-        "are_teza": "true/false",
-        "nota_teza": {
+        "areTeza": "true/false",
+        "notaTeza": {
           "nota": 10,
           "provenienta": "Lucrare/Ascultare",
           "observatii": "Observatie",
@@ -31,16 +31,16 @@
           {
             "data": "22/04/2016",
             "motivata": 0,
-            "este_nemotivabila": 0
+            "esteNemotivabila": 0
           }
         ]
-      }
+      
     }]
   },
   
   "semestrul 2": {
     "uid_elev": [{
-      "nume_materie": {
+      "numeMaterie": "valoare",
         "note": [
           {
             "nota": 10,
@@ -50,8 +50,8 @@
             "data": "23/04/2016"
           }
         ],
-        "are_teza": "true/false",
-        "nota_teza": {
+        "areTeza": "true/false",
+        "notaTeza": {
           "nota": 10,
           "provenienta": "Lucrare/Ascultare",
           "observatii": "Observatie",
@@ -62,10 +62,10 @@
           {
             "data": "22/04/2016",
             "motivata": 0,
-            "este_nemotivabila": 0
+            "esteNemotivabila": 0
           }
         ]
-      }
+      
     }]
   },
   "profesori": {
@@ -75,7 +75,7 @@
       "cnp": "valoare",
       "clase": [
         {
-          "id_clasa": "nume_materie"
+          "id_clasa": "numeMaterie"
         }
       ]
     }

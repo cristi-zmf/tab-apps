@@ -26,18 +26,18 @@ angular.module('gradeBook.loginController', ['firebase', 'chart.js'])
 
             /*Verificam daca este elev*/
             var ref = new Firebase(DatabaseTables.getDatabaseName() + DatabaseTables.getEleviTableName());
-            $firebaseArray(ref).$loaded().then(function (elevi){
+            $firebaseArray(ref).$loaded().then(function (elevi) {
                 if (elevi.$getRecord(authData.uid)) {
                     $location.path('/tab/dash');
                     console.log("Schimbal locatia ca este elev ", elevi.$getRecord(authData.uid));
                 }
             });
 
-        }).catch(function(error) {
+        }).catch(function (error) {
             var errorCode = error.code;
             var errorMessage = error.message;
             errorObj = error;
-            console.log("Login failed: ", error);
+            /*console.log("Login failed: ", error);*/
             $ionicPopup.alert({
                 title: 'Eroare!',
                 template: 'Credentiale gresite'

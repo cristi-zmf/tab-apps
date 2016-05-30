@@ -16,8 +16,9 @@ angular.module('gradeBook.generalServices', [])
     de date*/
 }).factory('DatabaseTables', function () {
     var elevi = "elevi/";
-    var profesori = "profesori";
-    var semestrul1 = "";
+    var profesori = "profesori/";
+    var semestrul1 = "semestrul_1/";
+    var semestrul2 = "semestrul_2/";
     var database = "https://gradebook-a87b2.firebaseio.com/";
 
     return {
@@ -30,6 +31,14 @@ angular.module('gradeBook.generalServices', [])
 
         getDatabaseName: function () {
             return database;
+        },
+
+        getSemestrul1: function () {
+            return semestrul1;
+        },
+
+        getSemestrul2: function () {
+            return semestrul2;
         }
     };
 });

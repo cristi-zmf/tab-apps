@@ -1,8 +1,8 @@
-<!--Fereastra de tipul pop-up/modal pentru 
+<!--Fereastra de tipul pop-up/modal pentru
 afisarea detaliilor despre nota curenta-->
 <ion-modal-view>
     <ion-header-bar class="bar-balanced">
-        <h1 class="title">Detalii nota {{nota[GRADE_POSITION]}}</h1>
+        <h1 class="title">Detalii nota {{nota.nota}}</h1>
         <button class="button icon ion-close-circled button-assertive" ng-click="closeModal()">Exit</button>
     </ion-header-bar>
     <ion-content class="padding">
@@ -11,22 +11,22 @@ afisarea detaliilor despre nota curenta-->
                 {{PROVENIENTA}}:
             </div>
             <div style="background:green" class="positive">
-                <h4><p>{{nota[DETAILS_POSITION].Provenienta}}</p></h4>
+                <h4><p>{{nota.provenienta}}</p></h4>
             </div>
             <div class="item item-divider balanced" style="background:purple">
                 {{OBSERVATII}}:
             </div>
             <div style="background:green" class="positive">
-                <h4><p>{{nota[DETAILS_POSITION].Observatii}}</p></h4>
+                <h4><p>{{nota.observatii}}</p></h4>
             </div>
             <div class="item item-divider balanced" style="background:purple">
                 {{RECOMANDARI}}:
             </div>
             <div style="background:green" class="positive">
-                <h4><p>{{nota[DETAILS_POSITION].Recomandari}}</p></h4>
+                <h4><p>{{nota.recomandari}}</p></h4>
             </div>
         </div>
     </ion-content>
 </ion-modal-view>
 
-<!--ng-if="!nota[DETAILS_POSITION].Provenienta"-->
+<!--ng-if="!nota.Provenienta"-->
