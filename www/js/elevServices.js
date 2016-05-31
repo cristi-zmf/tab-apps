@@ -62,37 +62,39 @@ angular.module('gradeBook.elevServices', [])
     var materii2 = $firebaseArray(ref);
 
     //Se returneaza notele din vectorul de note si observatii
-  /*  materii.getGrades = function (note) {
-        var grades = [];
-        var gradePos = 0;
+    /*  materii.getGrades = function (note) {
+          var grades = [];
+          var gradePos = 0;
 
-        for (var i = 0; i < note.length; i++) {
-            var nota = note[i];
-            grades.push(nota[gradePos]);
-        }
-        return grades;
-    };*/
+          for (var i = 0; i < note.length; i++) {
+              var nota = note[i];
+              grades.push(nota[gradePos]);
+          }
+          return grades;
+      };*/
 
     return {
         all: function () {
             return materii;
         },
-getMateriiElev: function () {
-    /*var ref = new Firebase(DatabaseTables.getDatabaseName() + DatabaseTables.getSemestrul1() + CurrentUser.getLoggedUser());
-    var materiiPromise = $firebaseArray(ref);*/
 
-    var ref = new Firebase(DatabaseTables.getDatabaseName());
-    var authObj = $firebaseAuth(ref);
-    var curUser = firebase.auth().currentUser;
-    var userUid = curUser.uid;
-    /*console.log("Avem uid-ul urmator in serviciu: ", userUid);*/
-    ref = new Firebase(DatabaseTables.getDatabaseName() + DatabaseTables.getSemestrul1() + userUid);
-    var materiiPromise = $firebaseArray(ref).$loaded().then(function (materiiArray) {
-        /*console.log("avem materiile: ", materiiArray);*/
-        return materiiArray;
-    });
-    return materiiPromise;
-},
+        /*Functie care returneaza materiile de pe semestrul 1*/
+        getMateriiElevSemestrul1: function () {
+            /*var ref = new Firebase(DatabaseTables.getDatabaseName() + DatabaseTables.getSemestrul1() + CurrentUser.getLoggedUser());
+            var materiiPromise = $firebaseArray(ref);*/
+
+            var ref = new Firebase(DatabaseTables.getDatabaseName());
+            var authObj = $firebaseAuth(ref);
+            var curUser = firebase.auth().currentUser;
+            var userUid = curUser.uid;
+            /*console.log("Avem uid-ul urmator in serviciu: ", userUid);*/
+            ref = new Firebase(DatabaseTables.getDatabaseName() + DatabaseTables.getSemestrul1() + userUid);
+            var materiiPromise = $firebaseArray(ref).$loaded().then(function (materiiArray) {
+                /*console.log("avem materiile: ", materiiArray);*/
+                return materiiArray;
+            });
+            return materiiPromise;
+        },
         get: function (materieId) {
             for (var i = 0; i < materii.length; i++) {
                 if (materii[i].id === parseInt(materieId))
@@ -132,7 +134,7 @@ getMateriiElev: function () {
                 occurs = [],
                 prev;
 
-            note.sort();
+            vector.sort();
             for (var i = 0; i < vector.length; i++) {
                 if (vector[i] !== prev) {
                     note.push(vector[i].toString());

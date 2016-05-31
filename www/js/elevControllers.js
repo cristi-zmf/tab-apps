@@ -6,7 +6,7 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
     var curUser = firebase.auth().currentUser.uid;
     var ref = new Firebase(DatabaseTables.getDatabaseName() + DatabaseTables.getSemestrul1() + curUser);
 
-    Materii.getMateriiElev().then(function (materiiArray) {
+    Materii.getMateriiElevSemestrul1().then(function (materiiArray) {
         $scope.materii = materiiArray;
     });
     /*$scope.materii = Materii.getMateriiElev();*/
@@ -18,19 +18,19 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
 })
 
 .controller('materieController', function ($scope, $state, $stateParams, $ionicModal, Materii) {
-    Materii.getMateriiElev().then(function (materiiArray) {
+    Materii.getMateriiElevSemestrul1().then(function (materiiArray) {
         $scope.materii = materiiArray;
-       /* console.log("Acestea sunt materiile: ", $scope.materii);
-        console.log("pe asta o selectam: ", $stateParams.materieNume);*/
+        /* console.log("Acestea sunt materiile: ", $scope.materii);
+         console.log("pe asta o selectam: ", $stateParams.materieNume);*/
+
         $scope.materie = Materii.getSelectedMaterie($stateParams.materieNume, $scope.materii);
-       /* console.log("Aceasta este materia: ", $scope.materie);*/
+        /* console.log("Aceasta este materia: ", $scope.materie);*/
         $scope.note = $scope.materie.note;
         /*console.log = ("acestea sunt notele: ", $scope.note);*/
         $scope.note.justGrades = Materii.getGrades($scope.materie.note);
         $scope.pieData = Materii.countOccurence($scope.materie);
         $scope.labels = $scope.pieData.note;
         $scope.data = $scope.pieData.aparitii;
-
         if ($scope.data.length == 0) {
             $scope.data.push(100);
             $scope.labels.push("Fara note");
@@ -38,7 +38,7 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
     });
 
 
-
+    $scope.numeMaterie = $stateParams.materieNume;
 
     /*Constante pentru fereastra modal*/
     $scope.PROVENIENTA = "Provenienta";
