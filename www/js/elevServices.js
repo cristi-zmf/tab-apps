@@ -1,6 +1,6 @@
 angular.module('gradeBook.elevServices', [])
 
-.factory('Materii', function ($firebaseArray, CurrentUser, DatabaseTables) {
+.factory('Materii', function ($firebaseArray, $firebaseAuth, CurrentUser, DatabaseTables) {
 
     var elev = '';
     elev = 'Luca';
@@ -57,7 +57,8 @@ angular.module('gradeBook.elevServices', [])
          }];
 
     /*Firebase logic*/
-    var ref = new Firebase(DatabaseTables.getDatabaseName() + DatabaseTables.getSemestrul1() + CurrentUser.getLoggedUser());
+    var curUser = firebase.auth().currentUser.uid;
+    var ref = new Firebase(DatabaseTables.getDatabaseName() + DatabaseTables.getSemestrul1() + curUser);
     var materii2 = $firebaseArray(ref);
 
     //Se returneaza notele din vectorul de note si observatii
@@ -76,13 +77,22 @@ angular.module('gradeBook.elevServices', [])
         all: function () {
             return materii;
         },
+getMateriiElev: function () {
+    /*var ref = new Firebase(DatabaseTables.getDatabaseName() + DatabaseTables.getSemestrul1() + CurrentUser.getLoggedUser());
+    var materiiPromise = $firebaseArray(ref);*/
 
-        getMateriiElev: function () {
-            /*var ref = new Firebase(DatabaseTables.getDatabaseName() + DatabaseTables.getSemestrul1() + CurrentUser.getLoggedUser());
-            var materii2 = $firebaseArray(ref);*/
-            return materii2;
-        },
-
+    var ref = new Firebase(DatabaseTables.getDatabaseName());
+    var authObj = $firebaseAuth(ref);
+    var curUser = firebase.auth().currentUser;
+    var userUid = curUser.uid;
+    /*console.log("Avem uid-ul urmator in serviciu: ", userUid);*/
+    ref = new Firebase(DatabaseTables.getDatabaseName() + DatabaseTables.getSemestrul1() + userUid);
+    var materiiPromise = $firebaseArray(ref).$loaded().then(function (materiiArray) {
+        /*console.log("avem materiile: ", materiiArray);*/
+        return materiiArray;
+    });
+    return materiiPromise;
+},
         get: function (materieId) {
             for (var i = 0; i < materii.length; i++) {
                 if (materii[i].id === parseInt(materieId))

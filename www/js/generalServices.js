@@ -5,7 +5,10 @@ angular.module('gradeBook.generalServices', [])
     var loggedUser = {};
     return {
         getLoggedUser: function () {
-            return loggedUser;
+            var userPromise = firebase.auth().onAuthStateChanged(function (user) {
+                return user.uid;
+            })
+            return userPromise;
         },
         setLoggedUser: function (user) {
             loggedUser = user;

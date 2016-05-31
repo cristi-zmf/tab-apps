@@ -2,7 +2,7 @@
 
 angular.module('gradeBook.loginController', ['firebase', 'chart.js'])
 
-.controller('loginController', function ($scope, $location, $firebase, $firebaseAuth, $firebaseArray, $ionicPopup, CurrentUser, DatabaseTables) {
+.controller('loginController', function ($scope, $rootScope, $location, $firebase, $firebaseAuth, $firebaseArray, $window, $ionicPopup, CurrentUser, DatabaseTables) {
 
     /*$scope.login = function(mailAddress, pass) {
 
@@ -42,6 +42,16 @@ angular.module('gradeBook.loginController', ['firebase', 'chart.js'])
                 title: 'Eroare!',
                 template: 'Credentiale gresite'
             });
+        });
+    };
+
+    $rootScope.signOut = function () {
+        firebase.auth().signOut().then(function () {
+            var empty = {};
+            CurrentUser.setLoggedUser(empty);
+            console.log("Ne-am deconectat!");
+            $location.path('/login');
+            $rootScope.$apply();
         });
     };
 });
