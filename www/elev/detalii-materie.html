@@ -23,9 +23,13 @@
     </ion-list>
     <canvas id="pie" class="chart chart-pie" chart-data="data" chart-labels="labels" chart-legend="true"></canvas>
     <div id="teza" ng-if="materie.areTeza">
-    <h5><p>{{TEZA}}</p></h5>
+      <h5><p>{{TEZA}}</p></h5>
       <ion-item class="item-icon-left" type="item-text-wrap" ng-click="openModal(materie.notaTeza)">
-      <div ng-if="materie.notaTeza.nota === 10">
+        <div ng-if="!materie.notaTeza.nota">
+          <i class="icon ion-more calm"></i>
+          <h5><p>Nota netrecuta</p></h5>
+        </div>
+        <div ng-if="materie.notaTeza.nota === 10">
           <i class="icon ion-trophy royal"></i>
           <h5><p>{{materie.notaTeza.nota}}</p></h5>
         </div>
@@ -37,11 +41,11 @@
           <i class="icon ion-alert-circled energized"></i>
           <h5><p>{{materie.notaTeza.nota}}</p></h5>
         </div>
-        <div ng-if="materie.notaTeza.nota < 5">
+        <div ng-if="materie.notaTeza.nota < 5 && materie.notaTeza.nota">
           <i class="icon ion-sad assertive"></i>
           <h5><p>{{materie.notaTeza.nota}}</p></h5>
         </div>
-        </ion-item>
+      </ion-item>
     </div>
   </ion-content>
 </ion-view>

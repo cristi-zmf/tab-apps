@@ -1,7 +1,7 @@
 /*Modul care ofera functionalitatea pentru taburile din elev*/
 angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
 
-.controller('materiiController', function ($scope, $firebaseArray, $firebaseObject, $location, $state, Materii, DatabaseTables, CurrentUser) {
+.controller('materiiController', function ($scope, $firebaseArray, $firebaseObject, $interpolate, $location, $state, Materii, DatabaseTables, CurrentUser) {
     /*Luam materiile */
     var curUser = firebase.auth().currentUser.uid;
     var ref = new Firebase(DatabaseTables.getDatabaseName() + DatabaseTables.getSemestrul1() + curUser);
