@@ -35,6 +35,8 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
             /*console.log = ("acestea sunt notele: ", $scope.note);*/
             $scope.nume = $scope.materie.numeMaterie;
             console.log("asta e numele materiei: ", $scope.materie.numeMaterie);
+
+            /*Logica pentru pie chart*/
             $scope.note.justGrades = Materii.getGrades($scope.materie.note);
             $scope.pieData = Materii.countOccurence($scope.materie);
             $scope.labels = $scope.pieData.note;
@@ -55,8 +57,13 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
             /* console.log("Aceasta este materia: ", $scope.materie);*/
             $scope.note = $scope.materie.note;
             /*console.log = ("acestea sunt notele: ", $scope.note);*/
-            $scope.nume = $scope.materie.numeMaterie;
+
+            $scope.$evalAsync(function () {
+                    $scope.nume = $scope.materie.numeMaterie;
+                })
+                /*Logica pentru pie chart*/
             console.log("asta e numele materiei: ", $scope.materie.numeMaterie);
+
             $scope.note.justGrades = Materii.getGrades($scope.materie.note);
             $scope.pieData = Materii.countOccurence($scope.materie);
             $scope.labels = $scope.pieData.note;
@@ -84,9 +91,12 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
 
     /*Functie care returneaza un vector cu detaliile fiecarei note*/
 
-    /*Pie chart logic and some grade details for $scope*/
+    $scope.$evalAsync();
 
-
+    /**/
+    if (!$scope.$$phase) {
+        $scope.$apply();
+    }
 
     /*Firebase logic*/
 
@@ -106,4 +116,55 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
     };
 
 
+})
+
+.controller('mediiCtrl', function ($scope, $firebaseArray, Materii) {
+
+    /*Calculam media generala pentru semestrul 1*/
+    var firebaseRef = Materii.getFirebaseRef();
+
+    /*Punem listener pentru a vedea cand se schimba o nota in baza de date*/
+    firebaseRef.$watch(function () {
+
+        /*Semestrul 1*/
+        Materii.getMateriiElevSemestrul1().then(function (materiiArray) {
+            $scope.materiiSemestrul1 = materiiArray;
+
+            $scope.medieGeneralaSemestrul1 = Materii.getMedieGeneralaSemestru($scope.materiiSemestrul1);
+            return $scope.medieGeneralaSemestrul1;
+        }).then(function (medieGeneralaSemestrul1) {
+            Materii.getMateriiElevSemestrul2().then(function (materiiArray) {
+                $scope.materiiSemestrul2 = materiiArray;
+
+                $scope.medieGeneralaSemestrul2 = Materii.getMedieGeneralaSemestru($scope.materiiSemestrul2);
+                $scope.medieGenerala = (medieGeneralaSemestrul1 + $scope.medieGeneralaSemestrul2) / 2;
+
+                /*Gauge logic*/
+                /*Gauge semestrul 1*/
+                var semestrul1Gauge = new JustGage({
+                    id: 'semestrul1',
+                    value: medieGeneralaSemestrul1,
+                    min: 0,
+                    max: 10,
+                    decimals: 2,
+                    symbol: '%',
+                    pointer: true,
+                    gaugeWidthScale: 0.6,
+                    customSectors: [{
+                        color: '#ff0000',
+                        lo: 50,
+                        hi: 100
+        }, {
+                        color: '#00ff00',
+                        lo: 0,
+                        hi: 50
+        }],
+                    counter: true
+                });
+            });
+        });
+
+
+
+    });
 });

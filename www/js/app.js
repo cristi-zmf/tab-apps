@@ -71,9 +71,9 @@ angular.module('gradeBook', ['ionic', 'firebase', 'ngSanitize', 'gradeBook.contr
   .state('tab.dash', {
     url: '/dash',
     views: {
-      'tab-dash': {
-        templateUrl: 'elev/tab-dash.html',
-        controller: 'DashCtrl'
+      'tab-medii': {
+        templateUrl: 'elev/tab-medii.html',
+        controller: 'mediiCtrl'
       }
     }
   })

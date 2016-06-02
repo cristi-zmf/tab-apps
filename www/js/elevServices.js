@@ -2,81 +2,9 @@ angular.module('gradeBook.elevServices', [])
 
 .factory('Materii', function ($firebaseArray, $firebaseAuth, CurrentUser, DatabaseTables) {
 
-    var elev = '';
-    elev = 'Luca';
 
-    var materii = [{
-        id: 1,
-        nume: 'Matematica',
-        are_teza: true,
-        note: [[10, {
-                "Provenienta": "Lucrare",
-                "Observatii": "Nu e bine!",
-                "Recomandari": "SUPER, NIMIC DE ZIS!"
-        }], [5, {
-                "Provenienta": "Lucrare",
-                "Observatii": "Nu e bine!",
-                "Recomandari": ""
-        }], [3, {
-                "Provenienta": "Lucrare",
-                "Observatii": "Nu e bine!",
-                "Recomandari": ""
-        }], [8, {
-                "Provenienta": "Lucrare",
-                "Observatii": "Nu e bine!",
-                "Recomandari": ""
-        }],
-            [8, {
-                "Provenienta": "Lucrare",
-                "Observatii": "Nu e bine!",
-                "Recomandari": ""
-        }]],
-        absente: ['22/03/2016']
-         }, {
-        id: 2,
-        nume: 'Romana',
-        are_teza: false,
-        note: [[10, {
-            "Provenienta": "Lucrare",
-            "Observatii": "Nu e bine!",
-            "Recomandari": ""
-        }], [9, {
-            "Provenienta": "Lucrare",
-            "Observatii": "Nu e bine!",
-            "Recomandari": ""
-        }], [8, {
-            "Provenienta": "Lucrare",
-            "Observatii": "Nu e bine!",
-            "Recomandari": ""
-        }], [5, {
-            "Provenienta": "Lucrare",
-            "Observatii": "Nu e bine!",
-            "Recomandari": ""
-        }]],
-        absente: ['22/04/2016']
-         }];
-
-    /*Firebase logic*/
-    var curUser = firebase.auth().currentUser.uid;
-    var ref = new Firebase(DatabaseTables.getDatabaseName() + DatabaseTables.getSemestrul1() + curUser);
-    var materii2 = $firebaseArray(ref);
-
-    //Se returneaza notele din vectorul de note si observatii
-    /*  materii.getGrades = function (note) {
-          var grades = [];
-          var gradePos = 0;
-
-          for (var i = 0; i < note.length; i++) {
-              var nota = note[i];
-              grades.push(nota[gradePos]);
-          }
-          return grades;
-      };*/
 
     return {
-        all: function () {
-            return materii;
-        },
 
         /*Functie care returneaza materiile de pe semestrul 1*/
         getMateriiElevSemestrul1: function () {
@@ -138,11 +66,54 @@ angular.module('gradeBook.elevServices', [])
             /*var gradePos = 0;*/
 
             for (var i = 0; i < note.length; i++) {
-                var nota = note[i].nota;
-                grades.push(nota);
+                if (note[i].nota) {
+                    var nota = note[i].nota;
+                    grades.push(nota);
+                }
             }
             return grades;
         },
+
+        /*Calculam media generala a unei materii*/
+        getMedieMaterie: function (materie) {
+            var grades = this.getGrades(materie.note);
+            console.log("Astea sunt notele: ", grades);
+            if (grades) {
+                var medieNote = grades.reduce(function (total, number) {
+                    return total + number;
+                }, 0.0) / grades.length;
+
+                if (materie.areTeza) {
+                    var fractieNote = 3;
+                    var notaTeza = materie.notaTeza.nota;
+                    console.log("Nota la teza este: ", notaTeza);
+                    console.log("Media fara teza: ", medieNote);
+                    var medieCuTeza = (medieNote * fractieNote + notaTeza) / 4;
+                    var roundedMedieCuTeza = Math.round(medieCuTeza);
+                    console.log("Asta este media cu teza: ", roundedMedieCuTeza)
+                    return roundedMedieCuTeza;
+                } else {
+                    console.log("Asta este media: ", medieNote)
+                    return medieNote;
+                }
+            } else
+                return 0;
+        },
+
+        /*Functie care calculeaza media generala a unui
+        vector de materii*/
+        getMedieGeneralaSemestru: function (materii) {
+            var medieGenerala = 0.0;
+            medieGenerala *= 1.0
+            for (var i = 0; i < materii.length; i++) {
+                medieGenerala += this.getMedieMaterie(materii[i]);
+                console.log()
+            }
+            console.log("Media generala este: ", medieGenerala);
+            medieGenerala = medieGenerala / materii.length;
+            return medieGenerala;
+        },
+
         /*Functie care numara de cate ori apare o nota
             @in:materie = materia la care vrem sa numaram notele
             @out: note = vector cu notele
@@ -169,6 +140,12 @@ angular.module('gradeBook.elevServices', [])
                 note: note,
                 aparitii: occurs
             };
+        },
+
+        getFirebaseRef: function () {
+            var ref = new Firebase(DatabaseTables.getDatabaseName());
+            var refArray = $firebaseArray(ref);
+            return refArray;
         }
     };
 
