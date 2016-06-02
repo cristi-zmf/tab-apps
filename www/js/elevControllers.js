@@ -141,9 +141,10 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
 
                 /*Gauge logic*/
                 /*Gauge semestrul 1*/
+
                 var semestrul1Gauge = new JustGage({
                     id: 'semestrul1',
-                    value: medieGeneralaSemestrul1,
+                    value: 6,
                     min: 0,
                     max: 10,
                     decimals: 2,
@@ -151,16 +152,17 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
                     pointer: true,
                     gaugeWidthScale: 0.6,
                     customSectors: [{
-                        color: '#ff0000',
-                        lo: 50,
-                        hi: 100
-        }, {
                         color: '#00ff00',
+                        lo: 5,
+                        hi: 10
+        }, {
+                        color: '#ff0000',
                         lo: 0,
-                        hi: 50
+                        hi: 5
         }],
                     counter: true
                 });
+
             });
         });
 
