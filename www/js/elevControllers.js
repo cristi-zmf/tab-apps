@@ -123,6 +123,8 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
     /*Gauges pentru semestre si medie generala*/
     var semestrul1Gauge = new JustGage({
         id: 'semestrul1',
+        title: 'Medie generala semestrul 1',
+        titleFontColor: "#886aea",
         value: 0,
         min: 0,
         max: 10,
@@ -134,7 +136,52 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
         startAnimationType: ">",
         refreshAnimationTime: 2000,
         refreshAnimationType: "bounce",
+        levelColors: [
+          "#e60000",
+          "#886aea"
+        ]
+    });
 
+    var semestrul2Gauge = new JustGage({
+        id: 'semestrul2',
+        title: 'Medie generala semestrul 2',
+        titleFontColor: "#886aea",
+        value: 0,
+        min: 0,
+        max: 10,
+        decimals: 2,
+        symbol: '',
+        pointer: true,
+        gaugeWidthScale: 0.6,
+        startAnimationTime: 2000,
+        startAnimationType: ">",
+        refreshAnimationTime: 2000,
+        refreshAnimationType: "bounce",
+        levelColors: [
+          "#e60000",
+          "#886aea"
+        ]
+    });
+
+     var generalGauge = new JustGage({
+        id: 'general',
+        title: 'Medie generala finala',
+        titleFontColor: "#886aea",
+        value: 0,
+        min: 0,
+        max: 10,
+        decimals: 2,
+        symbol: '',
+        pointer: true,
+        gaugeWidthScale: 0.6,
+        startAnimationTime: 2000,
+        startAnimationType: ">",
+        refreshAnimationTime: 2000,
+        refreshAnimationType: "bounce",
+        levelColors: [
+          "#e60000",
+          "#886aea"
+        ]
     });
 
 
@@ -160,8 +207,9 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
                 /*Gauge logic*/
                 /*Gauge semestrul 1*/
 
-              semestrul1Gauge.refresh(medieGeneralaSemestrul1);
-
+                semestrul1Gauge.refresh(medieGeneralaSemestrul1);
+                semestrul2Gauge.refresh($scope.medieGeneralaSemestrul2);
+                generalGauge.refresh($scope.medieGenerala);
             });
         });
 

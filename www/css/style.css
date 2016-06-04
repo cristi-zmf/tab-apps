@@ -47,6 +47,11 @@ background: -webkit-linear-gradient(to left, #000000 , #434343); /* Chrome 10-25
 background: linear-gradient(to left, #000000 , #434343); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+#curiosity {
+background: #525252; /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #525252 , #3d72b4); /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #525252 , #3d72b4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
 
 .wrapper {
       position: relative;
@@ -76,3 +81,16 @@ background: linear-gradient(to left, #000000 , #434343); /* W3C, IE 10+/ Edge, F
       width: 320px;
       height: 240px;
     }
+
+/*Stil linie orizontala*/
+hr.coolLine:before {
+  display: block;
+  content: "";
+  height: 30px;
+  margin-top: -31px;
+  border-style: solid;
+  border-color: #8c8b8b;
+  border-width: 0 0 1px 0;
+  border-radius: 20px;
+}
+
