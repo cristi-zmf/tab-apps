@@ -26,13 +26,9 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
     if ($stateParams.idMaterie.slice(-1) === '1')
         Materii.getMateriiElevSemestrul1().then(function (materiiArray) {
             $scope.materii = materiiArray;
-            /* console.log("Acestea sunt materiile: ", $scope.materii);
-             console.log("pe asta o selectam: ", $stateParams.materieNume);*/
 
             $scope.materie = Materii.getSelectedMaterie($stateParams.idMaterie, $scope.materii);
-            /* console.log("Aceasta este materia: ", $scope.materie);*/
             $scope.note = $scope.materie.note;
-            /*console.log = ("acestea sunt notele: ", $scope.note);*/
             $scope.nume = $scope.materie.numeMaterie;
             console.log("asta e numele materiei: ", $scope.materie.numeMaterie);
 
@@ -89,14 +85,7 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
     $scope.GRADE_POSITION = 0;
     $scope.DETAILS_POSITION = 1;
 
-    /*Functie care returneaza un vector cu detaliile fiecarei note*/
 
-    $scope.$evalAsync();
-
-    /**/
-    if (!$scope.$$phase) {
-        $scope.$apply();
-    }
 
     /*Firebase logic*/
 
@@ -138,7 +127,7 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
         refreshAnimationType: "bounce",
         levelColors: [
           "#e60000",
-          "#886aea"
+          "#33cd5f"
         ]
     });
 
@@ -159,11 +148,11 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
         refreshAnimationType: "bounce",
         levelColors: [
           "#e60000",
-          "#886aea"
+          "#33cd5f"
         ]
     });
 
-     var generalGauge = new JustGage({
+    var generalGauge = new JustGage({
         id: 'general',
         title: 'Medie generala finala',
         titleFontColor: "#886aea",
@@ -180,7 +169,7 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
         refreshAnimationType: "bounce",
         levelColors: [
           "#e60000",
-          "#886aea"
+          "#33cd5f"
         ]
     });
 
@@ -214,6 +203,134 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
         });
 
 
+
+    });
+})
+
+.controller('materiiMedieController', function ($scope, Materii) {
+    Materii.getMateriiElevSemestrul1().then(function (materiiArray) {
+        $scope.materii = materiiArray;
+    });
+
+    Materii.getMateriiElevSemestrul2().then(function (materiiArray) {
+        $scope.materiiSemestrul2 = materiiArray;
+    });
+
+})
+
+.controller('materieMedieController', function ($scope, $state, $stateParams, $ionicPopup, $ionicModal, Materii) {
+
+     /*Modal logic*/
+    $ionicModal.fromTemplateUrl('elev/modal-note-necesare.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function (modal) {
+        $scope.modal = modal;
+    });
+    $scope.openModal = function (noteNecesare) {
+        $scope.noteNecesareModal = noteNecesare;
+        $scope.modal.show();
+    };
+    $scope.closeModal = function () {
+        $scope.modal.hide();
+    };
+
+    /*Functie pentru detectarea unui numar*/
+    var isNumber = function (n) {
+        return /^-?[\d.]+(?:e-?\d+)?$/.test(n);
+    };
+
+    /*Popup pentru calculare medie dorita*/
+    $scope.showMediePopup = function (materie) {
+            $scope.medieDorita = {};
+
+            var myPopup = $ionicPopup.show({
+                template: '<input type="value" name="Medie dorita" min="1" max="5" ng-model="medieDorita.nota" placeholder="Nota">',
+                title: 'Introduceti media dorita',
+                subTitle: 'Numar de la 1 la 10',
+                scope: $scope,
+                buttons: [
+                    {
+                        text: 'Anuleaza'
+                    },
+                    {
+                        text: '<b>Calculeaza</b>',
+                        type: 'button-royal',
+                        onTap: function (e) {
+                            if (!$scope.medieDorita.nota) {
+                                $ionicPopup.alert({
+                                    title: 'Eroare',
+                                    template: 'Medie dorita necompletta'
+                                });
+                                e.preventDefault();
+                            } else {
+                                console.log("Avem tipuul cand nu e null: ", typeof $scope.medieDorita.nota);
+                                if (!isNumber($scope.medieDorita.nota)) {
+                                    $ionicPopup.alert({
+                                        title: 'Eroare',
+                                        template: 'Nu ati introdus un numar corespunzator'
+                                    });
+                                    e.preventDefault();
+                                } else {
+                                    $scope.noteNecesare = Materii.calculeazaNotePentruMedie($scope.medieDorita.nota, materie);
+                                   /* $ionicPopup.alert({
+                                        title: 'Note necesare',
+                                        template: $scope.noteNecesare
+                                    });*/
+                                    $scope.openModal($scope.noteNecesare);
+                                }
+                            }
+                        }
+                    }
+            ]
+            })
+        }
+        /*Gauges pentru semestre si medie generala*/
+    var materieGauge = new JustGage({
+        id: 'materieGauge',
+        title: 'Medie materie curenta',
+        titleFontColor: "#886aea",
+        value: 0,
+        min: 0,
+        max: 10,
+        decimals: 2,
+        symbol: '',
+        pointer: true,
+        gaugeWidthScale: 0.6,
+        startAnimationTime: 2000,
+        startAnimationType: ">",
+        refreshAnimationTime: 2000,
+        refreshAnimationType: "bounce",
+        levelColors: [
+          "#e60000",
+          "#33cd5f"
+        ]
+    });
+
+    /*Watcher pentru actualizari in timp real
+    de la firebase*/
+    var firebaseRef = Materii.getFirebaseRef();
+
+    firebaseRef.$watch(function () {
+        /*Verificam daca materia aleasa este semestrul 1 sau 2*/
+        if ($stateParams.idMaterie.slice(-1) === '1')
+            Materii.getMateriiElevSemestrul1().then(function (materiiArray) {
+                $scope.materii = materiiArray;
+                $scope.materie = Materii.getSelectedMaterie($stateParams.idMaterie, $scope.materii);
+                $scope.medieMaterie = Materii.getMedieMaterie($scope.materie);
+                $scope.nume = $scope.materie.numeMaterie
+                materieGauge.refresh($scope.medieMaterie);
+            });
+
+        else
+            Materii.getMateriiElevSemestrul2().then(function (materiiArray) {
+                $scope.materii = materiiArray;
+                $scope.materie = Materii.getSelectedMaterie($stateParams.idMaterie, $scope.materii);
+                $scope.medieMaterie = Materii.getMedieMaterie($scope.materie);
+                $scope.nume = $scope.materie.numeMaterie;
+                materieGauge.refresh($scope.medieMaterie);
+
+            });
 
     });
 });

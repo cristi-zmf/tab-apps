@@ -83,7 +83,7 @@ angular.module('gradeBook.elevServices', [])
                     return total + number;
                 }, 0.0) / grades.length;
 
-                if (materie.areTeza) {
+                if (materie.areTeza && materie.notaTeza.nota) {
                     var fractieNote = 3;
                     var notaTeza = materie.notaTeza.nota;
                     console.log("Nota la teza este: ", notaTeza);
@@ -114,6 +114,56 @@ angular.module('gradeBook.elevServices', [])
             return medieGenerala;
         },
 
+        /*Functie care returneaza notele necesare
+        pentru a obtine o anumita medie*/
+        calculeazaNotePentruMedie: function (medieDorita, materie) {
+            medieDorita = parseInt(medieDorita);
+            var noteMaterie = this.getGrades(materie.note);
+            var noteNecesare = [];
+            var vectorNotePentruCalcul = noteMaterie;
+            var medieActuala = this.getMedieMaterie(materie);
+            var nrNoteNecesareMax = 20;
+            var nrNoteNecesareActual = 1;
+            var notaActuala = medieActuala;
+            var medieEstimata = 0;
+            var preaMulteNote = "peste 20 de note";
+
+            if (medieActuala >= medieDorita) {
+                /*Se returneaza vid cand avem deja
+                media dorita sau peste*/
+                return noteNecesare;
+            }
+
+            noteNecesare.push(notaActuala);
+            while (nrNoteNecesareActual <= nrNoteNecesareMax) {
+
+                vectorNotePentruCalcul.push(notaActuala);
+                medieEstimata = vectorNotePentruCalcul.reduce(function (total, number) {
+                    return total + number;
+                }, 0.0) / vectorNotePentruCalcul.length;
+
+                if (materie.areTeza && materie.notaTeza.nota)
+                    medieEstimata = ((medieEstimata * 3) + materie.notaTeza.nota) / 4;
+                console.log("Media estimata este ", medieEstimata);
+                console.log("Notele necesare curente sunt ", noteNecesare);
+                if (Math.round(medieEstimata) >= medieDorita)
+                    return noteNecesare;
+                else if (notaActuala == 10) {
+                    nrNoteNecesareActual++;
+                    notaActuala = medieActuala;
+                    noteNecesare.push(notaActuala);
+                } else {
+                    vectorNotePentruCalcul.pop();
+                    noteNecesare.pop();
+                    notaActuala++;
+                    noteNecesare.push(notaActuala);
+                }
+
+            }
+
+            return noteNecesare;
+
+        },
         /*Functie care numara de cate ori apare o nota
             @in:materie = materia la care vrem sa numaram notele
             @out: note = vector cu notele

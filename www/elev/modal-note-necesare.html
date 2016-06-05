@@ -1,0 +1,47 @@
+<ion-modal-view>
+    <ion-header-bar class="bar-royal">
+        <h1 class="title">Note necesare</h1>
+        <button class="button icon ion-close-circled button-royal" ng-click="closeModal()">Exit</button>
+    </ion-header-bar>
+    <ion-content>
+        <div ng-if="!noteNecesare">
+            <ion-item class="royal">Aveti deja media dorita sau mai mare</ion-item>
+        </div>
+        <div ng-if="noteNecesare.length >= 20" id="darkskies">
+            <br>
+            <br>
+            <hr class="coolLine">
+            <hr class="coolLine">
+            <hr class="coolLine">
+            <p> Sunt necesare 20 sau mai mult de 20 de note pentru a obtine media 10!</p>
+            <hr class="coolLine">
+            <hr class="coolLine">
+            <hr class="coolLine">
+            <br>
+            <br>
+
+        </div>
+        <div ng-if="noteNecesare.length < 20">
+            <ion-list ng-if="noteNecesare.length < 20">
+                <ion-item class="item-icon-left" ng-repeat="nota in noteNecesareModal track by $index" type="item-text-wrap">
+                    <div ng-if="nota === 10">
+                        <i class="icon ion-trophy royal"></i>
+                        <h5><p>{{nota}}</p></h5>
+                    </div>
+                    <div ng-if="nota >= 7 && nota < 10">
+                        <i class="icon ion-ribbon-b balanced"></i>
+                        <h5><p>{{nota}}</p></h5>
+                    </div>
+                    <div ng-if="nota < 7 && nota >= 5">
+                        <i class="icon ion-alert-circled energized"></i>
+                        <h5><p>{{nota}}</p></h5>
+                    </div>
+                    <div ng-if="nota < 5">
+                        <i class="icon ion-sad assertive"></i>
+                        <h5><p>{{nota}}</p></h5>
+                    </div>
+                </ion-item>
+            </ion-list>
+        </div>
+    </ion-content>
+</ion-modal-view>

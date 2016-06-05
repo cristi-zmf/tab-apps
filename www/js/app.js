@@ -45,7 +45,7 @@ angular.module('gradeBook', ['ionic', 'firebase', 'ngSanitize', 'gradeBook.contr
     templateUrl: 'elev/tabs.html'
   })
 
-  // Each tab has its own nav history stack:
+  /*Tabul pentru lista materiilor*/
   .state('tab.materii', {
       url: '/materii',
       views: {
@@ -56,7 +56,8 @@ angular.module('gradeBook', ['ionic', 'firebase', 'ngSanitize', 'gradeBook.contr
       }
 
   })
-
+  /*Tabul pentru detalii materie referitor
+  la note*/
   .state('tab.materie', {
       url: '/materii/:idMaterie',
       views: {
@@ -68,13 +69,37 @@ angular.module('gradeBook', ['ionic', 'firebase', 'ngSanitize', 'gradeBook.contr
 
   })
 
-  .state('tab.dash', {
-    url: '/dash',
+  /*Tabul pentru medii semestrul 1, 2, generala*/
+  .state('tab.medii', {
+    url: '/medii',
     views: {
       'tab-medii': {
         templateUrl: 'elev/tab-medii.html',
         controller: 'mediiCtrl'
       }
+    }
+  })
+
+  /*Tabul pentru lista materiilor referitor la medii*/
+ .state('tab.materiiMedie', {
+    url: '/medii/materiiMedie',
+    views: {
+      'tab-medii': {
+        templateUrl: 'elev/tab-materii-medie.html',
+        controller: 'materiiMedieController'
+      }
+    }
+  })
+
+  /*Tabul pentru detalierea unei materii referitor
+  la media acesteia*/
+  .state('tab.materieMedie', {
+    url: '/medii/materiiMedie/:idMaterie',
+    views: {
+      'tab-medii': {
+              templateUrl: 'elev/detalii-materieMedie.html',
+              controller: 'materieMedieController'
+          }
     }
   })
 
