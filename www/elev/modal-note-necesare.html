@@ -4,8 +4,18 @@
         <button class="button icon ion-close-circled button-royal" ng-click="closeModal()">Exit</button>
     </ion-header-bar>
     <ion-content>
-        <div ng-if="!noteNecesare">
-            <ion-item class="royal">Aveti deja media dorita sau mai mare</ion-item>
+        <div ng-if="noteNecesare.length == 0" id="darkskies">
+             <br>
+            <br>
+            <hr class="coolLine">
+            <hr class="coolLine">
+            <hr class="coolLine">
+            <p> Aveti deja media dorita sau mai mare!</p>
+            <hr class="coolLine">
+            <hr class="coolLine">
+            <hr class="coolLine">
+            <br>
+            <br>
         </div>
         <div ng-if="noteNecesare.length >= 20" id="darkskies">
             <br>

@@ -94,7 +94,7 @@ angular.module('gradeBook.elevServices', [])
                     return roundedMedieCuTeza;
                 } else {
                     console.log("Asta este media: ", medieNote)
-                    return medieNote;
+                    return Math.round(medieNote);
                 }
             } else
                 return 0;
@@ -141,11 +141,8 @@ angular.module('gradeBook.elevServices', [])
                 medieEstimata = vectorNotePentruCalcul.reduce(function (total, number) {
                     return total + number;
                 }, 0.0) / vectorNotePentruCalcul.length;
-
                 if (materie.areTeza && materie.notaTeza.nota)
                     medieEstimata = ((medieEstimata * 3) + materie.notaTeza.nota) / 4;
-                console.log("Media estimata este ", medieEstimata);
-                console.log("Notele necesare curente sunt ", noteNecesare);
                 if (Math.round(medieEstimata) >= medieDorita)
                     return noteNecesare;
                 else if (notaActuala == 10) {
