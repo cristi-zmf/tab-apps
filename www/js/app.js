@@ -103,19 +103,19 @@ angular.module('gradeBook', ['ionic', 'firebase', 'ngSanitize', 'gradeBook.contr
     }
   })
 
-  .state('tab.chats', {
-      url: '/chats',
+  .state('tab.absente', {
+      url: '/absente',
       views: {
-        'tab-chats': {
-          templateUrl: 'elev/tab-chats.html',
-          controller: 'ChatsCtrl'
+        'tab-absente': {
+          templateUrl: 'elev/tab-absente.html',
+          controller: 'absenteCtrl'
         }
       }
     })
     .state('tab.chat-detail', {
-      url: '/chats/:chatId',
+      url: '/absente/:chatId',
       views: {
-        'tab-chats': {
+        'tab-absente': {
           templateUrl: 'elev/chat-detail.html',
           controller: 'ChatDetailCtrl'
         }

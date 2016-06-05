@@ -1,10 +1,10 @@
 angular.module('gradeBook.services', [])
 
-.factory('Chats', function() {
+.factory('absente', function() {
   // Might use a resource here that returns a JSON array
 
   // Some fake testing data
-var chats = [{
+var absente = [{
     id: 0,
     name: 'Ben Sparrow',
     lastText: 'You on your way?',
@@ -33,15 +33,15 @@ var chats = [{
 
   return {
     all: function() {
-      return chats;
+      return absente;
     },
     remove: function(chat) {
-      chats.splice(chats.indexOf(chat), 1);
+      absente.splice(absente.indexOf(chat), 1);
     },
     get: function(chatId) {
-      for (var i = 0; i < chats.length; i++) {
-        if (chats[i].id === parseInt(chatId)) {
-          return chats[i];
+      for (var i = 0; i < absente.length; i++) {
+        if (absente[i].id === parseInt(chatId)) {
+          return absente[i];
         }
       }
       return null;

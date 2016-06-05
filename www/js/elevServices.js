@@ -161,6 +161,49 @@ angular.module('gradeBook.elevServices', [])
             return noteNecesare;
 
         },
+
+        /*Functie care returneaza numarul de  absente total
+        motivate, nemotivate*/
+        calculeazaNrAbsenteMaterie: function(materie) {
+            var absente = {};
+            absente.total = 0;
+            absente.motivate = 0;
+            absente.nemotivate = 0;
+            absente.nemotivabile = 0;
+
+            var absenteMaterie = materie.absente;
+            absente.total = absenteMaterie.length;
+
+            for (var i = 0; i < absenteMaterie.length; i++) {
+                if (absenteMaterie[i].motivata)
+                    absente.motivate++;
+                else
+                    absente.nemotivate++;
+                if (absenteMaterie[i].esteNemotivabila)
+                    absente.nemotivabile++;
+            }
+            return absente;
+        },
+
+        /*Functie care calculeaza absentele totale
+        ale unui vector de materii*/
+        calculeazaNrAbsenteTotal: function (materii) {
+            var absente = {};
+            absente.total = 0;
+            absente.motivate = 0;
+            absente.nemotivate = 0;
+            absente.nemotivabile = 0;
+
+            for (var i = 0; i < materii.length; i++) {
+                absenteAux = this.calculeazaNrAbsenteMaterie(materii[i]);
+                absente.total += absenteAux.total;
+                absente.motivate += absenteAux.motivate;
+                absente.nemotivate += absenteAux.nemotivate;
+                absente.nemotivabile += absenteAux.nemotivabile;
+            }
+
+            return absente;
+        },
         /*Functie care numara de cate ori apare o nota
             @in:materie = materia la care vrem sa numaram notele
             @out: note = vector cu notele

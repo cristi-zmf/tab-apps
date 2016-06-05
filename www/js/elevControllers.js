@@ -220,7 +220,7 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
 
 .controller('materieMedieController', function ($scope, $state, $stateParams, $ionicPopup, $ionicModal, Materii) {
 
-     /*Modal logic*/
+    /*Modal logic*/
     $ionicModal.fromTemplateUrl('elev/modal-note-necesare.html', {
         scope: $scope,
         animation: 'slide-in-up'
@@ -273,10 +273,10 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
                                     e.preventDefault();
                                 } else {
                                     $scope.noteNecesare = Materii.calculeazaNotePentruMedie($scope.medieDorita.nota, materie);
-                                   /* $ionicPopup.alert({
-                                        title: 'Note necesare',
-                                        template: $scope.noteNecesare
-                                    });*/
+                                    /* $ionicPopup.alert({
+                                         title: 'Note necesare',
+                                         template: $scope.noteNecesare
+                                     });*/
                                     $scope.openModal($scope.noteNecesare);
                                 }
                             }
@@ -333,4 +333,58 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
             });
 
     });
+})
+
+.controller('absenteCtrl', function ($scope, Materii) {
+    // With the new view caching in Ionic, Controllers are only called
+    // when they are recreated or on app start, instead of every page change.
+    // To listen for when this page is active (for example, to refresh data),
+    // listen for the $ionicView.enter event:
+    //
+    //$scope.$on('$ionicView.enter', function(e) {
+    //});
+    $scope.labels = ["Motivate", "Nemotivate"];
+    var firebaseRef = Materii.getFirebaseRef();
+
+    /*Punem listener pentru a vedea cand se schimba absentele
+    in baza de date*/
+    firebaseRef.$watch(function () {
+
+        /*Semestrul 1*/
+        Materii.getMateriiElevSemestrul1().then(function (materiiArray) {
+            $scope.materiiSemestrul1 = materiiArray;
+
+           $scope.absenteSemestrul1 = Materii.calculeazaNrAbsenteTotal($scope.materiiSemestrul1);
+            return $scope.absenteSemestrul1;
+        }).then(function (absenteSemestrul1) {
+            Materii.getMateriiElevSemestrul2().then(function (materiiArray) {
+                $scope.materiiSemestrul2 = materiiArray;
+
+                $scope.absenteSemestrul2 = Materii.calculeazaNrAbsenteTotal($scope.materiiSemestrul2);
+                $scope.absenteTotal = {};
+
+                $scope.absenteTotal.total = absenteSemestrul1.total + $scope.absenteSemestrul2.total;
+
+                $scope.absenteTotal.motivate = absenteSemestrul1.motivate + $scope.absenteSemestrul2.motivate;
+
+                $scope.absenteTotal.nemotivate = absenteSemestrul1.nemotivate + $scope.absenteSemestrul2.nemotivate;
+
+                $scope.absenteTotal.nemotivabile = absenteSemestrul1.nemotivabile + $scope.absenteSemestrul2.nemotivabile;
+
+
+                /*Pie chart logic semestrul 1*/
+                $scope.pieDataSemestrul1 = [absenteSemestrul1.motivate, absenteSemestrul1.nemotivate];
+
+                /*Pie chart logic semestrul 2*/
+                $scope.pieDataSemestrul2 = [$scope.absenteSemestrul2.motivate, $scope.absenteSemestrul2.nemotivate];
+
+                /*Pie chart logic total*/
+                $scope.pieDataTotal = [$scope.absenteTotal.motivate, $scope.absenteTotal.nemotivate];
+            });
+        });
+
+
+
+    });
+
 });
