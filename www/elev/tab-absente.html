@@ -1,54 +1,53 @@
 <ion-view view-title="Absente">
-  <ion-nav-buttons side="left">
-    <button class="button">Materii</button>
-  </ion-nav-buttons>
-  <ion-content>
-    <div class="item item-divider royal">Absente semestrul 1: </div>
-    <canvas id="pie" class="chart chart-pie" chart-data="pieDataSemestrul1" chart-labels="labels" chart-legend="true"></canvas>
-    <ion-item class="royal item-icon-right">Absente totale: {{absenteSemestrul1.total}}
-      <i class="ion-social-buffer energized"></i>
-    </ion-item>
-    <ion-item class="royal item-icon-right">Absente motivate: {{absenteSemestrul1.motivate}}
-      <i class="ion-checkmark balanced"></i></ion-item>
-    <ion-item class="royal item-icon-right">Absente nemotivate: {{absenteSemestrul1.nemotivate}}
-      <i class="ion-alert-circled assertive"></i>
-    </ion-item>
-    <ion-item class="royal item-icon-right">Absente nemotivabile: {{absenteSemestrul1.nemotivabile}}
-      <i class="ion-sad dark"></i>
-    </ion-item>
-    <br>
-    <hr class="coolLine">
-    <br>
+    <ion-nav-buttons side="left">
+        <button class="button" ui-sref="tab.materiiAbsente">Materii</button>
+    </ion-nav-buttons>
+    <ion-content>
+        <div class="item item-divider royal">Absente semestrul 1: </div>
+        <canvas id="pie" class="chart chart-pie" chart-data="pieDataSemestrul1" chart-labels="labels" chart-legend="true"></canvas>
+        <ion-item class="royal item-icon-right">Absente totale: {{absenteSemestrul1.total}}
+            <i class="ion-social-buffer energized"></i>
+        </ion-item>
+        <ion-item class="royal item-icon-right">Absente motivate: {{absenteSemestrul1.motivate}}
+            <i class="ion-checkmark balanced"></i></ion-item>
+        <ion-item class="royal item-icon-right">Absente nemotivate: {{absenteSemestrul1.nemotivate}}
+            <i class="ion-alert-circled assertive"></i>
+        </ion-item>
+        <ion-item class="royal item-icon-right">Absente nemotivabile: {{absenteSemestrul1.nemotivabile}}
+            <i class="ion-sad dark"></i>
+        </ion-item>
+        <br>
+        <hr class="coolLine">
+        <br>
 
-    <div class="item item-divider royal">Absente semestrul 2: </div>
-    <canvas id="pie" class="chart chart-pie" chart-data="pieDataSemestrul2" chart-labels="labels" chart-legend="true"></canvas>
-    <ion-item class="royal item-icon-right">Absente totale: {{absenteSemestrul2.total}}
-      <i class="ion-social-buffer energized"></i>
-    </ion-item>
-    <ion-item class="royal item-icon-right">Absente motivate: {{absenteSemestrul2.motivate}}
-      <i class="ion-checkmark balanced"></i></ion-item>
-    </ion-item>
-    <ion-item class="royal item-icon-right">Absente nemotivate: {{absenteSemestrul2.nemotivate}}
-      <i class="ion-alert-circled assertive"></i>
-    </ion-item>
-    <ion-item class="royal item-icon-right">Absente nemotivabile: {{absenteSemestrul2.nemotivabile}}
-      <i class="ion-sad dark"></i>
-    </ion-item>
-    <br>
-    <hr class="coolLine">
-    <br>
+        <div class="item item-divider royal">Absente semestrul 2: </div>
+        <canvas id="pie" class="chart chart-pie" chart-data="pieDataSemestrul2" chart-labels="labels" chart-legend="true"></canvas>
+        <ion-item class="royal item-icon-right">Absente totale: {{absenteSemestrul2.total}}
+            <i class="ion-social-buffer energized"></i>
+        </ion-item>
+        <ion-item class="royal item-icon-right">Absente motivate: {{absenteSemestrul2.motivate}}
+            <i class="ion-checkmark balanced"></i></ion-item>
 
-    <div class="item item-divider royal">Absente total: </div>
-    <canvas id="pie" class="chart chart-pie" chart-data="pieDataTotal" chart-labels="labels" chart-legend="true"></canvas>
-    <ion-item class="royal item-icon-right">Absente totale: {{absenteTotal.total}}
-      <i class="ion-social-buffer energized"></i>
-    </ion-item>
-    <ion-item class="royal item-icon-right">Absente motivate: {{absenteTotal.motivate}}
-      <i class="ion-checkmark balanced"></i></ion-item>
-    </ion-item>
-    <ion-item class="royal item-icon-right">Absente nemotivate: {{absenteTotal.nemotivate}}
-      <i class="ion-alert-circled assertive"></i></ion-item>
-    <ion-item class="royal item-icon-right">Absente nemotivabile: {{absenteTotal.nemotivabile}}
-      <i class="ion-sad dark"></i></ion-item>
-  </ion-content>
+        <ion-item class="royal item-icon-right">Absente nemotivate: {{absenteSemestrul2.nemotivate}}
+            <i class="ion-alert-circled assertive"></i>
+        </ion-item>
+        <ion-item class="royal item-icon-right">Absente nemotivabile: {{absenteSemestrul2.nemotivabile}}
+            <i class="ion-sad dark"></i>
+        </ion-item>
+        <br>
+        <hr class="coolLine">
+        <br>
+
+        <div class="item item-divider royal">Absente total: </div>
+        <canvas id="pie" class="chart chart-pie" chart-data="pieDataTotal" chart-labels="labels" chart-legend="true"></canvas>
+        <ion-item class="royal item-icon-right">Absente totale: {{absenteTotal.total}}
+            <i class="ion-social-buffer energized"></i>
+        </ion-item>
+        <ion-item class="royal item-icon-right">Absente motivate: {{absenteTotal.motivate}}
+            <i class="ion-checkmark balanced"></i></ion-item>
+        <ion-item class="royal item-icon-right">Absente nemotivate: {{absenteTotal.nemotivate}}
+            <i class="ion-alert-circled assertive"></i></ion-item>
+        <ion-item class="royal item-icon-right">Absente nemotivabile: {{absenteTotal.nemotivabile}}
+            <i class="ion-sad dark"></i></ion-item>
+    </ion-content>
 </ion-view>

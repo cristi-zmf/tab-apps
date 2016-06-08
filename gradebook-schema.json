@@ -77,7 +77,7 @@
       "cnp": "valoare",
       "clase": [
         {
-          "id_clasa": "numeMaterie"
+          "id_clasa": "idMaterie"
         }
       ]
     }

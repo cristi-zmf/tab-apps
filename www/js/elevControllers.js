@@ -354,7 +354,7 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
         Materii.getMateriiElevSemestrul1().then(function (materiiArray) {
             $scope.materiiSemestrul1 = materiiArray;
 
-           $scope.absenteSemestrul1 = Materii.calculeazaNrAbsenteTotal($scope.materiiSemestrul1);
+            $scope.absenteSemestrul1 = Materii.calculeazaNrAbsenteTotal($scope.materiiSemestrul1);
             return $scope.absenteSemestrul1;
         }).then(function (absenteSemestrul1) {
             Materii.getMateriiElevSemestrul2().then(function (materiiArray) {
@@ -386,5 +386,39 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
 
 
     });
+
+})
+
+.controller('absenteMateriiCtrl', function ($scope, $ionicModal, Materii) {
+    Materii.getMateriiElevSemestrul1().then(function (materiiArray) {
+        $scope.materii = materiiArray;
+    });
+
+    Materii.getMateriiElevSemestrul2().then(function (materiiArray) {
+        $scope.materiiSemestrul2 = materiiArray;
+    });
+
+    /*Modal logic*/
+    $ionicModal.fromTemplateUrl('elev/absente-modal.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function (modal) {
+        $scope.modal = modal;
+    });
+    $scope.openModal = function (materie) {
+        //semestrul 1
+        $scope.materie = materie;
+        $scope.absenteMaterie = Materii.calculeazaNrAbsenteMaterie(materie);
+        $scope.labels = ["Motivate", "Nemotivate"];
+
+        /*Chart logic*/
+        $scope.labels = ["Motivate", "Nemotivate"];
+        $scope.pieDataMaterie = [$scope.absenteMaterie.motivate, $scope.absenteMaterie.nemotivate];
+
+        $scope.modal.show();
+    };
+    $scope.closeModal = function () {
+        $scope.modal.hide();
+    };
 
 });
