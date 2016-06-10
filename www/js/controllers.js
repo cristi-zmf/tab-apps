@@ -7,7 +7,7 @@ angular.module('gradeBook.controllers', ['firebase'])
 
 
 
-.controller('AccountCtrl', function ($scope) {
+.controller('contCtrl', function ($scope) {
     $scope.settings = {
         enableFriends: true
     }

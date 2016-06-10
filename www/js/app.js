@@ -135,12 +135,12 @@ angular.module('gradeBook', ['ionic', 'firebase', 'ngSanitize', 'gradeBook.contr
         }
     })
 
-    .state('tab.account', {
-        url: '/account',
+    .state('tab.cont', {
+        url: '/cont',
         views: {
-            'tab-account': {
-                templateUrl: 'elev/tab-account.html',
-                controller: 'AccountCtrl'
+            'tab-cont': {
+                templateUrl: 'elev/tab-cont.html',
+                controller: 'contCtrl'
             }
         }
     });
