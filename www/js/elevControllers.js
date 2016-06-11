@@ -416,6 +416,8 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
         $scope.pieDataMaterie = [$scope.absenteMaterie.motivate, $scope.absenteMaterie.nemotivate];
 
         $scope.modal.show();
+
+
     };
     $scope.closeModal = function () {
         $scope.modal.hide();
