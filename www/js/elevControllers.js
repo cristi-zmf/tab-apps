@@ -389,7 +389,7 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
 
 })
 
-.controller('absenteMateriiCtrl', function ($scope, $ionicModal, Materii) {
+.controller('absenteMateriiCtrl', function ($scope, $ionicModal, $window, Materii) {
     Materii.getMateriiElevSemestrul1().then(function (materiiArray) {
         $scope.materii = materiiArray;
     });
@@ -423,4 +423,14 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
         $scope.modal.hide();
     };
 
-});
+})
+
+.controller('contCtrl', function ($scope, Materii) {
+    $scope.settings = {
+        enableFriends: true
+    }
+
+    $scope.parinti = Materii.getParinti();
+
+
+});;

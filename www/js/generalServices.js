@@ -23,6 +23,7 @@ angular.module('gradeBook.generalServices', [])
     var semestrul1 = "semestrul_1/";
     var semestrul2 = "semestrul_2/";
     var database = "https://gradebook-a87b2.firebaseio.com/";
+    var parinti = "parinti";
 
     return {
         getEleviTableName: function () {
@@ -42,6 +43,10 @@ angular.module('gradeBook.generalServices', [])
 
         getSemestrul2: function () {
             return semestrul2;
+        },
+
+        getParintiTableName: function () {
+            return parinti;
         }
     };
 });

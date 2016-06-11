@@ -1,6 +1,6 @@
 angular.module('gradeBook.elevServices', [])
 
-.factory('Materii', function ($firebaseArray, $firebaseAuth, CurrentUser, DatabaseTables) {
+.factory('Materii', function ($firebaseArray, $firebaseAuth, $firebaseObject, CurrentUser, DatabaseTables) {
 
 
 
@@ -53,9 +53,9 @@ angular.module('gradeBook.elevServices', [])
 
         getSelectedMaterie: function (idMaterie, materiiArray) {
             for (var i = 0; i < materiiArray.length; i++) {
-                console.log("Suntem la materia: ", materiiArray[i].numeMaterie);
+                /*console.log("Suntem la materia: ", materiiArray[i].numeMaterie);*/
                 if (materiiArray[i].idMaterie === idMaterie) {
-                    console.log("am gasit materia: ", materiiArray[i].nume);
+                    /*console.log("am gasit materia: ", materiiArray[i].nume);*/
                     return materiiArray[i];
                 }
             }
@@ -77,7 +77,7 @@ angular.module('gradeBook.elevServices', [])
         /*Calculam media generala a unei materii*/
         getMedieMaterie: function (materie) {
             var grades = this.getGrades(materie.note);
-            console.log("Astea sunt notele: ", grades);
+            /*console.log("Astea sunt notele: ", grades);*/
             if (grades) {
                 var medieNote = grades.reduce(function (total, number) {
                     return total + number;
@@ -86,14 +86,14 @@ angular.module('gradeBook.elevServices', [])
                 if (materie.areTeza && materie.notaTeza.nota) {
                     var fractieNote = 3;
                     var notaTeza = materie.notaTeza.nota;
-                    console.log("Nota la teza este: ", notaTeza);
-                    console.log("Media fara teza: ", medieNote);
+                    /*console.log("Nota la teza este: ", notaTeza);
+                    console.log("Media fara teza: ", medieNote);*/
                     var medieCuTeza = (medieNote * fractieNote + notaTeza) / 4;
                     var roundedMedieCuTeza = Math.round(medieCuTeza);
-                    console.log("Asta este media cu teza: ", roundedMedieCuTeza)
+                    /*console.log("Asta este media cu teza: ", roundedMedieCuTeza)*/
                     return roundedMedieCuTeza;
                 } else {
-                    console.log("Asta este media: ", medieNote)
+                    /*console.log("Asta este media: ", medieNote)*/
                     return Math.round(medieNote);
                 }
             } else
@@ -109,7 +109,7 @@ angular.module('gradeBook.elevServices', [])
                 medieGenerala += this.getMedieMaterie(materii[i]);
                 console.log()
             }
-            console.log("Media generala este: ", medieGenerala);
+            /*console.log("Media generala este: ", medieGenerala);*/
             medieGenerala = medieGenerala / materii.length;
             return medieGenerala;
         },
@@ -230,6 +230,45 @@ angular.module('gradeBook.elevServices', [])
                 note: note,
                 aparitii: occurs
             };
+        },
+
+        /*Functie care returneaza obiectele parinte
+        ale elevului*/
+        getParinti: function (){
+            //vector obiect parinti
+            var parinti = [];
+            var uid = firebase.auth().currentUser.uid;
+            console.log("Asta este id-ul eleveului: ", uid);
+            var ref = new Firebase(DatabaseTables.getDatabaseName() + DatabaseTables.getEleviTableName() + uid);
+            $firebaseArray(ref).$loaded().then(function(elev) {
+                var parintiUid = elev.$getRecord("parinti");
+                console.log("Acesta este elevul: ", parintiUid.length);
+                console.log("Acestea sunt uid ale parintilor: ", parintiUid);
+
+                var ref2 = new Firebase(DatabaseTables.getDatabaseName() + DatabaseTables.getParintiTableName());
+               /* $firebaseArray(ref2).$loaded().then(function (parintiObiecte, parintiUid) {
+                    var i = 0;
+                    for (i; i < parintiUid.length; i++) {
+                        console.log("Adaugam parintele: ", parintiUid[i]);
+                        parinti.push(parintiObiecte.get(parintiUid[i]));
+                    }
+                });*/
+                return parintiUid;
+            }).then(function(parintiUid){
+                console.log("Acestea sunt uid ale parintilor: ", parintiUid);
+                var ref2 = new Firebase(DatabaseTables.getDatabaseName());
+                $firebaseArray(ref2.child(DatabaseTables.getParintiTableName())).$loaded().then(function (parintiObiecte) {
+                    var i = 0;
+                    console.log("Acestia sunt toti parintii: ", parintiObiecte.$indexFor(parintiUid[i]));
+                    for (i; i < parintiUid.length; i++) {
+                        console.log("Adaugam parintele: ", parintiUid[i].uid);
+                        parinti.push(parintiObiecte.$getRecord(parintiUid[i]));
+                        console.log("parintele adaugat este: ", parintiObiecte.$getRecord(parintiUid[i]));
+                    }
+                });
+            });
+
+            return parinti;
         },
 
         getFirebaseRef: function () {
