@@ -11,9 +11,17 @@
       analiza notele.</h4></p>
     </div>
     <br>
-    <div class="item item-divider">Parinti</div>
+    <div class="item item-divider"><p<h2 class="royal">Parinti</h2></div>
     <ion-list>
-      <ion-toggle ng-repeat="parinte in parinti" ng-model="parinte.permis" ng-change="schimbaPermisiune(parinte.$id, parinte.permis)">{{parinte.prenume}} {{parinte.nume}}</ion-toggle>
+      <ion-toggle ng-repeat="parinte in parinti" ng-model="parinte.permis" ng-change="schimbaPermisiune(parinte.$id, parinte.permis)" class="ion icon-right royal">
+
+        <div>
+          <i class="icon ion-ios-person"></i>
+          <h5><p>{{parinte.prenume}} {{parinte.nume}}</p></h5>
+        </div>
+
+
+      </ion-toggle>
     </ion-list>
   </ion-content>
 </ion-view>
