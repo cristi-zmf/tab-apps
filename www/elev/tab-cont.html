@@ -1,6 +1,16 @@
 <ion-view view-title="Cont">
   <ion-content>
-    <ion-list>
+    <div>
+      <p><h3>Bun venit <a class="royal">{{elev.prenume}} {{elev.nume}}</a>!</h3></p>
+    </div>
+  <hr class="coolLineMedie">
+    <div>
+    <p><h4>Aici puteti selecta care dintre parinti va pot
+      analiza notele.</h4></p>
+  </div>
+
+    <div class="item item-divider">Parinti</div>
+    <ion-list id="coolPurple">
     <ion-toggle  ng-model="settings.enableFriends">
         Enable Friends
     </ion-toggle>

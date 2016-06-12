@@ -425,11 +425,13 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
 
 })
 
-.controller('contCtrl', function ($scope, Materii) {
+.controller('contCtrl', function ($scope, Materii, CurrentUser) {
     $scope.settings = {
         enableFriends: true
     }
-
+    Materii.getConnectedElev().then(function (elev) {
+        $scope.elev = elev;
+    });
     $scope.parinti = Materii.getParinti();
 
 

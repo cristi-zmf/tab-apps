@@ -242,9 +242,6 @@ angular.module('gradeBook.elevServices', [])
             var ref = new Firebase(DatabaseTables.getDatabaseName() + DatabaseTables.getEleviTableName() + uid);
             $firebaseArray(ref).$loaded().then(function(elev) {
                 var parintiUid = elev.$getRecord("parinti");
-                console.log("Acesta este elevul: ", parintiUid.length);
-                console.log("Acestea sunt uid ale parintilor: ", parintiUid);
-
                 var ref2 = new Firebase(DatabaseTables.getDatabaseName() + DatabaseTables.getParintiTableName());
                /* $firebaseArray(ref2).$loaded().then(function (parintiObiecte, parintiUid) {
                     var i = 0;
@@ -259,16 +256,23 @@ angular.module('gradeBook.elevServices', [])
                 var ref2 = new Firebase(DatabaseTables.getDatabaseName());
                 $firebaseArray(ref2.child(DatabaseTables.getParintiTableName())).$loaded().then(function (parintiObiecte) {
                     var i = 0;
-                    console.log("Acestia sunt toti parintii: ", parintiObiecte.$indexFor(parintiUid[i]));
                     for (i; i < parintiUid.length; i++) {
-                        console.log("Adaugam parintele: ", parintiUid[i].uid);
-                        parinti.push(parintiObiecte.$getRecord(parintiUid[i]));
-                        console.log("parintele adaugat este: ", parintiObiecte.$getRecord(parintiUid[i]));
+                        parinti.push(parintiObiecte.$getRecord(parintiUid[i].uid));
                     }
                 });
             });
 
             return parinti;
+        },
+
+        getConnectedElev: function () {
+            var uid = firebase.auth().currentUser.uid;
+            var ref = new Firebase(DatabaseTables.getDatabaseName() + DatabaseTables.getEleviTableName());
+            var elevPromise = $firebaseArray(ref).$loaded().then(function (elevi) {
+                var elevPromise = elevi.$getRecord(uid);
+                return elevPromise;
+            });
+            return elevPromise;
         },
 
         getFirebaseRef: function () {
