@@ -24,6 +24,7 @@ angular.module('gradeBook.generalServices', [])
     var semestrul2 = "semestrul_2/";
     var database = "https://gradebook-a87b2.firebaseio.com/";
     var parinti = "parinti";
+    var eleviEntity = "elevi";
 
     return {
         getEleviTableName: function () {
@@ -47,6 +48,10 @@ angular.module('gradeBook.generalServices', [])
 
         getParintiTableName: function () {
             return parinti;
+        },
+
+        getEleviEntity: function () {
+            return eleviEntity;
         }
     };
 });

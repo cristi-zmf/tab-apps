@@ -27,9 +27,19 @@ angular.module('gradeBook.loginController', ['firebase', 'chart.js'])
             /*Verificam daca este elev*/
             var ref = new Firebase(DatabaseTables.getDatabaseName() + DatabaseTables.getEleviTableName());
             $firebaseArray(ref).$loaded().then(function (elevi) {
+                console.log("asta este recordul de elevi: ", elevi);
+                console.log("luam elevii: ", elevi.$getRecord("elevi"));
                 if (elevi.$getRecord(authData.uid)) {
                     $location.path('/tab/cont');
                     console.log("Schimbal locatia ca este elev ", elevi.$getRecord(authData.uid));
+                }
+                else {
+                    ref = new Firebase(DatabaseTables.getDatabaseName() + DatabaseTables.getProfesoriTableName());
+                    $firebaseArray(ref).$loaded().then(function(profesori) {
+                        if (profesori.$getRecord(authData.uid)) {
+                            $location.path('/tabProfesor/clase');
+                        }
+                    })
                 }
             });
 
