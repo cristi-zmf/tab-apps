@@ -28,7 +28,7 @@ angular.module('gradeBook.loginController', ['firebase', 'chart.js'])
             var ref = new Firebase(DatabaseTables.getDatabaseName() + DatabaseTables.getEleviTableName());
             $firebaseArray(ref).$loaded().then(function (elevi) {
                 if (elevi.$getRecord(authData.uid)) {
-                    $location.path('/tab/medii');
+                    $location.path('/tab/cont');
                     console.log("Schimbal locatia ca este elev ", elevi.$getRecord(authData.uid));
                 }
             });
