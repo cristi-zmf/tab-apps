@@ -1,22 +1,19 @@
 <ion-view view-title="Cont">
   <ion-content>
     <div>
-      <p><h3>Bun venit <a class="royal">{{elev.prenume}} {{elev.nume}}</a>!</h3></p>
+      <p>
+        <h3>Bun venit <a class="royal">{{elev.prenume}} {{elev.nume}}</a>!</h3></p>
     </div>
-  <hr class="coolLineMedie">
+    <hr class="coolLineMedie">
     <div>
-    <p><h4>Aici puteti selecta care dintre parinti va pot
+      <p>
+        <h4>Aici puteti selecta care dintre parinti va pot
       analiza notele.</h4></p>
-  </div>
-
+    </div>
+    <br>
     <div class="item item-divider">Parinti</div>
-    <ion-list id="coolPurple">
-    <ion-toggle  ng-model="settings.enableFriends">
-        Enable Friends
-    </ion-toggle>
-      <ion-item ng-repeat="parinte in parinti">
-      {{parinte.nume}}
-      </ion-item>
+    <ion-list>
+      <ion-toggle ng-repeat="parinte in parinti" ng-model="parinte.permis" ng-change="schimbaPermisiune(parinte.$id, parinte.permis)">{{parinte.prenume}} {{parinte.nume}}</ion-toggle>
     </ion-list>
   </ion-content>
 </ion-view>

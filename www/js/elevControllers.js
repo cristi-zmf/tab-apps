@@ -433,6 +433,12 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
         $scope.elev = elev;
     });
     $scope.parinti = Materii.getParinti();
-
+    $scope.test = function () {
+        console.log("merge click-ul si aici!!1");
+    }
+    $scope.schimbaPermisiune = function (uidParinte, permNoua) {
+        Materii.salveazaPermisiuneNoua(uidParinte, permNoua);
+        console.log("s-a schimbat permisiunea!!!");
+    }
 
 });;

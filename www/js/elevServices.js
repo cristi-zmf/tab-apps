@@ -257,7 +257,10 @@ angular.module('gradeBook.elevServices', [])
                 $firebaseArray(ref2.child(DatabaseTables.getParintiTableName())).$loaded().then(function (parintiObiecte) {
                     var i = 0;
                     for (i; i < parintiUid.length; i++) {
-                        parinti.push(parintiObiecte.$getRecord(parintiUid[i].uid));
+                        var parinte = parintiObiecte.$getRecord(parintiUid[i].uid);
+                        parinte.permis = parintiUid[i].permis;
+                        /*parinti.push(parintiObiecte.$getRecord(parintiUid[i].uid));*/
+                        parinti.push(parinte);
                     }
                 });
             });
@@ -273,6 +276,24 @@ angular.module('gradeBook.elevServices', [])
                 return elevPromise;
             });
             return elevPromise;
+        },
+
+        salveazaPermisiuneNoua: function (uidParinte, permNoua) {
+            var uid = firebase.auth().currentUser.uid;
+            var ref = new Firebase(DatabaseTables.getDatabaseName() + DatabaseTables.getEleviTableName() + uid + "/parinti");
+            console.log("pula");
+            $firebaseArray(ref).$loaded().then(function (parinti) {
+                /*console.log("uite ce parinti: ", parinti);*/
+                 for (var i = 0; i < parinti.length; i++) {
+                     console.log("suntem la parintele: ", parinti[i].uid);
+                     console.log("asta este uid-ul pe care il cautam: ", uidParinte);
+                     if (parinti[i].uid === uidParinte) {
+                         console.log("salvam noua valoare a parintelui", parinti[i].uid);
+                         parinti[i].permis = permNoua;
+                         parinti.$save(i);
+                     }
+                 }
+            });
         },
 
         getFirebaseRef: function () {
