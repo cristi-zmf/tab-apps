@@ -174,7 +174,11 @@ angular.module('gradeBook', ['ionic', 'firebase', 'ngSanitize', 'gradeBook.contr
 
     /*View pentru elevii unei clase*/
     .state('tabProfesor.clasa', {
-        url: '/clase/:clasaId',
+        url: '/clase/clasa',
+        params: {
+            numeClasa: null,
+            idMaterie: null
+        },
         views: {
             'tab-clase': {
                 templateUrl: 'profesor/elevi-clasa.html',

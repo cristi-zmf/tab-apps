@@ -1,0 +1,11 @@
+<ion-popover-view>
+   <ion-content>
+      <ion-list>
+         <ion-item ng-repeat="materie in materii" class="item item-text-wrap item-icon-left item-icon-right" ui-sref="tabProfesor.clasa({numeClasa:clasa.numeClasa, idMaterie:materie.idMaterie})" ng-click="closePopover()">
+            <i class="icon ion-ios-book balanced"></i>
+            <p>{{materie.numeMaterie}}</p>
+            <i class="icon ion-chevron-right icon-accessory"></i>
+         </ion-item>
+      </ion-list>
+   </ion-content>
+</ion-popover-view>

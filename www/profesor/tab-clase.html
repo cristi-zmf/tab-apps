@@ -1,11 +1,11 @@
 <ion-view view-title="Clase">
     <ion-content>
         <ion-list>
-            <ion-item class="item-icon-left item-icon-right" type="item-text-wrap" ng-repeat="clasa in clase" href="#/tabProfesor/clase/{{clasa.numeClasa}}">
-                <i class="icon ion-ios-book royal"></i>
+            <button class="button button-full button-positive item-icon-left item-icon-right" type="item-text-wrap" ng-repeat="clasa in clase" ng-click="openPopover($event, clasa)">
+                <i class="icon ion-ios-book balanced"></i>
                 <p>{{clasa.numeClasa}}</p>
                 <i class="icon ion-chevron-right icon-accessory"></i>
-            </ion-item>
+            </button>
         </ion-list>
     </ion-content>
 </ion-view>
