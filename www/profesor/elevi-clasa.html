@@ -1,9 +1,9 @@
 <ion-view view-title="Clase">
     <ion-content>
         <ion-list>
-            <ion-item class="item-icon-left item-icon-right" type="item-text-wrap" ng-repeat="clasa in clase" href="#/tabProfesor/clase/{{clasa.numeClasa}}">
+            <ion-item class="item-icon-left item-icon-right" type="item-text-wrap" ng-repeat="elev in elevi">
                 <i class="icon ion-ios-book royal"></i>
-                <p>{{clasa.numeClasa}}</p>
+                <p>{{elev.prenume}} {{elev.nume}}</p>
                 <i class="icon ion-chevron-right icon-accessory"></i>
             </ion-item>
         </ion-list>

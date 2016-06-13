@@ -170,6 +170,17 @@ angular.module('gradeBook', ['ionic', 'firebase', 'ngSanitize', 'gradeBook.contr
                 controller: 'claseController'
             }
         }
+    })
+
+    /*View pentru elevii unei clase*/
+    .state('tabProfesor.clasa', {
+        url: '/clase/:clasaId',
+        views: {
+            'tab-clase': {
+                templateUrl: 'profesor/elevi-clasa.html',
+                controller: 'clasaController'
+            }
+        }
     });
 
 

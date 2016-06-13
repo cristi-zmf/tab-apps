@@ -25,6 +25,7 @@ angular.module('gradeBook.generalServices', [])
     var database = "https://gradebook-a87b2.firebaseio.com/";
     var parinti = "parinti";
     var eleviEntity = "elevi";
+    var clase = "clase/";
 
     return {
         getEleviTableName: function () {
@@ -56,6 +57,10 @@ angular.module('gradeBook.generalServices', [])
 
         getFirebaseRef: function () {
             return new Firebase(this.getDatabaseName());
+        },
+
+        getClaseTableName: function () {
+            return clase;
         }
     };
 });
