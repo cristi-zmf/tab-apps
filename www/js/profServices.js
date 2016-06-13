@@ -48,6 +48,35 @@ angular.module('gradeBook.profServices', [])
             });
 
             return eleviPromise;
+        },
+
+        /*Functie care returneaza materia aleasa */
+        getMaterieElev: function(uid, idMaterie) {
+
+            var semestrul = '';
+            if (idMaterie.slice(-1) === '1') {
+                semestrul = DatabaseTables.getSemestrul1();
+            } else {
+                semestrul = DatabaseTables.getSemestrul2();
+            }
+
+            var ref = DatabaseTables.getFirebaseRef();
+            ref = ref.child(semestrul + uid);
+
+            var materiePromise = $firebaseArray(ref).$loaded().then(function (materii) {
+                var materieObject = {};
+                var indexMaterie = 0;
+                for (var i = 0; i < materii.length; i++) {
+                    if (materii[i].idMaterie === idMaterie) {
+                        materieObject.materie = materii[i];
+                        materieObject.indexMaterie = i;
+                        break;
+                    }
+                }
+                return materieObject;
+            });
+
+            return materiePromise;
         }
 
     };

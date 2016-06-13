@@ -185,6 +185,36 @@ angular.module('gradeBook', ['ionic', 'firebase', 'ngSanitize', 'gradeBook.contr
                 controller: 'clasaController'
             }
         }
+    })
+
+    /*View pentru notele unui elev*/
+    .state('tabProfesor.note', {
+        url: '/clase/clasa/note',
+        params: {
+            elev: null,
+            idMaterie: null
+        },
+        views: {
+            'tab-clase': {
+                templateUrl: 'profesor/elev-note.html',
+                controller: 'noteController'
+            }
+        }
+    })
+
+    /*View pentru absentele unui elev*/
+    .state('tabProfesor.absente', {
+        url: '/clase/clasa/absente',
+        params: {
+            elev: null,
+            idMaterie: null
+        },
+        views: {
+            'tab-clase': {
+                templateUrl: 'profesor/elev-absente.html',
+                controller: 'noteController'
+            }
+        }
     });
 
 

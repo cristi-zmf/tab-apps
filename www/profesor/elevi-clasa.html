@@ -1,7 +1,7 @@
-<ion-view view-title="Clase">
+<ion-view view-title="{{numeClasa}}">
     <ion-content>
         <ion-list>
-            <ion-item class="item-icon-left item-icon-right" type="item-text-wrap" ng-repeat="elev in elevi">
+            <ion-item class="item-icon-left item-icon-right" type="item-text-wrap" ng-repeat="elev in elevi" ng-click="openPopover($event, elev)">
                 <i class="icon ion-ios-book balanced"></i>
                 <p>{{elev.prenume}} {{elev.nume}}</p>
                 <i class="icon ion-chevron-right icon-accessory"></i>
