@@ -52,6 +52,10 @@ angular.module('gradeBook.generalServices', [])
 
         getEleviEntity: function () {
             return eleviEntity;
+        },
+
+        getFirebaseRef: function () {
+            return new Firebase(this.getDatabaseName());
         }
     };
 });
