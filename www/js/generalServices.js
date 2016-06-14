@@ -26,6 +26,7 @@ angular.module('gradeBook.generalServices', [])
     var parinti = "parinti";
     var eleviEntity = "elevi";
     var clase = "clase/";
+    var tezaName = "notaTeza";
 
     return {
         getEleviTableName: function () {
@@ -61,6 +62,10 @@ angular.module('gradeBook.generalServices', [])
 
         getClaseTableName: function () {
             return clase;
+        },
+
+        getTezaName: function () {
+            return tezaName;
         }
     };
 });

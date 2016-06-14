@@ -50,9 +50,19 @@
     </div>
 
     <div>
-     <button class="button button-block button-royal"> <!--ng-click="showMediePopup(materie)"-->
-      Adauga nota
-    </button>
+      <button class="button button-block button-royal" ng-click="openModal()">
+        Adauga nota
+      </button>
+    </div>
+    <div ng-if="materie.areTeza">
+      <button class="button button-block button-royal" ng-click="openModal()">
+        Adauga nota teza
+      </button>
+    </div>
+    <div>
+      <button class="button button-block button-royal" ng-click="openModalMedie()">
+        Calculeaza media
+      </button>
     </div>
   </ion-content>
 </ion-view>

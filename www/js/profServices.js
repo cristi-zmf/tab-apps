@@ -1,6 +1,6 @@
 angular.module('gradeBook.profServices', [])
 
-.factory('Profi', function ($firebaseArray, $firebaseAuth, $firebaseObject, CurrentUser, DatabaseTables) {
+.factory('Profi', function ($firebaseArray, $firebaseAuth, $firebaseObject, $ionicPopup, CurrentUser, DatabaseTables) {
 
     return {
         /*Functie care returneaza obiect cu detalii despre profesor*/
@@ -51,7 +51,7 @@ angular.module('gradeBook.profServices', [])
         },
 
         /*Functie care returneaza materia aleasa */
-        getMaterieElev: function(uid, idMaterie) {
+        getMaterieElev: function (uid, idMaterie) {
 
             var semestrul = '';
             if (idMaterie.slice(-1) === '1') {
@@ -73,12 +73,43 @@ angular.module('gradeBook.profServices', [])
                         break;
                     }
                 }
+                console.log("aceasta este materia returnata: ", materieObject);
                 return materieObject;
             });
 
             return materiePromise;
-        }
+        },
 
+        /*Adauga nota in functie de materie,
+        uid elev, si daca este teza*/
+        adaugaNota: function (nota, materie, uid, esteTeza) {
+
+            var semestrul = '';
+            if (idMaterie.slice(-1) === '1') {
+                semestrul = DatabaseTables.getSemestrul1();
+            } else {
+                semestrul = DatabaseTables.getSemestrul2();
+            }
+
+            if (!nota.nota) {
+                $ionicPopup.alert({
+                    title: 'Eroare!',
+                    template: 'Nu ati introdus o nota!'
+                });
+                return;
+            }
+            /*$ionicPopup.alert({
+                title: 'Eroare!',
+                template: 'Nota de la teza deja exista. O puteti edita pe aceea'
+            });*/
+            var ref = DatabaseTables.getFirebaseRef();
+            ref = ref.child(semestrul + uid);
+
+            this.getMaterieElev(uid, materie.idMaterie).then(function (materieDatabase) {
+
+            })
+
+        }
     };
 
 });

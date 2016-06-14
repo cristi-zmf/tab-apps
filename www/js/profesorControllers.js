@@ -63,7 +63,9 @@ angular.module('gradeBook.profesorControllers', ['firebase', 'chart.js'])
 
 })
 
-.controller('noteController', function ($scope, $stateParams, $ionicPopover, Profi, Materii) {
+.controller('noteController', function ($scope, $stateParams, $ionicPopover, $ionicModal, Profi, Materii) {
+    $scope.TEZA = "Nota Teza";
+    $scope.descriere = "Adaugare nota ";
     $scope.elev = $stateParams.elev;
     $scope.idMaterie = $stateParams.idMaterie;
     var uid = elev.$id;
@@ -81,6 +83,23 @@ angular.module('gradeBook.profesorControllers', ['firebase', 'chart.js'])
             $scope.data.push(100);
             $scope.labels.push("Fara note");
         }
-    })
+    });
+
+    $ionicModal.fromTemplateUrl('profesor/nota-modal.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function (modal) {
+        $scope.modal = modal;
+    });
+    $scope.openModal = function () {
+        $scope.nota = {};
+        $scope.nota.valoare = null;
+        /*$scope.nota.data = new Date($scope.nota.data);*/
+        $scope.nota.data = null;
+        $scope.modal.show();
+    };
+    $scope.closeModal = function () {
+        $scope.modal.hide();
+    };
 
 });
