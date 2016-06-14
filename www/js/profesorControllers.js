@@ -63,7 +63,7 @@ angular.module('gradeBook.profesorControllers', ['firebase', 'chart.js'])
 
 })
 
-.controller('noteController', function ($scope, $stateParams, $ionicPopover, $ionicModal, $filter, DatabaseTables, Profi, Materii) {
+.controller('noteController', function ($scope, $stateParams, $ionicPopover, $ionicModal, $ionicListDelegate, $filter, DatabaseTables, Profi, Materii) {
     $scope.TEZA = "Nota Teza";
     $scope.descriere = "Adaugare nota ";
     $scope.elev = $stateParams.elev;
@@ -76,6 +76,7 @@ angular.module('gradeBook.profesorControllers', ['firebase', 'chart.js'])
         Profi.getMaterieElev(uid, $scope.idMaterie).then(function (materieObject) {
             $scope.materie = materieObject.materie;
             $scope.indexMaterie = materieObject.indexMaterie;
+            $scope.materie.indexMaterie = $scope.indexMaterie;
             $scope.note = $scope.materie.note;
             $scope.nume = $scope.materie.numeMaterie;
             $scope.note.justGrades = Materii.getGrades($scope.materie.note);
@@ -115,9 +116,34 @@ angular.module('gradeBook.profesorControllers', ['firebase', 'chart.js'])
             $scope.modal.hide();
     };
 
+    $scope.stergeNota = function (nota, materie, uid, esteTeza, indexNota) {
+        Profi.stergeNota(nota, materie, uid, esteTeza, indexNota);
+        $ionicListDelegate.closeOptionButtons();
+    };
 
+    $ionicModal.fromTemplateUrl('profesor/nota-modal-editare.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function (modal) {
+        $scope.modalEditare = modal;
+    });
+    $scope.openModalEditare = function (esteTeza, nota, indexNota) {
+        $scope.indexNota = indexNota;
+        $scope.esteTeza = esteTeza;
+        $scope.notaEditare = nota;
+        /* console.log("asta este data: ", $scope.notaEditare.data);*/
+        $scope.notaEditare.data = DatabaseTables.toDate($scope.notaEditare.data);
+        /*console.log("asta este data: ", $scope.notaEditare.data);*/
+        $scope.modalEditare.show();
+    };
+    $scope.closeModalEditare = function () {
+        $scope.modalEditare.hide();
+    };
 
-
+    $scope.editeazaNota = function (notaEditare, materie, uid, esteTeza, indexNota) {
+        if (Profi.editeazaNota(notaEditare, materie, uid, esteTeza, indexNota) != -1)
+            $scope.modalEditare.hide();
+    }
 
 })
 

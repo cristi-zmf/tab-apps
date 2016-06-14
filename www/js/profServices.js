@@ -70,6 +70,7 @@ angular.module('gradeBook.profServices', [])
                     if (materii[i].idMaterie === idMaterie) {
                         materieObject.materie = materii[i];
                         materieObject.indexMaterie = i;
+                        /*console.log("astea sunt notele ", materieObject.materie.note);*/
                         break;
                     }
                 }
@@ -83,6 +84,7 @@ angular.module('gradeBook.profServices', [])
         /*Adauga nota in functie de materie,
         uid elev, si daca este teza*/
         adaugaNota: function (nota, materie, uid, esteTeza, indexMaterie) {
+            nota.data = $filter('date')(nota.data, 'dd/MM/yyyy');
             console.log("Asta este uid-ul necesar: ", uid);
             var semestrul = '';
             if (materie.idMaterie.slice(-1) === '1') {
@@ -96,16 +98,16 @@ angular.module('gradeBook.profServices', [])
             };
 
             if (!isNumber(nota.nota)) {
-                 $ionicPopup.alert({
+                $ionicPopup.alert({
                     title: 'Eroare!',
                     template: 'Nu ati introdus un numar!'
                 });
                 return -1;
             }
-           /* nota.nota = parseInt(nota.nota);*/
+            /* nota.nota = parseInt(nota.nota);*/
             console.log("avem nota ", nota.nota);
             if (nota.nota < 0 || nota.nota > 10) {
-                 $ionicPopup.alert({
+                $ionicPopup.alert({
                     title: 'Eroare!',
                     template: 'Nu ati introdus un numar intre 0 si 10'
                 });
@@ -148,11 +150,113 @@ angular.module('gradeBook.profServices', [])
                 ref.on('value', function (snap) {
                     materieNote = snap.val();
                 });
-                nota.data = $filter('date')(nota.data, 'dd/MM/yyyy');
+
                 console.log("asta este filstru ", $filter('date')(nota.data, 'dd/MM/yyyy'));
                 materieNote.push(nota);
                 ref.set(materieNote);
             }
+        },
+
+        /*Sterge o nota relativ la materie si uid elevului*/
+        stergeNota: function (nota, materie, uid, esteTeza, indexNota) {
+            $ionicPopup.confirm({
+                title: 'Stergere nota',
+                template: 'Sunteti sigur ca vrei sa stergeti nota?'
+            }).then(function (resp) {
+                if (resp) {
+                    var semestrul = '';
+                    if (materie.idMaterie.slice(-1) === '1') {
+                        semestrul = DatabaseTables.getSemestrul1();
+                    } else {
+                        semestrul = DatabaseTables.getSemestrul2();
+                    }
+
+                    if (esteTeza) {
+                        var ref = DatabaseTables.getFirebaseRef();
+                        ref = ref.child(semestrul + uid + '/' + materie.indexMaterie + '/' + DatabaseTables.getTezaName());
+                        ref.remove();
+
+                    } else {
+                        var ref = DatabaseTables.getFirebaseRef();
+                        ref = ref.child(semestrul + uid + '/' + materie.indexMaterie + '/' + DatabaseTables.getNoteTableName());
+                        var path = semestrul + uid + '/' + materie.indexMaterie + '/' + DatabaseTables.getNoteTableName();
+                        console.log("Pathul este acesta: ", path);
+                        var note = [];
+                        ref.on('value', function (snap) {
+                            note = snap.val();
+                        });
+                        /* console.log("astea sunt notele ", note)
+                         console.log("Asta este indexul notei: ", nota.$index)*/
+                        note.splice(indexNota, 1);
+                        console.log("indexul notei de sters este: ", indexNota);
+                        ref.set(note);
+                    }
+                }
+            });
+
+
+        },
+
+        /*Editeaza o nota*/
+        editeazaNota: function (nota, materie, uid, esteTeza, indexNota) {
+            nota.nota = parseInt(nota.nota);
+            nota.data = $filter('date')(nota.data, 'dd/MM/yyyy');
+            var isNumber = function (n) {
+                return /^-?[\d.]+(?:e-?\d+)?$/.test(n);
+            };
+
+            if (!isNumber(nota.nota)) {
+                $ionicPopup.alert({
+                    title: 'Eroare!',
+                    template: 'Nu ati introdus un numar!'
+                });
+                return -1;
+            }
+            /* nota.nota = parseInt(nota.nota);*/
+            console.log("avem nota ", nota.nota);
+            if (nota.nota < 0 || nota.nota > 10) {
+                $ionicPopup.alert({
+                    title: 'Eroare!',
+                    template: 'Nu ati introdus un numar intre 0 si 10'
+                });
+                return -1;
+            }
+
+            if (!nota.nota) {
+                $ionicPopup.alert({
+                    title: 'Eroare!',
+                    template: 'Nu ati introdus o nota!'
+                });
+                return -1;
+            }
+
+            var semestrul = '';
+            if (materie.idMaterie.slice(-1) === '1') {
+                semestrul = DatabaseTables.getSemestrul1();
+            } else {
+                semestrul = DatabaseTables.getSemestrul2();
+            }
+
+            if (esteTeza) {
+                var ref = DatabaseTables.getFirebaseRef();
+                ref = ref.child(semestrul + uid + '/' + materie.indexMaterie + '/' + DatabaseTables.getTezaName());
+                ref.set(nota);
+            } else {
+                var ref = DatabaseTables.getFirebaseRef();
+                ref = ref.child(semestrul + uid + '/' + materie.indexMaterie + '/' + DatabaseTables.getNoteTableName());
+                var path = semestrul + uid + '/' + materie.indexMaterie + '/' + DatabaseTables.getNoteTableName();
+                console.log("Pathul este acesta: ", path);
+                var note = [];
+                ref.on('value', function (snap) {
+                    note = snap.val();
+                });
+                /* console.log("astea sunt notele ", note)
+                 console.log("Asta este indexul notei: ", nota.$index)*/
+                note[indexNota] = nota;
+                /*console.log("indexul notei de sters este: ", indexNota);*/
+                ref.set(note);
+            }
+
         }
     };
 

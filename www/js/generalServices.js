@@ -17,7 +17,7 @@ angular.module('gradeBook.generalServices', [])
 
     /*Constante pentru numele intrarilor generale din baza
     de date*/
-}).factory('DatabaseTables', function () {
+}).factory('DatabaseTables', function ($filter) {
     var elevi = "elevi/";
     var profesori = "profesori/";
     var semestrul1 = "semestrul_1/";
@@ -71,6 +71,15 @@ angular.module('gradeBook.generalServices', [])
 
         getNoteTableName: function () {
             return noteName;
+        },
+
+        toDate: function (dataString) {
+            dataString = $filter('date')(dataString, 'dd/MM/yyyy');
+            var componente = dataString.split("/");
+            console.log("componentele: ", componente);
+            var data = new Date(componente[2], componente[1] - 1, componente[0]);
+            /*data = $filter('date')(data, 'dd/MM/yyyy');*/
+            return data;
         }
     };
 });

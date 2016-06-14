@@ -1,32 +1,32 @@
 <ion-modal-view>
     <ion-header-bar class="bar-royal">
-        <h1 class="title">Editare {{nota.nota}}</h1>
-        <button class="button icon ion-close-circled button-royal" ng-click="closeModal()">Exit</button>
+        <h1 class="title">Editare {{notaEditare.nota}}</h1>
+        <button class="button icon ion-close-circled button-royal" ng-click="closeModalEditare()">Exit</button>
     </ion-header-bar>
     <ion-content>
         <label class="item item-input item-floating-label">
             <span class="input-label royal">Nota</span>
-            <input type="tel" ng-model="nota.valoare" placeholder="Nota">
+            <input type="tel" ng-model="notaEditare.nota" placeholder="Nota">
         </label>
         <label class="item item-input">
             <span class="input-label royal">Data</span>
-            <input type="date" ng-model="nota.data" placeholder="Data">
+            <input type="date" ng-model="notaEditare.data" placeholder="Data">
         </label>
         <label class="item item-input item-floating-label">
             <span class="input-label royal">Provenienta</span>
-            <input type="text" ng-model="nota.provenienta" placeholder="Provenienta">
+            <input type="text" ng-model="notaEditare.provenienta" placeholder="Provenienta">
         </label>
 
         <label class="item item-input item-floating-label">
             <span class="input-label royal">Observatii</span>
-            <textarea ng-model="nota.observatii" placeholder="Observatii"></textarea>
+            <textarea ng-model="notaEditare.observatii" placeholder="Observatii"></textarea>
         </label>
 
         <label class="item item-input item-floating-label">
             <span class="input-label royal">Recomandari</span>
-            <textarea type="text" ng-model="nota.recomandari" placeholder="Recomandari"></textarea>
+            <textarea type="text" ng-model="notaEditare.recomandari" placeholder="Recomandari"></textarea>
         </label>
         <br>
-        <button class="button button-block icon icon-right button-royal" ng-click="adaugaNota(nota, materie)">Adauga nota</button>
+        <button class="button button-block icon icon-right button-royal" ng-click="editeazaNota(notaEditare, materie, uid, esteTeza, indexNota)">Salveaza modificarile</button>
     </ion-content>
 </ion-modal-view>
