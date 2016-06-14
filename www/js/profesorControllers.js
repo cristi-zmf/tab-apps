@@ -63,26 +63,30 @@ angular.module('gradeBook.profesorControllers', ['firebase', 'chart.js'])
 
 })
 
-.controller('noteController', function ($scope, $stateParams, $ionicPopover, $ionicModal, Profi, Materii) {
+.controller('noteController', function ($scope, $stateParams, $ionicPopover, $ionicModal, $filter, DatabaseTables, Profi, Materii) {
     $scope.TEZA = "Nota Teza";
     $scope.descriere = "Adaugare nota ";
     $scope.elev = $stateParams.elev;
     $scope.idMaterie = $stateParams.idMaterie;
+    $scope.uid = elev.$id;
     var uid = elev.$id;
 
-    Profi.getMaterieElev(uid, $scope.idMaterie).then(function (materieObject) {
-        $scope.materie = materieObject.materie;
-        $scope.indexMaterie = materieObject.indexMaterie;
-        $scope.note = $scope.materie.note;
-        $scope.nume = $scope.materie.numeMaterie;
-        $scope.note.justGrades = Materii.getGrades($scope.materie.note);
-        $scope.pieData = Materii.countOccurence($scope.materie);
-        $scope.labels = $scope.pieData.note;
-        $scope.data = $scope.pieData.aparitii;
-        if ($scope.data.length == 0) {
-            $scope.data.push(100);
-            $scope.labels.push("Fara note");
-        }
+    var firebaseRef = Materii.getFirebaseRef()
+    firebaseRef.$watch(function () {
+        Profi.getMaterieElev(uid, $scope.idMaterie).then(function (materieObject) {
+            $scope.materie = materieObject.materie;
+            $scope.indexMaterie = materieObject.indexMaterie;
+            $scope.note = $scope.materie.note;
+            $scope.nume = $scope.materie.numeMaterie;
+            $scope.note.justGrades = Materii.getGrades($scope.materie.note);
+            $scope.pieData = Materii.countOccurence($scope.materie);
+            $scope.labels = $scope.pieData.note;
+            $scope.data = $scope.pieData.aparitii;
+            if ($scope.data.length == 0) {
+                $scope.data.push(100);
+                $scope.labels.push("Fara note");
+            }
+        });
     });
 
     $ionicModal.fromTemplateUrl('profesor/nota-modal.html', {
@@ -91,15 +95,23 @@ angular.module('gradeBook.profesorControllers', ['firebase', 'chart.js'])
     }).then(function (modal) {
         $scope.modal = modal;
     });
-    $scope.openModal = function () {
+    $scope.openModal = function (esteTeza) {
+        $scope.esteTeza = esteTeza;
         $scope.nota = {};
-        $scope.nota.valoare = null;
-        /*$scope.nota.data = new Date($scope.nota.data);*/
-        $scope.nota.data = null;
+        $scope.nota.nota = null;
+        $scope.nota.data = new Date();
+        $scope.nota.provenienta = "";
+        $scope.nota.observatii = "";
+        $scope.nota.recomandari = "";
         $scope.modal.show();
     };
     $scope.closeModal = function () {
         $scope.modal.hide();
     };
 
+    $scope.adaugaNota = function (nota, materie, uid, esteTeza, indexMaterie) {
+        $scope.nota.nota = parseInt($scope.nota.nota);
+        Profi.adaugaNota(nota, materie, uid, esteTeza, indexMaterie);
+        $scope.modal.hide();
+    }
 });

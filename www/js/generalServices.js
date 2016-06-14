@@ -27,6 +27,7 @@ angular.module('gradeBook.generalServices', [])
     var eleviEntity = "elevi";
     var clase = "clase/";
     var tezaName = "notaTeza";
+    var noteName = "note/";
 
     return {
         getEleviTableName: function () {
@@ -66,6 +67,10 @@ angular.module('gradeBook.generalServices', [])
 
         getTezaName: function () {
             return tezaName;
+        },
+
+        getNoteTableName: function () {
+            return noteName;
         }
     };
 });

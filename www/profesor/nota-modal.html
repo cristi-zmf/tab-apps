@@ -6,7 +6,7 @@
     <ion-content>
         <label class="item item-input item-floating-label">
             <span class="input-label royal">Nota</span>
-            <input type="tel" ng-model="nota.valoare" placeholder="Nota">
+            <input type="tel" ng-model="nota.nota" placeholder="Nota">
         </label>
         <label class="item item-input">
             <span class="input-label royal">Data</span>
@@ -27,6 +27,6 @@
             <textarea type="text" ng-model="nota.recomandari" placeholder="Recomandari"></textarea>
         </label>
         <br>
-        <button class="button button-block icon icon-right button-royal" ng-click="adaugaNota(nota, materie, uid, esteTeza)">Adauga nota</button>
+        <button class="button button-block icon icon-right button-royal" ng-click="adaugaNota(nota, materie, uid, esteTeza, indexMaterie)">Adauga nota</button>
     </ion-content>
 </ion-modal-view>

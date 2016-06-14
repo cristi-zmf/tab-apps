@@ -1,6 +1,6 @@
 angular.module('gradeBook.profServices', [])
 
-.factory('Profi', function ($firebaseArray, $firebaseAuth, $firebaseObject, $ionicPopup, CurrentUser, DatabaseTables) {
+.factory('Profi', function ($firebaseArray, $firebaseAuth, $firebaseObject, $ionicPopup, $filter, CurrentUser, DatabaseTables) {
 
     return {
         /*Functie care returneaza obiect cu detalii despre profesor*/
@@ -82,10 +82,10 @@ angular.module('gradeBook.profServices', [])
 
         /*Adauga nota in functie de materie,
         uid elev, si daca este teza*/
-        adaugaNota: function (nota, materie, uid, esteTeza) {
-
+        adaugaNota: function (nota, materie, uid, esteTeza, indexMaterie) {
+            console.log("Asta este uid-ul necesar: ", uid);
             var semestrul = '';
-            if (idMaterie.slice(-1) === '1') {
+            if (materie.idMaterie.slice(-1) === '1') {
                 semestrul = DatabaseTables.getSemestrul1();
             } else {
                 semestrul = DatabaseTables.getSemestrul2();
@@ -102,13 +102,34 @@ angular.module('gradeBook.profServices', [])
                 title: 'Eroare!',
                 template: 'Nota de la teza deja exista. O puteti edita pe aceea'
             });*/
-            var ref = DatabaseTables.getFirebaseRef();
-            ref = ref.child(semestrul + uid);
+            if (esteTeza) {
+                if (materie.notaTeza === null) {
+                    $ionicPopup.alert({
+                        title: 'Eroare!',
+                        template: 'Nota de la teza deja exista. O puteti edita pe aceea'
+                    });
+                    return;
+                }
 
-            this.getMaterieElev(uid, materie.idMaterie).then(function (materieDatabase) {
+                var ref = DatabaseTables.getFirebaseRef();
+                ref = ref.child(semestrul + uid + '/' + indexMaterie);
+                var tezaKey = DatabaseTables.getTezaName();
+                /*var detaliiMaterie = $firebaseArray(ref);*/
+                ref.child(tezaKey).set(nota);
+                console.log("Adaugam nota la teza ");
+            } else {
 
-            })
-
+                var ref = DatabaseTables.getFirebaseRef();
+                var path = semestrul + uid + '/' + indexMaterie + '/' + DatabaseTables.getNoteTableName();
+                console.log("Asta este full pathul: ", path);
+                ref = ref.child(semestrul + uid + '/' + indexMaterie + '/' + DatabaseTables.getNoteTableName());
+                var materieNote = [];
+                ref.on('value', function(snap) {materieNote = snap.val();});
+                nota.data = $filter('date')(nota.data, 'dd/MM/yyyy');
+                console.log("asta este filstru ", $filter('date')(nota.data, 'dd/MM/yyyy'));
+                materieNote.push(nota);
+                ref.set(materieNote);
+            }
         }
     };
 
