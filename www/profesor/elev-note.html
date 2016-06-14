@@ -1,5 +1,5 @@
 <ion-view>
-  <ion-nav-title>{{nume}}</ion-nav-title>
+  <ion-nav-title>{{elev.prenume}} {{elev.nume}}</ion-nav-title>
   <ion-content class="padding">
     <ion-list>
 
@@ -60,7 +60,7 @@
       </button>
     </div>
     <div>
-      <button class="button button-block button-royal" ng-click="openModalMedie()">
+      <button class="button button-block button-royal" ui-sref="tabProfesor.noteMedie({materie:materie})">
         Calculeaza media
       </button>
     </div>

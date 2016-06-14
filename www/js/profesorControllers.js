@@ -111,7 +111,40 @@ angular.module('gradeBook.profesorControllers', ['firebase', 'chart.js'])
 
     $scope.adaugaNota = function (nota, materie, uid, esteTeza, indexMaterie) {
         $scope.nota.nota = parseInt($scope.nota.nota);
-        Profi.adaugaNota(nota, materie, uid, esteTeza, indexMaterie);
-        $scope.modal.hide();
-    }
+        if (Profi.adaugaNota(nota, materie, uid, esteTeza, indexMaterie) != -1)
+            $scope.modal.hide();
+    };
+
+
+
+
+
+})
+
+.controller('medieController', function ($scope, $stateParams, $ionicPopover, Profi, Materii) {
+
+    $scope.materie = $stateParams.materie;
+    $scope.medie = Materii.getMedieMaterie($scope.materie);
+    var materieGauge = new JustGage({
+        id: 'medieGauge',
+        title: 'Medie materie curenta',
+        titleFontColor: "#886aea",
+        value: 0,
+        min: 0,
+        max: 10,
+        decimals: 2,
+        symbol: '',
+        pointer: true,
+        gaugeWidthScale: 0.6,
+        startAnimationTime: 2000,
+        startAnimationType: ">",
+        refreshAnimationTime: 2000,
+        refreshAnimationType: "bounce",
+        levelColors: [
+          "#e60000",
+          "#33cd5f"
+        ]
+    });
+    materieGauge.refresh($scope.medie);
+
 });

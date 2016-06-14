@@ -73,7 +73,7 @@ angular.module('gradeBook.profServices', [])
                         break;
                     }
                 }
-                console.log("aceasta este materia returnata: ", materieObject);
+                /*console.log("aceasta este materia returnata: ", materieObject);*/
                 return materieObject;
             });
 
@@ -91,24 +91,45 @@ angular.module('gradeBook.profServices', [])
                 semestrul = DatabaseTables.getSemestrul2();
             }
 
+            var isNumber = function (n) {
+                return /^-?[\d.]+(?:e-?\d+)?$/.test(n);
+            };
+
+            if (!isNumber(nota.nota)) {
+                 $ionicPopup.alert({
+                    title: 'Eroare!',
+                    template: 'Nu ati introdus un numar!'
+                });
+                return -1;
+            }
+           /* nota.nota = parseInt(nota.nota);*/
+            console.log("avem nota ", nota.nota);
+            if (nota.nota < 0 || nota.nota > 10) {
+                 $ionicPopup.alert({
+                    title: 'Eroare!',
+                    template: 'Nu ati introdus un numar intre 0 si 10'
+                });
+                return -1;
+            }
+
             if (!nota.nota) {
                 $ionicPopup.alert({
                     title: 'Eroare!',
                     template: 'Nu ati introdus o nota!'
                 });
-                return;
+                return -1;
             }
             /*$ionicPopup.alert({
                 title: 'Eroare!',
                 template: 'Nota de la teza deja exista. O puteti edita pe aceea'
             });*/
             if (esteTeza) {
-                if (materie.notaTeza === null) {
+                if (materie.notaTeza) {
                     $ionicPopup.alert({
                         title: 'Eroare!',
                         template: 'Nota de la teza deja exista. O puteti edita pe aceea'
                     });
-                    return;
+                    return -1;
                 }
 
                 var ref = DatabaseTables.getFirebaseRef();
@@ -124,7 +145,9 @@ angular.module('gradeBook.profServices', [])
                 console.log("Asta este full pathul: ", path);
                 ref = ref.child(semestrul + uid + '/' + indexMaterie + '/' + DatabaseTables.getNoteTableName());
                 var materieNote = [];
-                ref.on('value', function(snap) {materieNote = snap.val();});
+                ref.on('value', function (snap) {
+                    materieNote = snap.val();
+                });
                 nota.data = $filter('date')(nota.data, 'dd/MM/yyyy');
                 console.log("asta este filstru ", $filter('date')(nota.data, 'dd/MM/yyyy'));
                 materieNote.push(nota);

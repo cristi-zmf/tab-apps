@@ -202,6 +202,19 @@ angular.module('gradeBook', ['ionic', 'firebase', 'ngSanitize', 'gradeBook.contr
         }
     })
 
+    .state('tabProfesor.noteMedie', {
+        url: '/clase/clasa/note/medie',
+        params: {
+            materie: null
+        },
+        views: {
+            'tab-clase': {
+                templateUrl: 'profesor/elev-medie.html',
+                controller: 'medieController'
+            }
+        }
+    })
+
     /*View pentru absentele unui elev*/
     .state('tabProfesor.absente', {
         url: '/clase/clasa/absente',

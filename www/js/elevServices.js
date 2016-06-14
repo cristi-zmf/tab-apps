@@ -84,7 +84,7 @@ angular.module('gradeBook.elevServices', [])
                 }, 0.0) / grades.length;
 
                 if (materie.areTeza && materie.notaTeza) {
-                    console.log(materie.notaTeza);
+                    /*console.log(materie.notaTeza);*/
                     var fractieNote = 3;
                     var notaTeza = materie.notaTeza.nota;
                     /*console.log("Nota la teza este: ", notaTeza);
