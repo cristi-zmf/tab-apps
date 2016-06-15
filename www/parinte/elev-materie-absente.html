@@ -1,0 +1,42 @@
+<ion-view>
+    <ion-header-bar class="bar-royal">
+        <h1 class="title">Absente {{materie.numeMaterie}}</h1>
+    </ion-header-bar>
+    <ion-content>
+        <br>
+        <canvas id="pie" class="chart chart-pie" chart-data="pieDataMaterie" chart-labels="labels" chart-legend="true"></canvas>
+
+        <ion-item class="royal item-icon-right">Absente totale: {{absenteMaterie.total}}
+            <i class="ion-social-buffer energized"></i>
+        </ion-item>
+        <ion-item class="royal item-icon-right">Absente motivate: {{absenteMaterie.motivate}}
+            <i class="ion-checkmark balanced"></i></ion-item>
+        <ion-item class="royal item-icon-right">Absente nemotivate: {{absenteMaterie.nemotivate}}
+            <i class="ion-alert-circled assertive"></i>
+        </ion-item>
+        <ion-item class="royal item-icon-right">Absente nemotivabile: {{absenteMaterie.nemotivabile}}
+            <i class="ion-sad dark"></i>
+        </ion-item>
+        <br>
+        <hr class="cooLine">
+        <br>
+        <div class="item item-divider royal">Absente</div>
+        <ion-list>
+            <ion-item class="royal item-icon-right" ng-repeat="absenta in materie.absente">
+                <div ng-if="absenta.motivata">
+                    <i class="icon ion-checkmark balanced"></i>
+                    <h5><p>{{absenta.data}}</p></h5>
+                </div>
+                <div ng-if="!absenta.motivata && !absenta.nemotivabila">
+                    <i class="icon ion-alert-circled assertive"></i>
+                    <h5><p>{{absenta.data}}</p></h5>
+                </div>
+                <div ng-if="!absenta.motivata && absenta.nemotivabila">
+                    <i class="icon ion-sad dark"></i>
+                    <h5><p>{{absenta.data}}</p></h5>
+                </div>
+
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

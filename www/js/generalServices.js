@@ -23,6 +23,7 @@ angular.module('gradeBook.generalServices', [])
     var semestrul1 = "semestrul_1/";
     var semestrul2 = "semestrul_2/";
     var database = "https://gradebook-a87b2.firebaseio.com/";
+
     var parinti = "parinti";
     var eleviEntity = "elevi";
     var clase = "clase/";
@@ -50,6 +51,9 @@ angular.module('gradeBook.generalServices', [])
             return semestrul2;
         },
 
+        /*Sa avem grija cand folosim
+        aceasta functie sa punem si "/"
+        dupa ea*/
         getParintiTableName: function () {
             return parinti;
         },
@@ -76,6 +80,10 @@ angular.module('gradeBook.generalServices', [])
 
         getAbsenteTableName: function () {
             return absentaName;
+        },
+
+        getCurrentUid: function () {
+            return firebase.auth().currentUser.uid;
         },
 
         toDate: function (dataString) {

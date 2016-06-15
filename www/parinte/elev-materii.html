@@ -1,0 +1,30 @@
+<ion-view view-title="Materii">
+    <ion-content>
+        <div class="item item-divider royal">Semestrul 1</div>
+        <ion-list>
+            <ion-item class="item-icon-left item-icon-right" ng-repeat="materie in materii" ng-click="openPopover($event, elev, materie)" type="item-text-wrap">
+                <i class="icon ion-ios-book royal"></i>
+                <p>{{materie.numeMaterie}}</p>
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </ion-item>
+        </ion-list>
+        <div class="item item-divider royal">Semestrul 2</div>
+        <ion-list>
+            <ion-item class="item-icon-left item-icon-right" ng-repeat="materie in materiiSemestrul2" ng-click="openPopover($event, elev, materie)" type="item-text-wrap">
+                <i class="icon ion-ios-book royal"></i>
+                <p>{{materie.numeMaterie}}</p>
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </ion-item>
+        </ion-list>
+        <div>
+            <button class="button button-block button-royal" ui-sref="tabParinte.bilantMedii({elev: elev})">
+                Bilant Materii
+            </button>
+        </div>
+        <div>
+            <button class="button button-block button-royal" ui-sref="tabParinte.bilantAbsente({elev: elev})">
+                Bilant Absente
+            </button>
+        </div>
+    </ion-content>
+</ion-view>

@@ -39,6 +39,9 @@ angular.module('gradeBook.loginController', ['firebase', 'chart.js'])
                         if (profesori.$getRecord(authData.uid)) {
                             $location.path('/tabProfesor/cont');
                         }
+                        else {
+                            $location.path('tabParinte/cont');
+                        }
                     })
                 }
             });

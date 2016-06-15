@@ -51,6 +51,49 @@ angular.module('gradeBook.elevServices', [])
             }
         },
 
+        /*Ia materiile din semestrul 1 bazandu-se pe id*/
+        getMateriiElevSemestrul1ByUid: function (uid) {
+
+            /*var ref = new Firebase(DatabaseTables.getDatabaseName());
+            var authObj = $firebaseAuth(ref);
+            var curUser = firebase.auth().currentUser;*/
+            var userUid = uid;
+            /*console.log("Avem uid-ul urmator in serviciu: ", userUid);*/
+            ref = new Firebase(DatabaseTables.getDatabaseName() + DatabaseTables.getSemestrul1() + userUid);
+            var materiiPromise = $firebaseArray(ref).$loaded().then(function (materiiArray) {
+                /*console.log("avem materiile: ", materiiArray);*/
+                return materiiArray;
+            });
+            return materiiPromise;
+        },
+        get: function (materieId) {
+            for (var i = 0; i < materii.length; i++) {
+                if (materii[i].id === parseInt(materieId))
+                    return materii[i];
+            }
+        },
+
+        /*Ia materiile din semestrul 2 bazandu-se pe id*/
+        getMateriiElevSemestrul2ByUid: function (uid) {
+            /*var ref = new Firebase(DatabaseTables.getDatabaseName());
+            var authObj = $firebaseAuth(ref);
+            var curUser = firebase.auth().currentUser;*/
+            var userUid = uid;
+            /*console.log("Avem uid-ul urmator in serviciu: ", userUid);*/
+            ref = new Firebase(DatabaseTables.getDatabaseName() + DatabaseTables.getSemestrul2() + userUid);
+            var materiiPromise = $firebaseArray(ref).$loaded().then(function (materiiArray) {
+                /*console.log("avem materiile: ", materiiArray);*/
+                return materiiArray;
+            });
+            return materiiPromise;
+        },
+        get: function (materieId) {
+            for (var i = 0; i < materii.length; i++) {
+                if (materii[i].id === parseInt(materieId))
+                    return materii[i];
+            }
+        },
+
         getSelectedMaterie: function (idMaterie, materiiArray) {
             for (var i = 0; i < materiiArray.length; i++) {
                 /*console.log("Suntem la materia: ", materiiArray[i].numeMaterie);*/

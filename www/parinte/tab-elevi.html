@@ -1,0 +1,18 @@
+<ion-view view-title="Elevi">
+    <ion-content>
+        <ion-list>
+            <ion-item class="item-icon-left item-icon-right" type="item-text-wrap" ng-repeat="elev in elevi" ui-sref="tabParinte.materii({elev: elev})">
+                <i class="icon ion-person positive"></i>
+                <p>{{elev.prenume}} {{elev.nume}}</p>
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </ion-item>
+
+                <div class="card" ng-if="elevi.length < 1">
+                    <div class="item item-icon-right item-text-wrap">
+                        <i class="icon ion-android-sad assertive"></i>
+                        Niciun elev de afisat.
+                    </div>
+                </div>
+        </ion-list>
+    </ion-content>
+</ion-view>

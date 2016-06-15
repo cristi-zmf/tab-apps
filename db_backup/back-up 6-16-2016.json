@@ -1,0 +1,245 @@
+{
+  "clase" : {
+    "11g" : [ "e001" ],
+    "12g" : [ null, "wbUM5P1XEafpdlBTJEad9Bgf4dq1" ]
+  },
+  "elevi" : {
+    "wbUM5P1XEafpdlBTJEad9Bgf4dq1" : {
+      "cnp" : "1234567891234",
+      "nume" : "Zamfir",
+      "parinti" : [ {
+        "permis" : true,
+        "uid" : "2MdXhO2NZuNBLUa8OHE5qIIpmnk2"
+      } ],
+      "prenume" : "Cristian"
+    }
+  },
+  "parinti" : {
+    "2MdXhO2NZuNBLUa8OHE5qIIpmnk2" : {
+      "elevi" : [ {
+        "uid" : "wbUM5P1XEafpdlBTJEad9Bgf4dq1"
+      } ],
+      "nume" : "Zamfir",
+      "prenume" : "Mihail"
+    },
+    "f000" : {
+      "elevi" : {
+        "e000" : true
+      },
+      "nume" : "ionel",
+      "parola" : "f000",
+      "prenume" : "mugur"
+    }
+  },
+  "profesori" : {
+    "nij9jJkZ1kPfYWmqr5bWv7J8Q3q1" : {
+      "clase" : [ {
+        "materii" : [ {
+          "idMaterie" : "12gmatematica1",
+          "numeMaterie" : "Matematica semestrul 1"
+        } ],
+        "numeClasa" : "12g"
+      } ],
+      "cnp" : 1234567,
+      "nume" : "mugurel",
+      "prenume" : "Vasile"
+    },
+    "p000" : {
+      "clase" : {
+        "12g" : "12gmatematica1"
+      },
+      "cnp" : "valoare",
+      "nume" : "valoare",
+      "parola" : "valoare criptata RSA",
+      "prenume" : "valoare"
+    }
+  },
+  "semestrul_1" : {
+    "wbUM5P1XEafpdlBTJEad9Bgf4dq1" : [ {
+      "absente" : [ {
+        "data" : "15/06/2016",
+        "esteNemotivabila" : false,
+        "motivata" : true
+      } ],
+      "areTeza" : true,
+      "idMaterie" : "12gmatematica1",
+      "notaTeza" : {
+        "data" : "15/06/2016",
+        "nota" : 10,
+        "observatii" : "",
+        "provenienta" : "",
+        "recomandari" : ""
+      },
+      "note" : [ {
+        "data" : "15/06/2016",
+        "nota" : 10,
+        "observatii" : "",
+        "provenienta" : "Super man!",
+        "recomandari" : ""
+      }, {
+        "data" : "15/06/2016",
+        "nota" : 10,
+        "observatii" : "",
+        "provenienta" : "",
+        "recomandari" : ""
+      }, {
+        "data" : "15/06/2016",
+        "nota" : 5,
+        "observatii" : "",
+        "provenienta" : "",
+        "recomandari" : ""
+      } ],
+      "numeMaterie" : "Matematica"
+    }, {
+      "absente" : [ {
+        "data" : "22/04/2016",
+        "esteNemotivabila" : false,
+        "motivata" : true
+      } ],
+      "areTeza" : true,
+      "idMaterie" : "12gromana1",
+      "notaTeza" : {
+        "data" : "23/04/2016",
+        "nota" : 10,
+        "observatii" : "Observatie",
+        "provenienta" : "Lucrare/Ascultare",
+        "recomandari" : "Recomandare"
+      },
+      "note" : [ {
+        "data" : "23/04/2016",
+        "nota" : 10,
+        "observatii" : "Observatie",
+        "provenienta" : "Lucrare/Ascultare",
+        "recomandari" : "Recomandare"
+      }, {
+        "data" : "23/04/2016",
+        "nota" : 9,
+        "observatii" : "Observatie",
+        "provenienta" : "Lucrare/Ascultare",
+        "recomandari" : "Recomandare"
+      }, {
+        "data" : "23/04/2016",
+        "nota" : 10,
+        "observatii" : "Observatie",
+        "provenienta" : "Lucrare/Ascultare",
+        "recomandari" : "Recomandare"
+      }, {
+        "data" : "23/04/2016",
+        "nota" : 5,
+        "observatii" : "Observatie",
+        "provenienta" : "Lucrare/Ascultare",
+        "recomandari" : "Recomandare"
+      } ],
+      "numeMaterie" : "Romana"
+    } ]
+  },
+  "semestrul_2" : {
+    "e0000" : {
+      "nume_materie" : {
+        "absente" : [ {
+          "data" : "22/04/2016",
+          "este_nemotivabila" : 0,
+          "motivata" : 0
+        } ],
+        "are_teza" : "true/false",
+        "nota_teza" : {
+          "data" : "23/04/2016",
+          "nota" : 10,
+          "observatii" : "Observatie",
+          "provenienta" : "Lucrare/Ascultare",
+          "recomandari" : "Recomandare"
+        },
+        "note" : [ {
+          "data" : "23/04/2016",
+          "nota" : 10,
+          "observatii" : "Observatie",
+          "provenienta" : "Lucrare/Ascultare",
+          "recomandari" : "Recomandare"
+        } ]
+      }
+    },
+    "wbUM5P1XEafpdlBTJEad9Bgf4dq1" : [ {
+      "absente" : [ {
+        "data" : "22/04/2016",
+        "esteNemotivabila" : false,
+        "motivata" : false
+      } ],
+      "areTeza" : true,
+      "idMaterie" : "12gmatematica2",
+      "notaTeza" : {
+        "data" : "23/04/2016",
+        "nota" : 10,
+        "observatii" : "Observatie",
+        "provenienta" : "Lucrare/Ascultare",
+        "recomandari" : "Recomandare"
+      },
+      "note" : [ {
+        "data" : "23/04/2016",
+        "nota" : 10,
+        "observatii" : "Observatie",
+        "provenienta" : "Ascultare",
+        "recomandari" : "Recomandare"
+      }, {
+        "data" : "23/04/2016",
+        "nota" : 3,
+        "observatii" : "Observatie",
+        "provenienta" : "Lucrare/Ascultare",
+        "recomandari" : "Trebuie sa ai grija"
+      }, {
+        "data" : "23/04/2016",
+        "nota" : 9,
+        "observatii" : "Observatie",
+        "provenienta" : "Lucrare",
+        "recomandari" : "Recomandare"
+      }, {
+        "data" : "23/04/2016",
+        "nota" : 7,
+        "observatii" : "Observatie",
+        "provenienta" : "Lucrare/Ascultare",
+        "recomandari" : "Se poate mai bine"
+      } ],
+      "numeMaterie" : "Matematica"
+    }, {
+      "absente" : [ {
+        "data" : "22/04/2016",
+        "esteNemotivabila" : false,
+        "motivata" : false
+      } ],
+      "areTeza" : true,
+      "idMaterie" : "12gromana2",
+      "notaTeza" : {
+        "data" : "23/04/2016",
+        "nota" : 8,
+        "observatii" : "Observatie",
+        "provenienta" : "Lucrare/Ascultare",
+        "recomandari" : "Recomandare"
+      },
+      "note" : [ {
+        "data" : "23/04/2016",
+        "nota" : 10,
+        "observatii" : "Observatie",
+        "provenienta" : "Lucrare/Ascultare",
+        "recomandari" : "Recomandare"
+      }, {
+        "data" : "23/04/2016",
+        "nota" : 10,
+        "observatii" : "Observatie",
+        "provenienta" : "Lucrare/Ascultare",
+        "recomandari" : "Recomandare"
+      }, {
+        "data" : "23/04/2016",
+        "nota" : 5,
+        "observatii" : "da-te incolo de partart",
+        "provenienta" : "Lucrare/Ascultare",
+        "recomandari" : "Recomandare"
+      }, {
+        "data" : "23/04/2016",
+        "nota" : 5,
+        "observatii" : "Observatie",
+        "provenienta" : "Lucrare/Ascultare",
+        "recomandari" : "Recomandare"
+      } ],
+      "numeMaterie" : "Romana"
+    } ]
+  }
+}

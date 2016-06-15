@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'gradeBook.services' is found in services.js
 // 'gradeBook.controllers' is found in controllers.js
-angular.module('gradeBook', ['ionic', 'firebase', 'ngSanitize', 'gradeBook.controllers', 'gradeBook.elevControllers', 'gradeBook.loginController', 'gradeBook.services', 'gradeBook.elevServices', 'gradeBook.generalServices', 'gradeBook.profesorControllers', 'gradeBook.profServices', 'chart.js'])
+angular.module('gradeBook', ['ionic', 'firebase', 'ngSanitize', 'gradeBook.controllers', 'gradeBook.elevControllers', 'gradeBook.loginController', 'gradeBook.services', 'gradeBook.elevServices', 'gradeBook.generalServices', 'gradeBook.profesorControllers', 'gradeBook.profServices', 'gradeBook.parinteControllers', 'gradeBook.parinteServices', 'chart.js'])
 
 .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -125,15 +125,6 @@ angular.module('gradeBook', ['ionic', 'firebase', 'ngSanitize', 'gradeBook.contr
         }
     })
 
-    .state('tab.chat-detail', {
-        url: '/absente/:chatId',
-        views: {
-            'tab-absente': {
-                templateUrl: 'elev/chat-detail.html',
-                controller: 'ChatDetailCtrl'
-            }
-        }
-    })
 
     .state('tab.cont', {
         url: '/cont',
@@ -145,7 +136,7 @@ angular.module('gradeBook', ['ionic', 'firebase', 'ngSanitize', 'gradeBook.contr
         }
     })
 
-    // setup an abstract state for the tabs directive
+    // Stare abstracta pentru partea de profesor
     .state('tabProfesor', {
         url: '/tabProfesor',
         abstract: true,
@@ -228,9 +219,113 @@ angular.module('gradeBook', ['ionic', 'firebase', 'ngSanitize', 'gradeBook.contr
                 controller: 'absenteController'
             }
         }
+    })
+
+    .state('tabParinte', {
+        url: '/tabParinte',
+        abstract: true,
+        templateUrl: 'parinte/tabs.html'
+    })
+
+    .state('tabParinte.elevi', {
+        url: '/elevi',
+        views: {
+            'tab-elevi': {
+                templateUrl: 'parinte/tab-elevi.html',
+                controller: 'eleviController'
+            }
+        }
+    })
+
+    .state('tabParinte.cont', {
+        url: '/cont',
+        views: {
+            'tab-cont': {
+                templateUrl: 'parinte/tab-cont.html',
+                controller: 'contController'
+            }
+        }
+    })
+
+    .state('tabParinte.materii', {
+        url: '/elevi/materii',
+        params: {
+            elev: null
+        },
+        views: {
+            'tab-elevi': {
+                templateUrl: 'parinte/elev-materii.html',
+                controller: 'materiiParinteController'
+            }
+        }
+    })
+
+    .state('tabParinte.materie', {
+        url: '/elevi/materii/materie',
+        params: {
+            elev: null,
+            materie: null
+        },
+        views: {
+            'tab-elevi': {
+                templateUrl: 'parinte/elev-materie-note.html',
+                controller: 'materieParinteController'
+            }
+        }
+    })
+
+    .state('tabParinte.noteMedie', {
+        url: '/elevi/materii/medie',
+        params: {
+            materie: null
+        },
+        views: {
+            'tab-elevi': {
+                templateUrl: 'parinte/elev-medie.html',
+                controller: 'medieParinteController'
+            }
+        }
+    })
+
+    .state('tabParinte.absente', {
+        url: '/elevi/materii/absente',
+        params: {
+            materie: null
+        },
+        views: {
+            'tab-elevi': {
+                templateUrl: 'parinte/elev-materie-absente.html',
+                controller: 'absenteParinteController'
+            }
+        }
+    })
+
+
+    .state('tabParinte.bilantMedii', {
+        url: '/elevi/materii/bilantMedii',
+        params: {
+            elev: null
+        },
+        views: {
+            'tab-elevi': {
+                templateUrl: 'parinte/bilant-medii.html',
+                controller: 'mediiParinteCtrl'
+            }
+        }
+    })
+
+     .state('tabParinte.bilantAbsente', {
+        url: '/elevi/materii/bilantAbsente',
+        params: {
+            elev: null
+        },
+        views: {
+            'tab-elevi': {
+                templateUrl: 'parinte/bilant-absente.html',
+                controller: 'bilantAbsenteController'
+            }
+        }
     });
-
-
 
 
     // if none of the above states are matched, use this as the fallback

@@ -3,7 +3,7 @@ angular.module('gradeBook.profesorControllers', ['firebase', 'chart.js'])
 .controller('claseController', function ($scope, $ionicPopover, Profi) {
     $scope.profesor = Profi.getProfesorObject();
     $scope.clase = Profi.getProfesorClase();
-
+    console.log("Pula: ", $scope.clase);
     /*Popover pentru a selecta materia*/
     $ionicPopover.fromTemplateUrl('profesor/popover-materii.html', {
         scope: $scope
