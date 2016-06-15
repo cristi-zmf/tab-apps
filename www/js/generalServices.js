@@ -28,6 +28,7 @@ angular.module('gradeBook.generalServices', [])
     var clase = "clase/";
     var tezaName = "notaTeza";
     var noteName = "note/";
+    var absentaName = "absente/";
 
     return {
         getEleviTableName: function () {
@@ -71,6 +72,10 @@ angular.module('gradeBook.generalServices', [])
 
         getNoteTableName: function () {
             return noteName;
+        },
+
+        getAbsenteTableName: function () {
+            return absentaName;
         },
 
         toDate: function (dataString) {

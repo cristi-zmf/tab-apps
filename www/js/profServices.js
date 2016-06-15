@@ -1,7 +1,11 @@
 angular.module('gradeBook.profServices', [])
 
 .factory('Profi', function ($firebaseArray, $firebaseAuth, $firebaseObject, $ionicPopup, $filter, CurrentUser, DatabaseTables) {
-
+    var constante = {};
+    constante.MOTIVEAZA = 0;
+    constante.DEMOTIVEAZA = 1;
+    constante.NEMOTIVABILA = 2;
+    constante.STERGE = 3;
     return {
         /*Functie care returneaza obiect cu detalii despre profesor*/
         getProfesorObject: function () {
@@ -257,6 +261,77 @@ angular.module('gradeBook.profServices', [])
                 ref.set(note);
             }
 
+        },
+
+        /*Se adauga o absenta la materia si elevul
+        cu uid-ul dat*/
+        adaugaAbsenta: function (absenta, materie, uid) {
+            console.log("Am primit absenta: ", absenta);
+            absenta.data = $filter('date')(absenta.data, 'dd/MM/yyyy');
+            var semestrul = '';
+            if (materie.idMaterie.slice(-1) === '1') {
+                semestrul = DatabaseTables.getSemestrul1();
+            } else {
+                semestrul = DatabaseTables.getSemestrul2();
+            }
+            var ref = DatabaseTables.getFirebaseRef();
+            ref = ref.child(semestrul + uid + '/' + materie.indexMaterie + '/' + DatabaseTables.getAbsenteTableName());
+            path = semestrul + uid + '/' + materie.indexMaterie + '/' + DatabaseTables.getAbsenteTableName();
+            console.log("Asta este pathul: ", path);
+            var absente = [];
+            ref.on('value', function (snap) {
+                absente = snap.val();
+            });
+            absente.push(absenta);
+            ref.set(absente);
+        },
+
+        /*Modifica absenta, sau o sterge
+        in functie de parametrul actiune*/
+        modificaAbsenta: function (materie, uid, indexAbsenta, actiune) {
+            console.log("Asta este actiunea ", actiune);
+            if (materie.idMaterie.slice(-1) === '1') {
+                semestrul = DatabaseTables.getSemestrul1();
+            } else {
+                semestrul = DatabaseTables.getSemestrul2();
+            }
+
+            var ref = DatabaseTables.getFirebaseRef();
+            ref = ref.child(semestrul + uid + '/' + materie.indexMaterie + '/' + DatabaseTables.getAbsenteTableName());
+            var absente = [];
+            ref.on('value', function (snap) {
+                absente = snap.val();
+            });
+
+            switch (actiune) {
+                case constante.MOTIVEAZA:
+                    console.log("Motivam absenta: ");
+                    absente[indexAbsenta].motivata = true;
+                    absente[indexAbsenta].esteNemotivabila = false;
+                    break;
+
+                case constante.DEMOTIVEAZA:
+                    console.log("Demotivam absenta: ");
+                    absente[indexAbsenta].motivata = false;
+                    absente[indexAbsenta].esteNemotivabila = false;
+                    break;
+
+                case constante.NEMOTIVABILA:
+                    console.log("Nemotivabila absenta: ");
+                    absente[indexAbsenta].motivata = false;
+                    absente[indexAbsenta].esteNemotivabila = true;
+                    break;
+
+                case constante.STERGE:
+                    console.log("Stergam absenta: ");
+                    absente.splice(indexAbsenta, 1);
+                    break;
+            }
+            ref.set(absente);
+        },
+
+        getConstante: function() {
+            return constante;
         }
     };
 

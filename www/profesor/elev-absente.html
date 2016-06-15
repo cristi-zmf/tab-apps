@@ -1,0 +1,66 @@
+<ion-view>
+    <ion-nav-title>{{elev.prenume}} {{elev.nume}}</ion-nav-title>
+    <ion-content>
+        <ion-list>
+            <ion-item class="item-icon-left" ng-repeat="absenta in absente track by $index" type="item-text-wrap" ng-click="openModalEditare(false, nota, $index)">
+
+                <div ng-if="absenta.motivata">
+                    <ion-option-button class="button-assertive" ng-if="absenta.motivata" ng-click="modificaAbsenta(materie, uid, $index, DEMOTIVEAZA)">
+                        <i class="icon ion-alert-circled light"></i>
+                    </ion-option-button>
+                    <ion-option-button class="button-dark" ng-click="modificaAbsenta(materie, uid, $index, NEMOTIVABILA)">
+                        <i class="icon ion-sad light"></i>
+                    </ion-option-button>
+                    <ion-option-button class="button-energized" ng-click="modificaAbsenta(materie, uid, $index, STERGE)">
+                        <i class="icon ion-close-circled light"></i>
+                    </ion-option-button>
+                    <i class="icon ion-checkmark balanced"></i>
+                    <h5><p>{{absenta.data}}</p></h5>
+                </div>
+                <div ng-if="!absenta.motivata && !absenta.esteNemotivabila">
+                    <ion-option-button class="button-balanced" ng-click="modificaAbsenta(materie, uid, $index, MOTIVEAZA)">
+                        <i class="icon ion-checkmark light"></i>
+                    </ion-option-button>
+                    <ion-option-button class="button-dark" ng-click="modificaAbsenta(materie, uid, $index, NEMOTIVABILA)">
+                        <i class="icon ion-sad light"></i>
+                    </ion-option-button>
+                    <ion-option-button class="button-energized" ng-click="modificaAbsenta(materie, uid, $index, STERGE)">
+                        <i class="icon ion-close-circled light"></i>
+                    </ion-option-button>
+                    <i class="icon ion-alert-circled assertive"></i>
+                    <h5><p>{{absenta.data}}</p></h5>
+                </div>
+                <div ng-if="!absenta.motivata && absenta.esteNemotivabila">
+                    <ion-option-button class="button-balanced" ng-click="modificaAbsenta(materie, uid, $index, MOTIVEAZA)">
+                        <i class="icon ion-checkmark light"></i>
+                    </ion-option-button>
+                    <ion-option-button class="button-assertive" ng-click="modificaAbsenta(materie, uid, $index, DEMOTIVEAZA)">
+                        <i class="icon ion-alert-circled light"></i>
+                    </ion-option-button>
+                    <ion-option-button class="button-energized" ng-click="modificaAbsenta(materie, uid, $index, STERGE)">
+                        <i class="icon ion-close-circled light"></i>
+                    </ion-option-button>
+                    <i class="icon ion-sad dark"></i>
+                    <h5><p>{{absenta.data}}</p></h5>
+                </div>
+                <ion-item>
+
+                </ion-item>
+                <ion-item>
+
+                </ion-item>
+            </ion-item>
+
+        </ion-list>
+        <div>
+            <button class="button button-block button-royal" ng-click="showPopup(materie, uid)">
+                Adauga absenta
+            </button>
+        </div>
+        <div ng-if="materie.areTeza">
+            <button class="button button-block button-royal" ng-click="openModal(true)">
+                Bilant absente
+            </button>
+        </div>
+    </ion-content>
+</ion-view>

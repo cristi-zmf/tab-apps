@@ -79,6 +79,8 @@ angular.module('gradeBook.profesorControllers', ['firebase', 'chart.js'])
             $scope.materie.indexMaterie = $scope.indexMaterie;
             $scope.note = $scope.materie.note;
             $scope.nume = $scope.materie.numeMaterie;
+
+            /*Pie chart logic*/
             $scope.note.justGrades = Materii.getGrades($scope.materie.note);
             $scope.pieData = Materii.countOccurence($scope.materie);
             $scope.labels = $scope.pieData.note;
@@ -173,4 +175,71 @@ angular.module('gradeBook.profesorControllers', ['firebase', 'chart.js'])
     });
     materieGauge.refresh($scope.medie);
 
+})
+
+.controller('absenteController', function ($scope, $state, $stateParams, $ionicPopover, $ionicPopup, $ionicListDelegate, Profi, Materii) {
+    var constante = Profi.getConstante();
+    $scope.MOTIVEAZA = constante.MOTIVEAZA;
+    $scope.DEMOTIVEAZA = constante.DEMOTIVEAZA;
+    $scope.NEMOTIVABILA = constante.NEMOTIVABILA;
+    $scope.STERGE = constante.STERGE;
+
+    $scope.elev = $stateParams.elev;
+    $scope.idMaterie = $stateParams.idMaterie;
+    $scope.uid = $scope.elev.$id;
+    console.log("Astia sunt parametrii primiti: ", $scope.elev, " ", $scope.idMaterie);
+    /*Obtinem absentele*/
+    var firebaseRef = Materii.getFirebaseRef()
+    firebaseRef.$watch(function () {
+        Profi.getMaterieElev($scope.uid, $scope.idMaterie).then(function (materieObject) {
+            $scope.materie = materieObject.materie;
+            /*console.log("asta este materia primita: ", $scope.materie);*/
+            $scope.indexMaterie = materieObject.indexMaterie;
+            $scope.materie.indexMaterie = $scope.indexMaterie;
+            $scope.note = $scope.materie.note;
+            $scope.nume = $scope.materie.numeMaterie;
+            $scope.absente = $scope.materie.absente;
+
+        });
+    });
+
+    /*Popup logic*/
+    $scope.showPopup = function (materie, uid) {
+        $scope.absenta = {};
+        $scope.absenta.data = new Date();
+        $scope.absenta.esteNemotivabila = false;
+        $scope.absenta.motivata = false;
+
+
+        // An elaborate, custom popup
+        $ionicPopup.show({
+            /*template: '<input type="date" ng-model="absenta.data">',*/
+            templateUrl: "profesor/popup-absenta.html",
+            title: 'Introduceti o data',
+            scope: $scope,
+            buttons: [
+                {
+                    text: 'Cancel'
+                },
+                {
+                    text: '<b>Adauga absenta</b>',
+                    type: 'button-royal',
+                    onTap: function (e) {
+                        if (!$scope.absenta) {
+                            //nu lasam utilizatorul sa apese
+                            e.preventDefault();
+                        } else {
+                            Profi.adaugaAbsenta($scope.absenta, materie, uid);
+                        }
+                    }
+      }
+    ]
+        });
+    };
+
+    $scope.modificaAbsenta = function (materie, uid, indexAbsenta, actiune) {
+        console.log("Intram in modifica absenta");
+        Profi.modificaAbsenta(materie, uid, indexAbsenta, actiune);
+        $ionicListDelegate.closeOptionButtons();
+    };
 });

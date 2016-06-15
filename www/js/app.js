@@ -225,7 +225,7 @@ angular.module('gradeBook', ['ionic', 'firebase', 'ngSanitize', 'gradeBook.contr
         views: {
             'tab-clase': {
                 templateUrl: 'profesor/elev-absente.html',
-                controller: 'noteController'
+                controller: 'absenteController'
             }
         }
     });
