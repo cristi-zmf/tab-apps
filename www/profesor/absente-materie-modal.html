@@ -1,0 +1,22 @@
+<ion-modal-view>
+    <ion-header-bar class="bar-royal">
+        <h1 class="title">Bilant absente</h1>
+        <button class="button icon ion-close-circled button-royal" ng-click="closeModal()">Exit</button>
+    </ion-header-bar>
+    <ion-content>
+        <br>
+        <canvas id="pie" class="chart chart-pie" chart-data="pieDataMaterie" chart-labels="labels" chart-legend="true"></canvas>
+
+        <ion-item class="royal item-icon-right">Absente totale: {{absenteMaterie.total}}
+            <i class="ion-social-buffer energized"></i>
+        </ion-item>
+        <ion-item class="royal item-icon-right">Absente motivate: {{absenteMaterie.motivate}}
+            <i class="ion-checkmark balanced"></i></ion-item>
+        <ion-item class="royal item-icon-right">Absente nemotivate: {{absenteMaterie.nemotivate}}
+            <i class="ion-alert-circled assertive"></i>
+        </ion-item>
+        <ion-item class="royal item-icon-right">Absente nemotivabile: {{absenteMaterie.nemotivabile}}
+            <i class="ion-sad dark"></i>
+        </ion-item>
+    </ion-content>
+</ion-modal-view>

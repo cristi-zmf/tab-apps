@@ -21,55 +21,63 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
 
 })
 
-.controller('materieController', function ($scope, $state, $stateParams, $ionicModal, Materii) {
+.controller('materieController', function ($scope, $state, $stateParams, $ionicModal, Materii, DatabaseTables) {
     /*Verificam daca materia aleasa este semestrul 1 sau 2*/
-    if ($stateParams.idMaterie.slice(-1) === '1')
-        Materii.getMateriiElevSemestrul1().then(function (materiiArray) {
-            $scope.materii = materiiArray;
+    var firebaseRef = Materii.getFirebaseRef();
+    firebaseRef.$watch(function () {
+        if ($stateParams.idMaterie.slice(-1) === '1')
+            Materii.getMateriiElevSemestrul1().then(function (materiiArray) {
+                $scope.materii = materiiArray;
 
-            $scope.materie = Materii.getSelectedMaterie($stateParams.idMaterie, $scope.materii);
-            $scope.note = $scope.materie.note;
-            $scope.nume = $scope.materie.numeMaterie;
-            console.log("asta e numele materiei: ", $scope.materie.numeMaterie);
+                $scope.materie = Materii.getSelectedMaterie($stateParams.idMaterie, $scope.materii);
+                $scope.note = $scope.materie.note;
+                $scope.nume = $scope.materie.numeMaterie;
+                console.log("asta e numele materiei: ", $scope.materie.numeMaterie);
 
-            /*Logica pentru pie chart*/
-            $scope.note.justGrades = Materii.getGrades($scope.materie.note);
-            $scope.pieData = Materii.countOccurence($scope.materie);
-            $scope.labels = $scope.pieData.note;
-            $scope.data = $scope.pieData.aparitii;
-            if ($scope.data.length == 0) {
-                $scope.data.push(100);
-                $scope.labels.push("Fara note");
-            }
-        });
-
-    else
-        Materii.getMateriiElevSemestrul2().then(function (materiiArray) {
-            $scope.materii = materiiArray;
-            /* console.log("Acestea sunt materiile: ", $scope.materii);
-             console.log("pe asta o selectam: ", $stateParams.materieNume);*/
-
-            $scope.materie = Materii.getSelectedMaterie($stateParams.idMaterie, $scope.materii);
-            /* console.log("Aceasta este materia: ", $scope.materie);*/
-            $scope.note = $scope.materie.note;
-            /*console.log = ("acestea sunt notele: ", $scope.note);*/
-
-            $scope.$evalAsync(function () {
-                    $scope.nume = $scope.materie.numeMaterie;
-                })
+                if (!$scope.note) {
+                    $scope.note = {};
+                }
                 /*Logica pentru pie chart*/
-            console.log("asta e numele materiei: ", $scope.materie.numeMaterie);
+                $scope.note.justGrades = Materii.getGrades($scope.materie.note);
+                $scope.pieData = Materii.countOccurence($scope.materie);
+                $scope.labels = $scope.pieData.note;
+                $scope.data = $scope.pieData.aparitii;
+                if ($scope.data.length == 0) {
+                    $scope.data.push(100);
+                    $scope.labels.push("Fara note");
+                }
+            });
 
-            $scope.note.justGrades = Materii.getGrades($scope.materie.note);
-            $scope.pieData = Materii.countOccurence($scope.materie);
-            $scope.labels = $scope.pieData.note;
-            $scope.data = $scope.pieData.aparitii;
-            if ($scope.data.length == 0) {
-                $scope.data.push(100);
-                $scope.labels.push("Fara note");
-            }
-        });
+        else
+            Materii.getMateriiElevSemestrul2().then(function (materiiArray) {
+                $scope.materii = materiiArray;
+                /* console.log("Acestea sunt materiile: ", $scope.materii);
+                 console.log("pe asta o selectam: ", $stateParams.materieNume);*/
 
+                $scope.materie = Materii.getSelectedMaterie($stateParams.idMaterie, $scope.materii);
+                /* console.log("Aceasta este materia: ", $scope.materie);*/
+                $scope.note = $scope.materie.note;
+                /*console.log = ("acestea sunt notele: ", $scope.note);*/
+
+                $scope.$evalAsync(function () {
+                        $scope.nume = $scope.materie.numeMaterie;
+                    })
+                    /*Logica pentru pie chart*/
+                console.log("asta e numele materiei: ", $scope.materie.numeMaterie);
+
+                if (!$scope.note) {
+                    $scope.note = {};
+                }
+                $scope.note.justGrades = Materii.getGrades($scope.materie.note);
+                $scope.pieData = Materii.countOccurence($scope.materie);
+                $scope.labels = $scope.pieData.note;
+                $scope.data = $scope.pieData.aparitii;
+                if ($scope.data.length == 0) {
+                    $scope.data.push(100);
+                    $scope.labels.push("Fara note");
+                }
+            });
+    });
 
 
 
@@ -373,13 +381,29 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
 
 
                 /*Pie chart logic semestrul 1*/
-                $scope.pieDataSemestrul1 = [absenteSemestrul1.motivate, absenteSemestrul1.nemotivate];
+                if ((absenteSemestrul1.motivate + absenteSemestrul1.nemotivate) === 0) {
+                    $scope.pieDataSemestrul1 = [100];
+                    $scope.labels = ["Fara absente"];
+
+                } else {
+                    $scope.pieDataSemestrul1 = [absenteSemestrul1.motivate, absenteSemestrul1.nemotivate];
+                }
 
                 /*Pie chart logic semestrul 2*/
-                $scope.pieDataSemestrul2 = [$scope.absenteSemestrul2.motivate, $scope.absenteSemestrul2.nemotivate];
+                if (($scope.absenteSemestrul2.motivate + $scope.absenteSemestrul2.nemotivate) === 0) {
+                    $scope.pieDataSemestrul2 = [100];
+                    $scope.labels = ["Fara absente"];
+                } else {
+                    $scope.pieDataSemestrul2 = [$scope.absenteSemestrul2.motivate, $scope.absenteSemestrul2.nemotivate];
+                }
 
                 /*Pie chart logic total*/
-                $scope.pieDataTotal = [$scope.absenteTotal.motivate, $scope.absenteTotal.nemotivate];
+                if (($scope.absenteTotal.motivate + $scope.absenteTotal.nemotivate) === 0) {
+                    $scope.pieDataTotal = [100];
+                    $scope.labels = ["Fara absente"];
+                } else {
+                    $scope.pieDataTotal = [$scope.absenteTotal.motivate, $scope.absenteTotal.nemotivate];
+                }
             });
         });
 
@@ -406,18 +430,19 @@ angular.module('gradeBook.elevControllers', ['firebase', 'chart.js'])
         $scope.modal = modal;
     });
     $scope.openModal = function (materie) {
-        //semestrul 1
         $scope.materie = materie;
         $scope.absenteMaterie = Materii.calculeazaNrAbsenteMaterie(materie);
         $scope.labels = ["Motivate", "Nemotivate"];
 
         /*Chart logic*/
-        $scope.labels = ["Motivate", "Nemotivate"];
-        $scope.pieDataMaterie = [$scope.absenteMaterie.motivate, $scope.absenteMaterie.nemotivate];
-
+        if (!$scope.materie.absente) {
+            $scope.pieDataMaterie = [100];
+            $scope.labels = ["Fara absente"];
+        } else {
+            $scope.labels = ["Motivate", "Nemotivate"];
+            $scope.pieDataMaterie = [$scope.absenteMaterie.motivate, $scope.absenteMaterie.nemotivate];
+        }
         $scope.modal.show();
-
-
     };
     $scope.closeModal = function () {
         $scope.modal.hide();

@@ -64,7 +64,9 @@ angular.module('gradeBook.elevServices', [])
         getGrades: function (note) {
             var grades = [];
             /*var gradePos = 0;*/
-
+            if (!note) {
+                return grades;
+            }
             for (var i = 0; i < note.length; i++) {
                 if (note[i].nota) {
                     var nota = note[i].nota;
@@ -76,6 +78,9 @@ angular.module('gradeBook.elevServices', [])
 
         /*Calculam media generala a unei materii*/
         getMedieMaterie: function (materie) {
+            if (!materie.note) {
+                return 0;
+            }
             var grades = this.getGrades(materie.note);
             /*console.log("Astea sunt notele: ", grades);*/
             if (grades) {
@@ -106,12 +111,17 @@ angular.module('gradeBook.elevServices', [])
         getMedieGeneralaSemestru: function (materii) {
             var medieGenerala = 0.0;
             medieGenerala *= 1.0
+            var length = materii.length;
             for (var i = 0; i < materii.length; i++) {
+                if (!materii[i].note) {
+                    length -= 1;
+                    continue;
+                }
+
                 medieGenerala += this.getMedieMaterie(materii[i]);
-                console.log()
             }
             /*console.log("Media generala este: ", medieGenerala);*/
-            medieGenerala = medieGenerala / materii.length;
+            medieGenerala = medieGenerala / length;
             return medieGenerala;
         },
 
@@ -172,6 +182,9 @@ angular.module('gradeBook.elevServices', [])
             absente.nemotivate = 0;
             absente.nemotivabile = 0;
 
+            if (!materie.absente) {
+                return absente;
+            }
             var absenteMaterie = materie.absente;
             absente.total = absenteMaterie.length;
 

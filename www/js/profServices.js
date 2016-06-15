@@ -156,6 +156,9 @@ angular.module('gradeBook.profServices', [])
                 });
 
                 console.log("asta este filstru ", $filter('date')(nota.data, 'dd/MM/yyyy'));
+                if (!materieNote) {
+                    materieNote = [];
+                }
                 materieNote.push(nota);
                 ref.set(materieNote);
             }
@@ -282,6 +285,11 @@ angular.module('gradeBook.profServices', [])
             ref.on('value', function (snap) {
                 absente = snap.val();
             });
+
+            /*Cand nu avemm absente*/
+            if (!absente) {
+                absente = [];
+            }
             absente.push(absenta);
             ref.set(absente);
         },

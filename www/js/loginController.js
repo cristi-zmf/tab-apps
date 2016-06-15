@@ -37,7 +37,7 @@ angular.module('gradeBook.loginController', ['firebase', 'chart.js'])
                     ref = new Firebase(DatabaseTables.getDatabaseName() + DatabaseTables.getProfesoriTableName());
                     $firebaseArray(ref).$loaded().then(function(profesori) {
                         if (profesori.$getRecord(authData.uid)) {
-                            $location.path('/tabProfesor/clase');
+                            $location.path('/tabProfesor/cont');
                         }
                     })
                 }

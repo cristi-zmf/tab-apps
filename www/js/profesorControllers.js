@@ -80,6 +80,9 @@ angular.module('gradeBook.profesorControllers', ['firebase', 'chart.js'])
             $scope.note = $scope.materie.note;
             $scope.nume = $scope.materie.numeMaterie;
 
+            if (!$scope.note) {
+                $scope.note = {};
+            }
             /*Pie chart logic*/
             $scope.note.justGrades = Materii.getGrades($scope.materie.note);
             $scope.pieData = Materii.countOccurence($scope.materie);
@@ -133,6 +136,9 @@ angular.module('gradeBook.profesorControllers', ['firebase', 'chart.js'])
         $scope.indexNota = indexNota;
         $scope.esteTeza = esteTeza;
         $scope.notaEditare = nota;
+        if (!nota) {
+            return;
+        }
         /* console.log("asta este data: ", $scope.notaEditare.data);*/
         $scope.notaEditare.data = DatabaseTables.toDate($scope.notaEditare.data);
         /*console.log("asta este data: ", $scope.notaEditare.data);*/
@@ -177,7 +183,7 @@ angular.module('gradeBook.profesorControllers', ['firebase', 'chart.js'])
 
 })
 
-.controller('absenteController', function ($scope, $state, $stateParams, $ionicPopover, $ionicPopup, $ionicListDelegate, Profi, Materii) {
+.controller('absenteController', function ($scope, $state, $stateParams, $ionicPopover, $ionicPopup, $ionicListDelegate, $ionicModal, Profi, Materii) {
     var constante = Profi.getConstante();
     $scope.MOTIVEAZA = constante.MOTIVEAZA;
     $scope.DEMOTIVEAZA = constante.DEMOTIVEAZA;
@@ -241,5 +247,36 @@ angular.module('gradeBook.profesorControllers', ['firebase', 'chart.js'])
         console.log("Intram in modifica absenta");
         Profi.modificaAbsenta(materie, uid, indexAbsenta, actiune);
         $ionicListDelegate.closeOptionButtons();
+    };
+
+    /*Modal pentru bilant absente*/
+
+    /*Modal logic*/
+    $ionicModal.fromTemplateUrl('profesor/absente-materie-modal.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function (modal) {
+        $scope.modal = modal;
+    });
+    $scope.openModal = function (materie) {
+        $scope.materie = materie;
+        $scope.absenteMaterie = Materii.calculeazaNrAbsenteMaterie(materie);
+        $scope.labels = ["Motivate", "Nemotivate"];
+
+         /*Chart logic*/
+        if (!$scope.materie.absente) {
+            $scope.pieDataMaterie = [100];
+            $scope.labels = ["Fara absente"];
+        } else {
+            $scope.labels = ["Motivate", "Nemotivate"];
+            $scope.pieDataMaterie = [$scope.absenteMaterie.motivate, $scope.absenteMaterie.nemotivate];
+        }
+
+        $scope.modal.show();
+
+
+    };
+    $scope.closeModal = function () {
+        $scope.modal.hide();
     };
 });

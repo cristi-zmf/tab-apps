@@ -1,6 +1,6 @@
 <ion-view>
   <ion-nav-title>{{elev.prenume}} {{elev.nume}}</ion-nav-title>
-  <ion-content class="padding">
+  <ion-content>
     <ion-list>
 
       <ion-item class="item-icon-left" ng-repeat="nota in note track by $index" type="item-text-wrap" ng-click="openModalEditare(false, nota, $index)">
