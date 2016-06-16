@@ -331,4 +331,9 @@ angular.module('gradeBook', ['ionic', 'firebase', 'ngSanitize', 'gradeBook.contr
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/login');
 
+})
+
+/*Activeaza scroll nativ*/
+.config(function ($ionicConfigProvider) {
+    $ionicConfigProvider.scrolling.jsScrolling(false);
 });

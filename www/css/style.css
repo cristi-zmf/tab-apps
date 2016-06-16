@@ -107,3 +107,8 @@ hr.coolLineMedie {
   box-shadow: 0 10px 10px -10px #8c8b8b inset;
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+}
+
