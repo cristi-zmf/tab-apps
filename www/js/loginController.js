@@ -2,7 +2,7 @@
 
 angular.module('gradeBook.loginController', ['firebase', 'chart.js'])
 
-.controller('loginController', function ($scope, $rootScope, $location, $firebase, $firebaseAuth, $firebaseArray, $window, $ionicPopup, CurrentUser, DatabaseTables) {
+.controller('loginController', function ($scope, $rootScope, $location, $firebase, $firebaseAuth, $firebaseArray, $window, $ionicPopup, $ionicHistory, $ionicViewService, CurrentUser, DatabaseTables) {
 
     /*$scope.login = function(mailAddress, pass) {
 
@@ -63,7 +63,12 @@ angular.module('gradeBook.loginController', ['firebase', 'chart.js'])
             var empty = {};
             CurrentUser.setLoggedUser(empty);
             console.log("Ne-am deconectat!");
+            $ionicViewService.clearHistory();
+            $ionicHistory.clearCache();
+            $ionicHistory.clearHistory();
             $location.path('/login');
+
+            console.log("Stergem history");
             $rootScope.$apply();
         });
     };

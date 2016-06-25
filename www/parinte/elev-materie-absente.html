@@ -25,11 +25,11 @@
                     <i class="icon ion-checkmark balanced"></i>
                     <h5><p>{{absenta.data}}</p></h5>
                 </div>
-                <div ng-if="!absenta.motivata && !absenta.nemotivabila">
+                <div ng-if="!absenta.motivata && !absenta.esteNemotivabila">
                     <i class="icon ion-alert-circled assertive"></i>
                     <h5><p>{{absenta.data}}</p></h5>
                 </div>
-                <div ng-if="!absenta.motivata && absenta.nemotivabila">
+                <div ng-if="!absenta.motivata && absenta.esteNemotivabila">
                     <i class="icon ion-sad dark"></i>
                     <h5><p>{{absenta.data}}</p></h5>
                 </div>
