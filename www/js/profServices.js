@@ -155,7 +155,6 @@ angular.module('gradeBook.profServices', [])
                     materieNote = snap.val();
                 });
 
-                console.log("asta este filstru ", $filter('date')(nota.data, 'dd/MM/yyyy'));
                 if (!materieNote) {
                     materieNote = [];
                 }
@@ -267,7 +266,8 @@ angular.module('gradeBook.profServices', [])
         },
 
         /*Se adauga o absenta la materia si elevul
-        cu uid-ul dat*/
+        cu uid-ul dat. Materia trebuie să conțină
+        și indexul din baza de date*/
         adaugaAbsenta: function (absenta, materie, uid) {
             console.log("Am primit absenta: ", absenta);
             absenta.data = $filter('date')(absenta.data, 'dd/MM/yyyy');

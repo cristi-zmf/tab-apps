@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'gradeBook.services' is found in services.js
 // 'gradeBook.controllers' is found in controllers.js
-angular.module('gradeBook', ['ionic', 'firebase', 'ngSanitize', 'gradeBook.controllers', 'gradeBook.elevControllers', 'gradeBook.loginController', 'gradeBook.services', 'gradeBook.elevServices', 'gradeBook.generalServices', 'gradeBook.profesorControllers', 'gradeBook.profServices', 'gradeBook.parinteControllers', 'gradeBook.parinteServices', 'chart.js'])
+angular.module('gradeBook', ['ionic', 'firebase', 'ngSanitize', 'gradeBook.controllers', 'gradeBook.elevControllers', 'gradeBook.loginController',  'gradeBook.elevServices', 'gradeBook.generalServices', 'gradeBook.profesorControllers', 'gradeBook.profServices', 'gradeBook.parinteControllers', 'gradeBook.parinteServices', 'chart.js'])
 
 .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
