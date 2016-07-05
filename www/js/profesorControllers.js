@@ -68,8 +68,8 @@ angular.module('gradeBook.profesorControllers', ['firebase', 'chart.js'])
     $scope.descriere = "Adaugare nota ";
     $scope.elev = $stateParams.elev;
     $scope.idMaterie = $stateParams.idMaterie;
-    $scope.uid = elev.$id;
-    var uid = elev.$id;
+    $scope.uid = $scope.elev.$id;
+    var uid = $scope.uid;
 
     var firebaseRef = Materii.getFirebaseRef()
     firebaseRef.$watch(function () {
